@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#252c24">
-  <meta name="description" content="一张指挥桌，十二次选择。融合像素角色扮演、回合策略与架空戏剧的 2D 历史小游戏。">
+  <meta name="description" content="亲自指挥部队、跨过桥头、护送粮车与守卫村庄。五个可走动场景，人物互动与分支电话对白，浏览器直接玩。">
   <title>蒋介石模拟器 · 另一条时间线</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./upgrade.css">
+  <link rel="stylesheet" href="./frontline.css">
 </head>
 <body>
   <header class="masthead">
@@ -74,10 +75,10 @@
     <section class="end-turn-bar"><div class="ap-group"><span class="eyebrow">剩余行动</span><div id="apDots" class="ap-dots"></div><span id="apText">3 / 3</span></div><div id="turnHint" class="turn-hint">先处理来电，再结束回合。<small>事件不消耗行动点 · 每轮自动存档</small></div><button id="endTurnBtn" class="primary-btn">结束回合 <span>→</span></button></section>
   </main>
 
-  <footer><span>历史是背景，选择是你的。<b>所有结局均为架空。</b></span><span>零依赖 · 本地存档 · v1.1</span></footer>
+  <footer><span>历史是背景，选择是你的。<b>所有结局均为架空。</b></span><span>零依赖 · 本地存档 · v2.0</span></footer>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <dialog id="modal" aria-labelledby="modalTitle"><button id="modalClose" class="modal-close" aria-label="关闭">×</button><div id="modalBody"></div></dialog>
   <input type="file" id="importFile" accept=".json,application/json" hidden>
-  <script src="./content.js"></script><script src="./engine.js"></script><script src="./room.js"></script><script src="./director.js"></script><script src="./experience.js"></script><script src="./app.js"></script>
+  <script src="./content.js"></script><script src="./engine.js"></script><script src="./room.js"></script><script src="./director.js"></script><script src="./experience.js"></script><script src="./tactics.js"></script><script src="./world.js"></script><script src="./frontline-view.js"></script><script src="./frontline.js"></script><script src="./app.js"></script>
 </body>
 </html>
