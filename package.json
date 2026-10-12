@@ -1,0 +1,13 @@
+{
+  "name": "chiang-kai-shek-simulator",
+  "version": "1.1.1",
+  "private": true,
+  "description": "A playable 2D alternate-history strategy and pixel roleplay game, with an in-game telephone exchange.",
+  "license": "MIT",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node scripts/serve.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "build": "node scripts/build.cjs"
+  }
+}
