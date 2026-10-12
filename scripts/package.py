@@ -8,7 +8,7 @@ import sys
 root = Path(__file__).resolve().parent.parent
 destination = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else root.parent / 'artifacts'
 destination.mkdir(exist_ok=True)
-source_entries = ['index.html', 'styles.css', 'upgrade.css', 'frontline.css', 'content.js', 'engine.js', 'room.js', 'director.js', 'experience.js', 'tactics.js', 'world.js', 'frontline-view.js', 'frontline.js', 'app.js',
+source_entries = ['index.html', 'styles.css', 'upgrade.css', 'campaign.css', 'campaign-core.js', 'campaign.js', 'frontline.css', 'content.js', 'engine.js', 'room.js', 'director.js', 'experience.js', 'tactics.js', 'world.js', 'frontline-view.js', 'frontline.js', 'app.js',
                   'assets', 'docs', 'scripts', 'tests', '.github', '.gitignore', '.nojekyll',
                   'README.md', 'LICENSE', 'package.json']
 

@@ -1,10 +1,12 @@
 {
   "name": "chiang-kai-shek-simulator",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "private": true,
-  "description": "A playable 2D alternate-history strategy and pixel roleplay game, with an in-game telephone exchange.",
+  "description": "A playable Chinese 2D free campaign with twelve cities, army movement, city sieges and defenses, plus pixel exploration and telephone stories.",
   "license": "MIT",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "start": "node scripts/serve.cjs",
     "test": "node --test tests/*.test.cjs",

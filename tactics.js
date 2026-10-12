@@ -18,7 +18,10 @@
   if(index===1){const u=unit('truck','blue','truck',105,330);u.order='escort';b.units.push(u);}
   if(options.prepared){b.units.filter(u=>u.team==='blue').forEach(u=>{u.maxHp+=25;u.hp+=25;u.damage*=1.12;});}return b;
  }
- function blocked(b,x,y){if(x<15||y<15||x>705||y>405)return true;if(b.mission===0)return x>=360&&x<390&&(y<150||y>=270);if(b.mission===2)return (x>=330&&x<420&&(y<150||y>=300))||(x>=90&&x<180&&y<120);return x>=330&&x<390&&y>=120&&y<270;}
+ kinds.fort={name:'城防堡垒',hp:160,speed:0,range:165,damage:6,delay:1.5,ammo:180};
+ function createCampaign(e){const index=e.terrain==='river'?0:e.terrain==='town'?2:1,b=create(index);b.campaign={...e};b.tutorial=null;b.units=b.units.filter(u=>u.kind!=='truck');b.objective={x:e.type==='attack'?555:255,y:210};b.units=b.units.filter(u=>u.team==='blue');const scale=Math.max(.35,Math.min(2.7,e.bluePower/90));b.units.forEach(u=>{u.hp=u.maxHp=Math.round(u.hp*scale);u.campaignOriginal=true;});const count=Math.max(2,Math.min(7,Math.ceil(e.redPower/28))),enemyScale=e.redPower/(count*24);for(let i=0;i<count;i++){const u=unit('r'+i,'red',i%2?'raider':'enemy',555+(i%3)*45,150+Math.floor(i/3)*60);u.hp=u.maxHp=Math.round(u.hp*enemyScale);u.order=e.type==='defense'?'advance':'hold';b.units.push(u);}if(e.fort>0){const u=unit('fort',e.type==='attack'?'red':'blue','fort',e.type==='attack'?555:255,e.type==='attack'?270:330);u.hp=u.maxHp=80+e.fort*40;u.campaignOriginal=u.team==='blue';b.units.push(u);}return b;}
+ function survival(b){const all=b.units.filter(u=>u.team==='blue'&&u.campaignOriginal);return all.length?all.reduce((n,u)=>n+Math.max(0,u.hp),0)/all.reduce((n,u)=>n+u.maxHp,0):1;}
+ function blocked(b,x,y){if(x<15||y<15||x>705||y>405)return true;if(b.campaign?.terrain==='plain')return false;if(b.mission===0)return x>=360&&x<390&&(y<150||y>=270);if(b.mission===2)return (x>=330&&x<420&&(y<150||y>=300))||(x>=90&&x<180&&y<120);return x>=330&&x<390&&y>=120&&y<270;}
  function route(b,start,goal){
   if(blocked(b,goal.x,goal.y))return null;
   const cell=p=>[clamp(Math.floor(p.x/tile),0,23),clamp(Math.floor(p.y/tile),0,13)],key=p=>p.join(','),a=cell(start),z=cell(goal),q=[a],seen=new Set([key(a)]),prev=new Map();let end=null;
@@ -42,7 +45,7 @@
  }
  function step(b,dt){
   if(b.result||b.paused||!Number.isFinite(dt)||dt<=0)return;dt=Math.min(dt,.1);b.time+=dt;b.shots=b.shots.map(s=>({...s,life:s.life-dt})).filter(s=>s.life>0);
-  if(b.mission===2&&b.time>20&&b.spawns===0){b.spawns++;for(let i=0;i<2;i++){const u=unit('wave'+i,'red','raider',675,270+i*60);u.order='advance';b.units.push(u);}}
+  if(!b.campaign&&b.mission===2&&b.time>20&&b.spawns===0){b.spawns++;for(let i=0;i<2;i++){const u=unit('wave'+i,'red','raider',675,270+i*60);u.order='advance';b.units.push(u);}}
   for(const u of b.units){if(u.hp<=0)continue;u.cooldown-=dt;
    const foes=b.units.filter(e=>e.team!==u.team&&e.hp>0),preferred=foes.find(e=>e.id===u.target),nearest=foes.sort((a,c)=>distance(u,a)-distance(u,c))[0];
    const enemy=preferred||nearest;
@@ -50,14 +53,15 @@
    if(u.kind==='medic'){const ally=b.units.filter(e=>e.team==='blue'&&e.id!==u.id&&e.hp>0&&e.hp<e.maxHp&&distance(u,e)<u.range).sort((a,c)=>a.hp-c.hp)[0];if(ally&&u.cooldown<=0){ally.hp=Math.min(ally.maxHp,ally.hp+12);u.cooldown=1;b.shots.push({x:u.x,y:u.y,tx:ally.x,ty:ally.y,team:'heal',life:.35});}move(b,u,dt);continue;}
    const inRange=enemy&&distance(u,enemy)<=u.range;
    if(inRange&&u.cooldown<=0&&u.ammo>0){enemy.hp=Math.max(0,enemy.hp-damageAt(b,enemy,u.damage));u.ammo--;u.cooldown=u.delay;b.shots.push({x:u.x,y:u.y,tx:enemy.x,ty:enemy.y,team:u.team,artillery:u.kind==='artillery',life:.22});}
-   if(u.team==='red'||u.order==='attack'){
+   if((u.team==='red'&&u.kind!=='fort'&&(!b.campaign||u.order==='advance'))||u.order==='attack'){
     if(!inRange&&enemy){if(!u.path.length||u.cooldown<=-.7){u.path=route(b,u,enemy)||[];u.cooldown=Math.max(u.cooldown,-.3);}move(b,u,dt);}else u.path=[];
    }else{if(u.order==='follow'){const truck=b.units.find(e=>e.id===u.target&&e.hp>0);if(truck&&!u.path.length)u.path=route(b,u,{x:Math.max(30,truck.x-40),y:300})||[];}move(b,u,dt);}
   }
   const blue=b.units.filter(u=>u.team==='blue'&&u.kind!=='truck'&&u.hp>0),red=b.units.filter(u=>u.team==='red'&&u.hp>0);if(!blue.length){b.result='defeat';return;}
+  if(b.campaign){if(b.campaign.type==='defense'){if(!red.length)b.result='victory';}else{const occupation=blue.some(u=>u.kind!=='fort'&&distance(u,b.objective)<72),contested=red.some(u=>distance(u,b.objective)<135);b.capture=occupation&&!contested?b.capture+dt:0;if(b.capture>=3)b.result='victory';}return;}
   if(b.mission===0){const occupation=blue.some(u=>distance(u,b.objective)<72),contested=red.some(u=>distance(u,b.objective)<135);b.capture=occupation&&!contested?b.capture+dt:Math.max(0,b.capture-dt*.3);if(b.capture>=6)b.result='victory';}
   if(b.mission===1){const truck=b.units.find(u=>u.kind==='truck');if(truck.hp<=0)b.result='defeat';else if(truck.x>=660)b.result='victory';}
   if(b.mission===2&&b.time>=50)b.result=blue.some(u=>distance(u,b.objective)<145)?'victory':'defeat';
  }
- return {missions,kinds,width,height,create,blocked,route,order,step,support,damageAt};
+ return {missions,kinds,width,height,create,createCampaign,survival,blocked,route,order,step,support,damageAt};
 });
