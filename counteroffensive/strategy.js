@@ -4,7 +4,7 @@
  const no=message=>({ok:false,message}),ok=message=>({ok:true,message});
  function init(s,api){
   s.strategy={phase:'preparation',funds:140,integrity:100,levels:{economy:0,technology:0,diplomacy:0},partners:{usa:false,japan:false,korea:false,philippines:false},project:null,warAt:null,nextStrike:null,warning:null,lastStrike:null,repairAt:0};
-  for(let i=0;i<api.N;i++)if(s.terrain[i]&&i%api.W<135){const y=Math.floor(i/api.W);api.claim(s,i,y<47?2:y<83?3:4);}
+  if(api.setup)api.setup(s);else for(let i=0;i<api.N;i++)if(s.terrain[i]&&i%api.W<135){const y=Math.floor(i/api.W);api.claim(s,i,y<47?2:y<83?3:4);}
   for(let f=2;f<5;f++)s.factions[f].troops=3000;
   s.events=[];s.flashes=[];api.event(s,'先投资发展，再决定开战。推荐从经济建设开始。');return s;
  }
