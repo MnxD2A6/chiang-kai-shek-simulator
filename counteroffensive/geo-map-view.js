@@ -1,12 +1,12 @@
 (function(root){
  'use strict';
  const F=root.FrontCore,G=F.geography;
- const colors=['#657975','#548fe0','#8c6062','#a38a69','#80728e'];
+ const colors=['#626f83','#66b7cf','#83576c','#907578','#695c89'];
  const partnerLocations={usa:[-98,39],japan:[138,38],korea:[127.7,36.6],philippines:[123,12]};
  const countryNames={CHN:'大陆',TWN:'台湾',USA:'美国',JPN:'日本',KOR:'韩国',PRK:'朝鲜',RUS:'俄罗斯',CAN:'加拿大',MEX:'墨西哥',PHL:'菲律宾',VNM:'越南',AUS:'澳大利亚',IDN:'印度尼西亚',MNG:'蒙古'};
  class FrontMap{
   constructor(canvas){
-   this.canvas=canvas;this.ctx=canvas.getContext('2d');this.texture=document.createElement('canvas');this.texture.width=F.W;this.texture.height=F.H;this.tc=this.texture.getContext('2d');this.zoom=1;this.pan={x:0,y:0};this.lastTexture=-10;this.hover=null;this.rings=[];this.labels=[];this.unitHits=[];this.visibleTowns=new Set();this.visibleRegions=new Set();
+   this.shipArt={};for(const kind of ['transport','destroyer','missile']){const img=new Image();img.src='./assets/ship-'+kind+'.svg';this.shipArt[kind]=img;}this.canvas=canvas;this.ctx=canvas.getContext('2d');this.texture=document.createElement('canvas');this.texture.width=F.W;this.texture.height=F.H;this.tc=this.texture.getContext('2d');this.zoom=1;this.pan={x:0,y:0};this.lastTexture=-10;this.hover=null;this.rings=[];this.labels=[];this.unitHits=[];this.visibleTowns=new Set();this.visibleRegions=new Set();
    this.shapes=G.data.features.map(f=>{const path=new Path2D(),bounds={x0:Infinity,y0:Infinity,x1:-Infinity,y1:-Infinity};for(const ring of f.rings){ring.forEach(([lon,lat],i)=>{const p=G.project(lon,lat);bounds.x0=Math.min(bounds.x0,p.x);bounds.x1=Math.max(bounds.x1,p.x);bounds.y0=Math.min(bounds.y0,p.y);bounds.y1=Math.max(bounds.y1,p.y);if(i)path.lineTo(p.x,p.y);else path.moveTo(p.x,p.y);});path.closePath();}return {code:f.code,path,bounds};});
    this.combatClip=new Path2D();for(const s of this.shapes)if(['CHN','TWN'].includes(s.code))this.combatClip.addPath(s.path);
    this.resize();this.home();
@@ -60,7 +60,7 @@
    if(!s.units&&this.zoom>=4){const home=this.townScreen(s.towns.find(t=>t.id==='taipei'));if(this.visible(home)){this.label('驻军 '+Math.floor(s.factions[1].troops).toLocaleString(),home.x-12,home.y+40,12,'#b8ead3','center');}}
    if(s.strategy?.warning){const w=s.strategy.warning,phase=Math.min(1,(s.time-w.startedAt)/(w.impactAt-w.startedAt)),a=this.townScreen(s.towns.find(t=>t.id==='fuzhou')),b=this.townScreen(s.towns.find(t=>t.id==='taipei'));c.strokeStyle='#f8ab8877';c.setLineDash([4,5]);c.beginPath();c.moveTo(a.x,a.y);c.quadraticCurveTo((a.x+b.x)/2,(a.y+b.y)/2-90,b.x,b.y);c.stroke();c.setLineDash([]);c.fillStyle='#ffd3a8';c.beginPath();c.arc(a.x+(b.x-a.x)*phase,a.y+(b.y-a.y)*phase-Math.sin(phase*Math.PI)*45,4,0,Math.PI*2);c.fill();}
    if(this.hover!==null&&s.terrain[this.hover]){const p=F.xy(this.hover),q=this.screen(p.x,p.y);c.strokeStyle='#f2df9e';c.lineWidth=1;c.strokeRect(q.x,q.y,G.data.grid.cell*t.scale,G.data.grid.cell*t.scale);}
-   this.drawUnits(s);this.scaleBar();c.setTransform(1,0,0,1,0,0);
+   this.drawUnits(s);this.drawNaval(s);this.scaleBar();c.setTransform(1,0,0,1,0,0);
   }
   drawUnits(s){
    const c=this.ctx;
@@ -72,6 +72,15 @@
     if(chosen){c.strokeStyle='#d3e9ff';c.lineWidth=1.5;c.beginPath();c.arc(q.x,q.y,12,0,Math.PI*2);c.stroke();}
     c.strokeStyle='#86baf0aa';c.lineWidth=1;c.beginPath();c.moveTo(q.x,q.y+9);c.lineTo(q.x,q.y+22);c.stroke();
    }
+  }
+  drawNaval(s){
+   if(!s.naval)return;const c=this.ctx;
+   for(const h of F.hostiles||[]){const p=this.townScreen(h);if(!this.visible(p,0))continue;c.fillStyle='#ff879c';c.beginPath();c.arc(p.x,p.y,6,0,Math.PI*2);c.fill();this.label(h.name,p.x,p.y-15,14,'#ffb5c2','center',true);this.label('大陆援军',p.x,p.y+23,10,'#e99baa','center',true);}
+   for(const a of s.naval.aid){if(a.delivered||s.time<a.depart)continue;const h=F.hostiles.find(h=>h.id===a.key),town=s.towns.find(t=>t.id===a.city),from=this.townScreen(h),to=this.townScreen(town),n=(s.time-a.depart)/(a.arrive-a.depart),p={x:from.x+(to.x-from.x)*n,y:from.y+(to.y-from.y)*n};this.arrow(from,to,'#ff89986b',s.time);c.fillStyle='#ff879a';c.fillRect(p.x-5,p.y-5,10,10);this.label(h.name+'增援 '+Math.ceil(a.arrive-s.time)+'秒',p.x,p.y-13,11,'#ffc5cf','center',true);}
+   for(const a of s.naval.ground){const pos=F.unitPosition(a),p=this.screen(pos.x,pos.y);if(!this.visible(p))continue;c.fillStyle='#fa8fa3';c.strokeStyle='#52293f';c.lineWidth=2;c.fillRect(p.x-9,p.y-6,18,12);c.strokeRect(p.x-9,p.y-6,18,12);this.label(a.name+' '+Math.ceil(a.force),p.x,p.y-16,12,'#ffb9c7','center',true);}
+   for(const a of s.naval.ships){const pos=F.shipPosition(a),p=this.screen(pos.x,pos.y),next=F.xy(a.path[0]??a.tile),curr=F.xy(a.tile),selected=a.id===this.selectedUnit;if(a.path.length){const g=F.xy(a.goal);this.arrow(p,this.screen(g.x+.5,g.y+.5),a.faction===1?'#86e0ee80':'#ff849986',s.time);}if(!this.visible(p))continue;c.save();c.translate(p.x,p.y);c.rotate(a.path.length?Math.atan2(next.y-curr.y,next.x-curr.x)+Math.PI/2:0);const img=this.shipArt[a.kind];if(img.complete&&img.naturalWidth)c.drawImage(img,-9,-22,18,44);c.restore();c.strokeStyle=a.faction===1?'#75e3ea':'#ff819b';c.lineWidth=selected?2.5:1;c.beginPath();c.arc(p.x,p.y,selected?25:19,0,Math.PI*2);c.stroke();c.fillStyle='#0b1b32';c.fillRect(p.x-16,p.y+27,32,3);c.fillStyle=a.faction===1?'#85e5d0':'#ff829c';c.fillRect(p.x-16,p.y+27,32*a.hp/F.shipTypes[a.kind].hp,3);}
+   for(const m of s.naval.missiles){const a=F.xy(m.from),b=F.xy(m.to),from=this.screen(a.x+.5,a.y+.5),to=this.screen(b.x+.5,b.y+.5),n=Math.min(1,(s.time-m.launched)/4),p={x:from.x+(to.x-from.x)*n,y:from.y+(to.y-from.y)*n-Math.sin(n*Math.PI)*60};c.strokeStyle=m.faction===1?'#b9f8ee':'#ffacb7';c.lineWidth=2;c.beginPath();c.moveTo(from.x,from.y);c.quadraticCurveTo((from.x+p.x)/2,(from.y+p.y)/2-25,p.x,p.y);c.stroke();c.fillStyle='#fff4bf';c.beginPath();c.arc(p.x,p.y,4,0,Math.PI*2);c.fill();this.label('导弹',p.x+8,p.y-9,10,m.faction===1?'#c9fff0':'#ffb3c2');}
+   for(const e of s.naval.bursts){const a=F.xy(e.tile),p=this.screen(a.x+.5,a.y+.5),n=(s.time-e.at)/2;c.globalAlpha=Math.max(0,1-n);c.strokeStyle=e.kind==='intercept'?'#84f0e5':'#ffb695';c.lineWidth=2;c.beginPath();c.arc(p.x,p.y,8+n*35,0,Math.PI*2);c.stroke();for(let i=0;i<6;i++){const angle=i*Math.PI/3;c.fillStyle=c.strokeStyle;c.fillRect(p.x+Math.cos(angle)*n*30-2,p.y+Math.sin(angle)*n*30-2,4,4);}c.globalAlpha=1;}
   }
   graticule(){const c=this.ctx,t=this.transform,step=this.zoom>=10?2:this.zoom>=3?5:20;c.strokeStyle='#bdd5dc12';c.lineWidth=1;for(let lon=70;lon<=300;lon+=step){const p=this.point(lon-70,0);if(p.x<0||p.x>this.width)continue;c.beginPath();c.moveTo(p.x,0);c.lineTo(p.x,this.height);c.stroke();if(p.x>250&&p.x<this.width-90)this.label((lon>180?360-lon:lon)+'°'+(lon>180?'W':'E'),p.x,22,9,'#6c949f','center');}for(let lat=-10;lat<72;lat+=step){const p=this.point(0,G.project(100,lat).y);if(p.y<40||p.y>this.height-50)continue;c.beginPath();c.moveTo(0,p.y);c.lineTo(this.width,p.y);c.stroke();this.label(Math.abs(lat)+'°'+(lat<0?'S':'N'),this.width-45,p.y-5,9,'#6c949f');}if(this.zoom<2){const p=G.project(185,15),q=this.point(p.x,p.y);this.label('太  平  洋',q.x,q.y,22,'#6897a6','center');}}
   scaleBar(){const c=this.ctx,mid=this.worldPoint(this.width/2,this.height/2),ll=G.unproject(mid.x,mid.y),pixelsPerKm=this.transform.scale/(111.32*Math.cos(ll.lat*Math.PI/180));const sizes=[10,20,50,100,200,500,1000,2000],km=sizes.findLast(n=>n*pixelsPerKm<110)||10,w=km*pixelsPerKm,x=18,y=this.height-48;c.strokeStyle='#aac4c9';c.lineWidth=1.5;c.beginPath();c.moveTo(x,y-4);c.lineTo(x,y);c.lineTo(x+w,y);c.lineTo(x+w,y-4);c.stroke();this.label(km+' km',x,y-8,10,'#a8c5cd');const el=document.getElementById('mapScale');if(el)el.textContent=this.zoom.toFixed(1)+'× · '+(this.zoom>=10?'城市 / 部队':this.zoom>=3?'区域视图':'太平洋全图');}

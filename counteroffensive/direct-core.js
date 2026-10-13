@@ -30,7 +30,7 @@
     if(prev[to]===-2)return null;const path=[];for(let i=to;i!==from;i=prev[i])path.push(i);return path.reverse();
   }
   F.unitPosition=u=>{const p=F.xy(u.tile),q=F.xy(u.path[0]??u.tile);return {x:p.x+(q.x-p.x)*u.progress+.5,y:p.y+(q.y-p.y)*u.progress+.5};};
-  F.unitStatus=(s,u)=>u.status==='guard'?'驻守':u.status==='blocked'?'兵力不足':!s.terrain[u.tile]?'渡海中':u.path.length&&s.owners[u.path[0]]!==1&&s.terrain[u.path[0]]?'交战中':'行军中';
+  F.unitStatus=(s,u)=>u.status==='guard'?'驻守':u.status==='waiting'?'等待运输舰':u.status==='blocked'?'兵力不足':!s.terrain[u.tile]?'渡海中':u.path.length&&s.owners[u.path[0]]!==1&&s.terrain[u.path[0]]?'交战中':'行军中';
   F.order=function(s,id,tile){
     if(s.result)return no('本局已结束。');const u=s.units.find(a=>a.id===id);
     if(!u)return no('先点地图上的蓝色军队，再点一座城市。');
@@ -49,7 +49,15 @@
   function march(s,u,dt){
     if(!u.path.length)return;u.progress+=dt*(!s.terrain[u.tile]?3.8:2.8);
     while(u.progress>=1&&u.path.length){
-      const tile=u.path[0];if(s.owners[tile]>4){u.path=[];u.progress=0;u.status='blocked';return;}
+      const tile=u.path[0];
+      if(s.naval&&(!s.terrain[tile]||!s.terrain[u.tile])){
+        const carrier=s.naval.ships.find(a=>a.id===u.transport&&a.hp>0)||s.naval.ships.find(a=>a.kind==='transport'&&a.faction===1&&a.hp>0&&a.cargo===null&&distance(a.tile,u.tile)<12);
+        if(!carrier){u.progress=0;u.status='waiting';return;}
+        u.transport=carrier.id;carrier.cargo=u.id;carrier.path=[];carrier.progress=0;u.status='moving';
+        if(!s.terrain[tile])carrier.tile=tile;
+        else{carrier.cargo=null;delete u.transport;}
+      }
+      if(s.owners[tile]>4){u.path=[];u.progress=0;u.status='blocked';return;}
       if(s.terrain[tile]&&s.owners[tile]!==1){
         const loss=F.cost(s,tile)*F.strategy.attackFactor(s)*(!s.terrain[u.tile]?2:1);
         if(u.force<=loss+10){u.path=[];u.progress=0;u.status='blocked';log(s,u.name+'兵力不足，已停止推进。','danger');return;}
@@ -81,9 +89,9 @@
     const bad=()=>{throw Error('军队存档数据无效。');},ids=new Set([...s.armies,...s.fleets].map(a=>a.id));
     if(!Array.isArray(raw.units)||raw.units.length>100)bad();
     for(const u of raw.units){
-      if(!u||!Number.isInteger(u.id)||u.id<1||u.id>=s.serial||ids.has(u.id)||u.faction!==1||typeof u.name!=='string'||u.name.length>30||!Number.isFinite(u.force)||u.force<=0||u.force>1e6||!valid(u.tile)||s.owners[u.tile]>4||!valid(u.goal)||s.owners[u.goal]>4||!Number.isFinite(u.progress)||u.progress<0||u.progress>=1||!['guard','moving','blocked'].includes(u.status)||!Array.isArray(u.path)||u.path.length>F.N)bad();
+      if(!u||!Number.isInteger(u.id)||u.id<1||u.id>=s.serial||ids.has(u.id)||u.faction!==1||typeof u.name!=='string'||u.name.length>30||!Number.isFinite(u.force)||u.force<=0||u.force>1e6||!valid(u.tile)||s.owners[u.tile]>4||!valid(u.goal)||s.owners[u.goal]>4||!Number.isFinite(u.progress)||u.progress<0||u.progress>=1||!['guard','moving','blocked','waiting'].includes(u.status)||!Array.isArray(u.path)||u.path.length>F.N)bad();
       ids.add(u.id);let prev=u.tile;for(const tile of u.path){if(!valid(tile)||s.owners[tile]>4||!F.neighbors(prev).includes(tile))bad();prev=tile;}
-      if(u.path.length?(u.path.at(-1)!==u.goal||u.status!=='moving'):u.progress!==0||u.status==='moving')bad();
+      if(u.path.length?(u.path.at(-1)!==u.goal||!['moving','waiting'].includes(u.status)):u.progress!==0||u.status==='moving')bad();
       s.units.push({...u,path:[...u.path]});
     }
     if(raw.result==='victory')s.result=s.towns.filter(t=>t.goal).every(t=>s.owners[t.tile]===1)?'victory':null;

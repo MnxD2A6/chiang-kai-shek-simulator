@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 440" role="img" aria-label="原创二次元战术通讯员澪，银蓝色短发与海军制服">
+<defs><linearGradient id="coat" x2="1" y2="1"><stop stop-color="#243c65"/><stop offset="1" stop-color="#111f38"/></linearGradient><linearGradient id="hair" x2=".7" y2="1"><stop stop-color="#eff9ff"/><stop offset="1" stop-color="#9dbad4"/></linearGradient></defs>
+<path d="M46 433L48 339Q60 293 118 274L125 244H192L199 278Q258 295 278 339L289 434Z" fill="url(#coat)" stroke="#0c192e" stroke-width="3"/>
+<path d="M121 260L119 290L158 322L199 288L190 257" fill="#ffe1d1" stroke="#b78c8c" stroke-width="2"/>
+<path d="M103 275L120 288L158 318L195 286L214 279L197 340L159 381L118 340Z" fill="#f0f6ff"/>
+<path d="M136 318L157 314L178 318L167 335L175 376L158 396L141 375L148 335Z" fill="#ff8197" stroke="#ca526e" stroke-width="2"/>
+<path d="M104 278L119 335L152 389L121 413L87 318L73 310Z M215 280L199 335L166 391L191 416L238 313Z" fill="#375584" stroke="#7399b8" stroke-width="2"/>
+<path d="M94 349L116 349L116 354L94 354ZM212 349L243 349L243 354L212 354Z" fill="#83dee7"/>
+<path d="M199 364L234 364L234 392L199 392Z" fill="#203852" stroke="#94cee4"/><path d="M206 375H227M206 382H217" stroke="#d8f4ff" stroke-width="2"/>
+<circle cx="124" cy="421" r="4" fill="#cbd7d8"/><circle cx="194" cy="421" r="4" fill="#cbd7d8"/>
+<path d="M64 176Q48 51 138 33Q226 6 255 88L254 208L228 267L207 274L187 224L94 264L80 246Z" fill="#5a7393" stroke="#182940" stroke-width="3"/>
+<path d="M97 130Q150 95 221 135L216 220Q207 253 164 270Q127 259 105 230Z" fill="#ffe8dc" stroke="#d9aaaa" stroke-width="2"/>
+<path d="M102 204Q95 181 85 194Q81 212 102 220M218 203Q233 182 234 201Q234 216 215 222" fill="#ffe1d1" stroke="#c99597" stroke-width="2"/>
+<path d="M99 170Q119 163 139 171M178 172Q198 163 218 169" stroke="#8a6673" stroke-width="2" fill="none"/>
+<path d="M105 184Q121 173 140 185L136 203Q121 214 110 200Z M178 185Q197 173 215 183L211 201Q195 214 183 202Z" fill="#fff"/>
+<path d="M113 183Q125 178 133 184L131 203Q122 210 115 202Z M186 183Q196 178 205 182L204 203Q194 210 187 202Z" fill="#3c87b8"/>
+<path d="M119 184H126V202H119ZM192 184H199V202H192Z" fill="#173b64"/><circle cx="119" cy="185" r="4" fill="#fff"/><circle cx="192" cy="185" r="4" fill="#fff"/><circle cx="128" cy="201" r="2" fill="#aef3ff"/><circle cx="201" cy="201" r="2" fill="#aef3ff"/>
+<path d="M103 183Q123 172 142 184M176 184Q197 172 216 182" fill="none" stroke="#263951" stroke-width="4" stroke-linecap="round"/>
+<path d="M101 181L98 177M216 181L221 177" stroke="#263951" stroke-width="2"/>
+<path d="M159 206L155 214L160 216M149 238Q160 245 173 236" fill="none" stroke="#bd7e86" stroke-width="2" stroke-linecap="round"/>
+<path d="M106 222L129 224M193 224L214 220" stroke="#f1afa9" stroke-width="6" opacity=".6"/>
+<path d="M74 179Q55 126 76 79Q105 25 175 34Q226 35 245 98L247 189L225 216L217 148L204 161L181 121L169 176L149 133L141 177L120 150L103 177L91 158L87 223L72 248L63 216Z" fill="url(#hair)" stroke="#456684" stroke-width="2.5"/>
+<path d="M81 151Q74 86 128 57M99 130Q112 83 167 52M174 58Q208 78 221 128M112 79L143 146M152 66L173 137M79 186L75 226" fill="none" stroke="#f8fdff" stroke-width="5" opacity=".8"/>
+<path d="M69 127L92 115L97 128L72 140Z" fill="#ff91a5" stroke="#ba5872" stroke-width="2"/><path d="M73 126L91 122M75 132L93 127" stroke="#ffe1e6" stroke-width="2"/>
+<path d="M55 156Q61 105 82 111L87 166" fill="none" stroke="#193456" stroke-width="9"/><rect x="62" y="163" width="22" height="40" rx="9" fill="#213d61" stroke="#92e9ef" stroke-width="2"/><path d="M73 202Q79 238 133 243" fill="none" stroke="#24415f" stroke-width="4"/><rect x="127" y="237" width="18" height="8" rx="4" fill="#172f4e"/>
+<path d="M247 178L254 227L238 259L229 214" fill="#a9c3d9" stroke="#456684" stroke-width="2"/>
+<path d="M155 31L173 30L175 38L157 39Z" fill="#6de3eb"/>
+</svg>
