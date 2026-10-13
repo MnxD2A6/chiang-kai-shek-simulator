@@ -58,6 +58,7 @@
    const factor=(1-protection(s))*(p.warning.sheltered?.35:1),damage=36*factor;
    const before=s.factions[1].troops+api.deployed(s,1);s.factions[1].troops*=1-.45*factor;
    for(const fleet of s.fleets)if(fleet.faction===1)fleet.force*=1-.6*factor;
+   for(const unit of s.units||[])if(!s.terrain[unit.tile]||s.towns.some(t=>t.country==='TWN'&&Math.hypot(t.x-unit.tile%api.W,t.y-Math.floor(unit.tile/api.W))<20))unit.force*=1-(s.terrain[unit.tile]?.45:.6)*factor;
    p.integrity=Math.max(0,p.integrity-damage);p.lastStrike={at:s.time,damage,lost:Math.round(before-s.factions[1].troops-api.deployed(s,1))};
    p.warning=null;p.nextStrike=s.time+36+p.levels.diplomacy*18;
    api.event(s,`空袭造成 ${Math.ceil(damage)} 点设施损伤，损失 ${p.lastStrike.lost} 兵力。`, 'danger');
