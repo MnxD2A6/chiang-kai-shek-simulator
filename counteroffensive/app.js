@@ -24,7 +24,7 @@
     const r=action(()=>F.order(state,selected,tile));if(r.ok)view.rings.push({tile,t:performance.now()/1000});
   }
   function help(){show(`<span class="eyebrow">两次点击就能下令</span><h2 id="modalTitle">你只需要选人，再选地方。</h2><div class="how-steps"><div><em>01</em><span><b>点地图上的蓝色军队。</b><small>也可在部队列表选择。选中的部队会亮起，显示路线和兵力。</small></span></div><div><em>02</em><span><b>点一座城市。</b><small>我方城市：移动后驻守。敌方城市：自动渡海、进攻，攻下后驻守。重新点另一座城市即可改令。筹备期先试试台北与高雄之间的调动。</small></span></div><div><em>03</em><span><b>留意兵力，守住夺下的城市。</b><small>补兵从预备兵转入选中的军队；驻守部队会抵抗附近反攻。「停止 / 驻守」只取消这支部队的命令。控制福州、南京、广州获胜。</small></span></div></div><p><b>海战：</b>运输舰靠近陆军后自动运兵；驱逐舰自动护航和拦截附近导弹；导弹艇可选中后用「导弹打击」。选舰船后点海域移动，点敌舰靠近交战。俄罗斯、朝鲜援军抵达后会反攻我方大陆据点。</p><p>准备进攻时打开「发展」：可投资经济、科技、外交，再决定开战。空袭时疏散，受损后修复。空格暂停，暂停也能下令。拖动与缩放地图。</p><button id="helpClose" class="primary-btn">开始指挥 →</button>`);$('helpClose').onclick=close;}
-  function archives(){show(`<span class="eyebrow">渡海 / 战术指挥版 1.5</span><h2 id="modalTitle">战役存档</h2><p>${storage?'自动保存已开启。':'本地保存不可用，请导出存档。'}旧版地图进度会自动迁移，原存档保留。打开菜单时战场暂停。</p><div class="modal-actions"><button id="export" ${started?'':'disabled'}>导出 JSON</button><button id="import">导入存档</button><button id="newRun">开始新战役</button></div>`);
+  function archives(){show(`<span class="eyebrow">渡海 / 战术指挥版 1.5.1</span><h2 id="modalTitle">战役存档</h2><p>${storage?'自动保存已开启。':'本地保存不可用，请导出存档。'}旧版地图进度会自动迁移，原存档保留。打开菜单时战场暂停。</p><div class="modal-actions"><button id="export" ${started?'':'disabled'}>导出 JSON</button><button id="import">导入存档</button><button id="newRun">开始新战役</button></div>`);
     $('export').onclick=()=>{const url=URL.createObjectURL(new Blob([F.encode(state)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=`strait-front-v5-${Math.floor(state.time)}s.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
     $('import').onclick=()=>$('importFile').click();$('newRun').onclick=()=>{show('<h2 id="modalTitle">开始新战役？</h2><p>本版自动存档将被替换，可以先导出留档。</p><div class="modal-actions"><button id="cancelNew">返回</button><button id="confirmNew" class="primary-btn">开始新远征</button></div>');$('cancelNew').onclick=archives;$('confirmNew').onclick=()=>begin(false);};
   }
@@ -64,7 +64,7 @@
   }
   function renderSelection(u,vessel){
     const chosen=u||vessel;$('unitValue').textContent=chosen?fmt(vessel?vessel.hp:u.force):'—';$('unitMetric').textContent=vessel?'舰体耐久 / HP':u?'现有兵力 / 人':'点图标选择单位';$('unitBar').style.width=chosen?(vessel?vessel.hp/F.shipTypes[vessel.kind].hp*100:100)+'%':'0%';
-    if(!chosen){$('selectionLabel').textContent='MIO / 通讯接入';$('selectedName').textContent='等待你的指令';$('selectedStatus').textContent='点地图上的图标，再点城市或海域下令。';}
+    if(!chosen){$('selectionLabel').textContent='蒋介石 / 指挥接入';$('selectedName').textContent='等待你的指令';$('selectedStatus').textContent='点地图上的图标，再点城市或海域下令。';}
   }
   function updateMarkers(){
     for(const r of F.regions){let b=$('region-'+r.id);if(!b){b=document.createElement('button');b.id='region-'+r.id;b.className='world-hit';b.setAttribute('aria-label',r.name+'，查看合作机会');b.onclick=()=>{if(started)strategyUI.choose(r.id);};$('worldButtons').append(b);}const p=view.regionScreen(r);b.style.left=p.x+'px';b.style.top=p.y+'px';b.hidden=!view.visible(p,0)||!view.visibleRegions.has(r.id);}
@@ -101,7 +101,7 @@
     for(const b of document.querySelectorAll('[data-build]'))b.disabled=!started||!!state.result||state.strategy.funds<F.shipTypes[b.dataset.build].cost||ships.length>=10;
     $('reinforce').textContent=vessel?'维修 · 60':'补兵 +500';if(vessel)$('reinforce').disabled=!!state.result||state.strategy.funds<60||vessel.hp>=F.shipTypes[vessel.kind].hp;
     if(vessel){$('selectionLabel').textContent=F.shipTypes[vessel.kind].name+' · '+Math.ceil(vessel.hp)+' HP';$('selectedName').textContent=vessel.name;$('selectedStatus').textContent=vessel.kind==='transport'?(vessel.cargo!==null?'运兵中 · 通过搭载的陆军改令':'靠近我方军队后自动承接渡海运输'):vessel.kind==='destroyer'?'自动攻击附近敌舰，并拦截附近来袭导弹':'舰载导弹 '+vessel.ammo+' 枚 · 点「导弹打击」再点敌舰或敌城';}
-    $('radioLine').textContent='澪 / '+(state.events[0]?.text||'通讯接入，等待指令。');
+    $('radioLine').textContent='指挥部 / '+(state.events[0]?.text||'通讯接入，等待指令。');
     const boat=vessel?.kind==='missile'?vessel:null;$('missileStock').textContent=boat?boat.ammo:state.naval.stock;$('missileMode').disabled=!started||!!state.result||state.strategy.phase!=='war';$('missileMode').classList.toggle('armed',missileMode);$('missileMode').setAttribute('aria-pressed',missileMode);
     const pending=state.naval.aid.filter(a=>!a.delivered).sort((a,b)=>a.arrive-b.arrive)[0];$('aidStatus').textContent=pending?Math.ceil(Math.max(0,pending.arrive-state.time))+'秒':state.naval.aid.length?'已抵达':'待机';
     $('guideTitle').textContent=missileMode?'选择导弹目标':vessel?'点海域或敌舰':selected===null?'选择军队或舰船':$('guideTitle').textContent;
