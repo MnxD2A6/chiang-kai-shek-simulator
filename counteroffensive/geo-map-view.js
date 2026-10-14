@@ -61,7 +61,15 @@
    if(!s.units&&this.zoom>=4){const home=this.townScreen(s.towns.find(t=>t.id==='taipei'));if(this.visible(home)){this.label('驻军 '+Math.floor(s.factions[1].troops).toLocaleString(),home.x-12,home.y+40,12,'#b8ead3','center');}}
    if(s.strategy?.warning){const w=s.strategy.warning,phase=Math.min(1,(s.time-w.startedAt)/(w.impactAt-w.startedAt)),a=this.townScreen(s.towns.find(t=>t.id==='fuzhou')),b=this.townScreen(s.towns.find(t=>t.id==='taipei'));c.strokeStyle='#f8ab8877';c.setLineDash([4,5]);c.beginPath();c.moveTo(a.x,a.y);c.quadraticCurveTo((a.x+b.x)/2,(a.y+b.y)/2-90,b.x,b.y);c.stroke();c.setLineDash([]);c.fillStyle='#ffd3a8';c.beginPath();c.arc(a.x+(b.x-a.x)*phase,a.y+(b.y-a.y)*phase-Math.sin(phase*Math.PI)*45,4,0,Math.PI*2);c.fill();}
    if(this.hover!==null&&s.terrain[this.hover]){const p=F.xy(this.hover),q=this.screen(p.x,p.y);c.strokeStyle='#f2df9e';c.lineWidth=1;c.strokeRect(q.x,q.y,G.data.grid.cell*t.scale,G.data.grid.cell*t.scale);}
-   this.observeCombat(s);this.drawUnits(s);this.drawNaval(s);this.drawMarkerLeaders(s);this.drawCombatFX(s);this.scaleBar();c.setTransform(1,0,0,1,0,0);
+   this.observeCombat(s);this.drawUnits(s);this.drawNaval(s);this.drawOperation(s);this.drawMarkerLeaders(s);this.drawCombatFX(s);this.scaleBar();c.setTransform(1,0,0,1,0,0);
+  }
+  drawOperation(s){
+   const a=s.operations?.active;if(!a||this.zoom<3)return;
+   const convoy=s.naval.ships.find(v=>v.id===a.convoyId);if(!convoy)return;
+   const p=this.markerPoint(convoy.id,convoy.tile),c=this.ctx;if(!this.visible(p,0))return;
+   const box={x:p.x-50,y:p.y-53,w:100,h:20};
+   if((this.hudObstacles||[]).some(b=>box.x<b.x+b.w&&box.x+box.w>b.x&&box.y<b.y+b.h&&box.y+box.h>b.y))return;
+   c.fillStyle='#111318';c.fillRect(box.x,box.y,box.w,box.h);c.fillStyle='#ffcc24';c.fillRect(box.x,box.y,3,box.h);c.font='bold 10px "Microsoft YaHei",sans-serif';c.textAlign='center';c.fillText('补给船 '+Math.ceil(convoy.hp)+' HP',p.x,box.y+14);c.textAlign='left';
   }
   drawUnits(s){
    const c=this.ctx;

@@ -11,7 +11,7 @@
  const levels=s=>s.strategy?.levels||{economy:0,technology:0,diplomacy:0};
  const partners=s=>s.strategy?.partners||{};
  const income=s=>(4+levels(s).economy*3+(partners(s).japan?2:0))*(.4+.6*(s.strategy?.integrity??100)/100);
- const bonusCap=s=>levels(s).economy*1800+levels(s).technology*700+levels(s).diplomacy*1200+(partners(s).usa?2000:0)+(partners(s).japan?1000:0);
+ const bonusCap=s=>levels(s).economy*1800+levels(s).technology*700+levels(s).diplomacy*1200+(partners(s).usa?2000:0)+(partners(s).japan?1000:0)+Math.min(3,s.operations?.wins||0)*600;
  const bonusGrowth=s=>levels(s).economy*12+levels(s).diplomacy*10+(partners(s).japan?8:0);
  const protection=s=>levels(s).technology*.22+levels(s).diplomacy*.04+(partners(s).korea?.08:0);
  const attackFactor=s=>1-levels(s).technology*.18-(partners(s).korea?.05:0);
