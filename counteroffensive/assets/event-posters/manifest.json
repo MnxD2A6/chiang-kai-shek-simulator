@@ -1,0 +1,247 @@
+{
+  "version": "1.10.0",
+  "tool": "OpenAI built-in image_gen",
+  "intent": "generate",
+  "style": "Original historical painted poster and lithographic editorial illustrations; red, ink, aged paper, olive, rough pigment",
+  "reference": "User supplied historical poster as style guidance; reference image not included in distribution",
+  "entries": [
+    {
+      "id": "korea_rps",
+      "file": "./korea_rps.png",
+      "prompt": "Use case: illustration-story. Create ONE original landscape 3:2 event illustration for a satirical fictional grand strategy game. Subject: Kim Jong Un at a tense diplomatic rock-paper-scissors table, visibly indignant after losing: his closed rock fist in foreground and an opposing diplomat's paper hand covering it, red telephone and scattered harmless game scorecards, anxious aides, a distant Korean peninsula silhouette. Show the absurd contrast of a trivial game with pompous military ceremony; no actual violence. STYLE: mid-20th-century hand-painted wartime poster / lithographic editorial illustration, bold sculptural faces and hands, heavy irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged cream paper and coarse pigment grain. Strong dramatic diagonal composition with large crimson fabric shapes, limited vermilion red, ink black, parchment ivory, muted olive and dusty gold. Painterly and gritty, emphatically NOT clean vector, not anime, not photorealistic or 3D. Fill the entire landscape frame with narrative composition; focal faces and hand gestures large and readable at a small card size. No letters, captions, words, logos, watermarks, swastikas or modern campaign slogans. A new scene, do not replicate the historical reference poster's soldier or existing composition.",
+      "sha256": "1b7953704fee6287cb2d8a0f6d44b335c39d2ee6ca02613ee971fa27e70c0d84",
+      "bytes": 3314376
+    },
+    {
+      "id": "korea_summit",
+      "file": "./korea_summit.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A tense Korean summit in an ornate hall: two rival delegations argue over a single oversized coin held by a weary neutral mediator; tiny rock paper scissors hand tokens abandoned on the table; pompous leaders, absurd diplomatic deadlock, no weapons or text.",
+      "sha256": "efba7f5b112346bcf400723b7e1c1eaf5269676fcc66bce80f9a55edd2ffeb23",
+      "bytes": 3418511
+    },
+    {
+      "id": "korea_war",
+      "file": "./korea_war.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A divided Korean peninsula under gathering red storm clouds: rival military columns face each other in the distance while exhausted diplomats in foreground reroute aid crates on a symbolic map; conflict tension and diverted support, no graphic injury.",
+      "sha256": "cc965695091ac4f69d98847c714bfe602a0efaab68f233c71d60b2c528e9f360",
+      "bytes": 3626519
+    },
+    {
+      "id": "korea_refugees",
+      "file": "./korea_refugees.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: Humanitarian workers and Korean families at a relief kitchen and train station, warm bowls passed across a table while weary uniformed negotiators finally pick up a peace hotline; emphasize ordinary people's dignity and absurd officials in background, no graphic suffering.",
+      "sha256": "0245fd1fd690129fa35c547d7b5ccd1382940110eb2b84d9fc9e686247bcbdb3",
+      "bytes": 3519178
+    },
+    {
+      "id": "korea_peace",
+      "file": "./korea_peace.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: Two rival Korean delegations sign a ceasefire across a long table, a neutral mediator quietly removes the rock paper scissors game from between them; relieved citizens and a rising cream sun, hopeful but satirical.",
+      "sha256": "c813d22401908a090bf9c1ba0a6477de22b6de07de4b0a34c06a84f711bd9219",
+      "bytes": 3360414
+    },
+    {
+      "id": "hitler_return",
+      "file": "./hitler_return.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: Fictional ominous return of Adolf Hitler in contemporary Berlin: a recognizable small toothbrush moustache silhouette behind a glass security barrier, alarmed investigators in foreground and pro-democracy protesters outside; critical anti-fascist historical satire, no glorification, no swastikas or Nazi insignia.",
+      "sha256": "701493117d8f44ec917b7eda41211240064ff4d64b536ec6b092ed54e23a0867",
+      "bytes": 3420321
+    },
+    {
+      "id": "europe_identity",
+      "file": "./europe_identity.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A fictional revived Adolf Hitler looking baffled at a smartphone while stern contemporary German police escort him away; investigators compare old photographs, concerned Berlin citizens behind barricades; anti-fascist satirical editorial tone, no Nazi insignia, no slogans.",
+      "sha256": "715afa98dd0ab84ce7e053e4e9d52b386ceda3e46e5d22c6f538f2a10471c8ba",
+      "bytes": 3552051
+    },
+    {
+      "id": "europe_trial",
+      "file": "./europe_trial.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A dramatic European courtroom trying a fictional revived dictator, elderly recognizable toothbrush-moustached defendant seated small and powerless beneath a monumental panel of judges; documents, witnesses and solemn public, anti-fascist historical accountability, no Nazi symbols.",
+      "sha256": "5aad3c9bc74789ac72edbaea7eede18fecbee8052f92b4a8c0392a5d498a385f",
+      "bytes": 3147319
+    },
+    {
+      "id": "russia_robot",
+      "file": "./russia_robot.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A rugged Soviet-style armored vehicle transforms into a towering articulated robot in a snowy far-eastern test yard; bewildered officers stare upward while the robot raises one large hand like asking a workplace question; intricate mechanical silhouette, funny but imposing, no text.",
+      "sha256": "84abf8de27d3426ef1df0782b09cb16c5217f76ec41a6b16d8e618eca98288e2",
+      "bytes": 3377130
+    },
+    {
+      "id": "mech_union",
+      "file": "./mech_union.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: Two giant Russian military robots at a makeshift workers' negotiation table with small astonished officials; one robot holds up a calendar with blank boxes, another folds its metal arms; concrete hangars and red cloth, humorous labor dispute, no writing.",
+      "sha256": "4eadeca131c7963c761de0835d7dec22145b4c3ae3cc3571b8c557c54e9562d3",
+      "bytes": 3276962
+    },
+    {
+      "id": "mech_landing",
+      "file": "./mech_landing.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: Towering angular Russian robots disembark from a freighter near Shanghai, cranes and recognizable waterfront silhouettes in the distance, tiny personnel in foreground showing scale; ominous allied military arrival in a fictional war, no battle or readable signs.",
+      "sha256": "c16658f221008c328eb59083080824a6fdb3382f48f47b4c225f6a06753738d7",
+      "bytes": 3438915
+    },
+    {
+      "id": "mech_breakdown",
+      "file": "./mech_breakdown.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A column of giant Russian robots stops outside an industrial canteen, two metal giants arguing with expressive raised mechanical hands while a tiny exhausted officer mediates and abandoned lunch trays sit in foreground; absurd military labor crisis.",
+      "sha256": "df0a8551375592d781337f268ae8d3a6148e5604d4cd950fe1f5869169137872",
+      "bytes": 3685969
+    },
+    {
+      "id": "duck_blockade",
+      "file": "./duck_blockade.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: An enormous bright yellow rubber duck wedged between cargo cranes in a Japanese seaport, tiny tugboats circling helplessly and shocked harbor officials holding blank paperwork in foreground; dramatic red sky, monumental absurd obstruction, no text.",
+      "sha256": "600913d166cba5c156476779b224ed8b4a3769c938fc375be4e43a356a59700b",
+      "bytes": 3365479
+    },
+    {
+      "id": "moon_rabbit",
+      "file": "./moon_rabbit.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A vintage radio telescope receives an absurd signal: a softly symbolic rabbit silhouette and a carrot-shaped weather cloud hover above a large moon; astonished international scientists listen at an old red radio in foreground; retro scientific mystery poster, no words.",
+      "sha256": "f3c466e37aafa3a51b5c982e7e6e31ad07bb1f95ac0a8e2f286be1792d94380f",
+      "bytes": 3684311
+    },
+    {
+      "id": "duck_convoy",
+      "file": "./duck_convoy.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A supply ship safely reaches harbor after passing a huge rubber duck far behind, a proud captain in foreground holds a tiny yellow bath duck while dockworkers unload relief crates; warm triumphant yet humorous composition, not military recruitment.",
+      "sha256": "9199a82b5f87b4065622714ea177274544fd62f18baf84f20422591f66689232",
+      "bytes": 3382309
+    },
+    {
+      "id": "duck_shortage",
+      "file": "./duck_shortage.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: Empty port warehouses and stalled cranes under the shadow of a gigantic yellow rubber duck, frustrated dockworkers and an overwhelmed insurance clerk buried in blank invoices; satire of shipping shortages with strong foreground hands.",
+      "sha256": "930237d9b914e92957531d41d9fb6dbf9b741d7579d8f304cc4075e9590b513d",
+      "bytes": 3297332
+    },
+    {
+      "id": "duck_resolution",
+      "file": "./duck_resolution.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: Powerful little tugboats tow a gigantic yellow rubber duck out to sea, harbor workers wave from a pier in foreground and ships resume passage beneath a broad red-and-cream sunrise; energetic diagonal sea composition.",
+      "sha256": "9a101d010b83d94aa0ce1c07d89a7964be9e0ff7b2dd381e2838e2c46ca53c7d",
+      "bytes": 3582060
+    },
+    {
+      "id": "moon_answer",
+      "file": "./moon_answer.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A space probe in distant orbit accidentally broadcasts a cheerful rabbit children's puppet show, while a crowded scientific press conference on Earth reacts with embarrassment; split-scale editorial composition connecting the probe and a big old broadcast screen, no diagrams or text.",
+      "sha256": "27d38e99868cc4c9a988d84f19cb6c1489aef4e922b43675ade441539cf007a9",
+      "bytes": 3187112
+    },
+    {
+      "id": "penguin_diplomat",
+      "file": "./penguin_diplomat.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A dignified penguin stands at the central microphone in a grand international conference hall, astonished human diplomats wearing headphones spontaneously applaud; colored generic flags and cream globe motifs, absurd diplomacy, no organization logos or text.",
+      "sha256": "e2d84e73b39dfb47f779326e48a4281be611192e2c8b22d587cea21e8104b95f",
+      "bytes": 2946058
+    },
+    {
+      "id": "penguin_follow",
+      "file": "./penguin_follow.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A penguin honorary diplomat offers its flipper to a smiling human peace mediator across an international meeting table, relieved delegates finally closing their paperwork behind them; respectful silly diplomacy, red curtains and hopeful ivory light.",
+      "sha256": "ddd99365c1d0b722b8651defc5a1073d72059a5d6de95a7d3d49c76a8d8dbe81",
+      "bytes": 3272782
+    },
+    {
+      "id": "satellite_glare",
+      "file": "./satellite_glare.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A symbolic orbital observation satellite above a broad stylized globe, concerned civilian analysts in foreground scrutinize an indistinct blurred photograph under a desk lamp; atmosphere of uncertain international scrutiny; no surveillance specifications, routes, facility plans or readable text.",
+      "sha256": "86d9487a9a3192e19274e14900fbe7ed723025381037909e196e5a26c074c88a",
+      "bytes": 3431338
+    },
+    {
+      "id": "relief_call",
+      "file": "./relief_call.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A storm-battered Philippine coastal harbor with relief workers passing crates from a rescue boat to civilians in foreground, a torn red tarp cutting diagonally across the sky; humane dignified disaster relief, no graphic wounds.",
+      "sha256": "2e684a65290f55afd88de07c95acaf92fe20b678ce545d4a1908da6afa4e02cb",
+      "bytes": 3824134
+    },
+    {
+      "id": "relief_thanks",
+      "file": "./relief_thanks.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A returning maritime relief team greeted by thankful civilian families at a Philippine harbor, a scientist and a coastguard exchange a sealed bundle of weather records in foreground; red-and-cream hopeful composition, no readable writing.",
+      "sha256": "2228db8309ae8279115ee3328b0ed23cf3b2fc64cd5a04d4e4d112b68bccefbe",
+      "bytes": 3385672
+    },
+    {
+      "id": "press_debate",
+      "file": "./press_debate.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A fictional Taiwanese commander at a crowded international press table surrounded by an exaggerated forest of microphones, skeptical journalists and television cameras lean in from every side; tense public accountability and geopolitical satire, no text or campaign slogans.",
+      "sha256": "e9f924f6cea8a6af887707b63781909426a5b0b73d8fde3253a129d36db635e8",
+      "bytes": 3214461
+    },
+    {
+      "id": "trade_review",
+      "file": "./trade_review.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: International diplomats renegotiate an aid agreement over a large symbolic Pacific globe on a table, hands balancing supply crates and sealed documents like a scale; guarded expressions, dramatic curtains, economic and diplomatic tradeoffs, no readable text.",
+      "sha256": "9060f755dee416fc52c9451a07dd63cbe9dc5febbc63fc73514fe1fb560062f9",
+      "bytes": 3366500
+    },
+    {
+      "id": "dawn_suspicion",
+      "file": "./dawn_suspicion.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: Fictional secret research project under growing public scrutiny: a thoughtful civilian scientist holds a sealed folder in foreground, worried officials peer toward distant press cameras and a purely symbolic eye above a globe; no weapon components, blueprints, facility layouts or evasion methods.",
+      "sha256": "323a2bd20aced41a5de5c0573823ff3839ba10a3d924f5d9a65c7072dfeaf50a",
+      "bytes": 3451260
+    },
+    {
+      "id": "dawn_inspection",
+      "file": "./dawn_inspection.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: An international civilian inspection team and local scientists face each other across a closed laboratory doorway, a sealed plain storage case and formal documents in foreground; serious investigation and a chance for cooperation, no bomb design or technical apparatus detail.",
+      "sha256": "a6f0dd4705a8e8b1a2386e3a011fcaf37a1430eaff2d305c4f1d1e05f2649de4",
+      "bytes": 3272774
+    },
+    {
+      "id": "dawn_ultimatum",
+      "file": "./dawn_ultimatum.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: A leader's hand hovers over a red diplomatic telephone beside a stark blank ultimatum document; distant warship silhouettes approach under a severe crimson sky while anxious aides wait; political pressure and a decision point, no readable text or targeting information.",
+      "sha256": "f04eb933f8054482de55cbf2e0b8c8701757e14045eb2126344aba617915c82f",
+      "bytes": 3002553
+    },
+    {
+      "id": "dawn_ready",
+      "file": "./dawn_ready.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: Scientists and a fictional Taiwanese commander stand solemnly around a sealed symbolic strategic briefcase under a rising sun, a small abstract atom-star emblem in the background; achievement mixed with responsibility, no internal device details, components, diagrams or construction instructions.",
+      "sha256": "b1042fa3827c2ed02fe24681423c8604da9a3553e45b22ec35dab569fe94b5ef",
+      "bytes": 3480998
+    },
+    {
+      "id": "dawn_negotiation",
+      "file": "./dawn_negotiation.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: High-stakes international negotiation around a circular table, diplomats cautiously exchange a sealed strategic briefcase for a folded peace document, looming red drapery and a soft cream globe behind them; restrained political suspense, no technical weapons details or readable text.",
+      "sha256": "d27b8f6c2a97c681d2e091ff14aa7f112a5ea3302b29a806b35c4d32bbd358d3",
+      "bytes": 3225558
+    },
+    {
+      "id": "dawn_treaty",
+      "file": "./dawn_treaty.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: Close foreground hands sign a blank peace agreement as a sealed strategic briefcase remains closed at the side, rival diplomats cautiously shake hands and soldiers lower their posture in distant silhouette; peaceful deterrence ending, ivory sunlight breaking through red clouds, no text.",
+      "sha256": "48130685b606d057fd19d7ea855d9872216db1b9a87eb0b5cd4b1477ddf6203c",
+      "bytes": 3177808
+    },
+    {
+      "id": "nuclear_fallout",
+      "file": "./nuclear_fallout.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: Solemn anti-war aftermath in a fictional coastal city after a strategic catastrophe, deserted streets, damaged silhouettes and immense grey-red clouds, tiny civilian rescuers moving toward shelter in foreground; grief and global responsibility, no triumphant hero, no graphic injuries, no attack instructions.",
+      "sha256": "30dade81e4909e53b9cb9011956d66ed103e226d09ada4c697c08306daa0941d",
+      "bytes": 3251768
+    },
+    {
+      "id": "nuclear_aftermath",
+      "file": "./nuclear_aftermath.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: Humanitarian medics and civilians rebuild a fictional devastated port while wary international soldiers and diplomats coordinate under a red emergency awning; cracked buildings and relief supplies, consequences and difficult recovery, dignified people, no graphic wounds or readable text.",
+      "sha256": "eaa015646dd15ad246d3dee279cfa99c39110dbcd2780729e9dcfcc8f5ed3b88",
+      "bytes": 3580462
+    },
+    {
+      "id": "intervention_arrived",
+      "file": "./intervention_arrived.png",
+      "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: An imposing multinational intervention fleet enters a fictional Taiwan Strait, large angular destroyer in foreground with churning cream waves and searchlights, anxious local harbor observers on shore, red-black storm sky; strategic consequences, no technical targeting details or writing.",
+      "sha256": "de75a19d713799040d1f215d3536a0f9c4d42c09979ae3453314a7b85a9497c5",
+      "bytes": 3617759
+    }
+  ]
+}

@@ -9,8 +9,10 @@
   s.events=[];s.flashes=[];api.event(s,'先投资发展，再决定开战。推荐从经济建设开始。');return s;
  }
  const levels=s=>s.strategy?.levels||{economy:0,technology:0,diplomacy:0};
- const partners=s=>s.strategy?.partners||{};
- const income=s=>(4+levels(s).economy*3+(partners(s).japan?2:0))*(.4+.6*(s.strategy?.integrity??100)/100);
+ const support=(s,key)=>!s.world||(s.world.sanctions<2&&s.world.relations[key]>-30&&!(s.world.flags.koreaWar&&['usa','korea'].includes(key))&&!(s.world.flags.duckBlockade&&key==='japan'));
+ const partners=s=>Object.fromEntries(Object.entries(s.strategy?.partners||{}).map(([key,value])=>[key,value&&support(s,key)]));
+ const deterrence=s=>!!s.world?.nuclear?.disclosed&&s.world.nuclear.stock>0&&!s.world.nuclear.used;
+ const income=s=>(4+levels(s).economy*3+(partners(s).japan?2:0))*(.4+.6*(s.strategy?.integrity??100)/100)*(s.world?(s.world.sanctions===2?.4:s.world.sanctions===1?.72:1)*(s.world.flags.europeCrisis?.9:1)*(s.world.opinion<25?.85:s.world.opinion>75?1.1:1):1);
  const bonusCap=s=>levels(s).economy*1800+levels(s).technology*700+levels(s).diplomacy*1200+(partners(s).usa?2000:0)+(partners(s).japan?1000:0)+Math.min(3,s.operations?.wins||0)*600;
  const bonusGrowth=s=>levels(s).economy*12+levels(s).diplomacy*10+(partners(s).japan?8:0);
  const protection=s=>levels(s).technology*.22+levels(s).diplomacy*.04+(partners(s).korea?.08:0);
@@ -30,7 +32,7 @@
  }
  function startWar(s,api){
   const p=s.strategy;if(s.result||!p||p.phase!=='preparation')return no('当前无法开战。');
-  p.phase='war';p.warAt=s.time;p.nextStrike=s.time+18;s.nextAI=s.time+25;s.nextNavy=s.time+100;
+  p.phase='war';p.warAt=s.time;p.nextStrike=s.time+18+(deterrence(s)?20:0);s.nextAI=s.time+25;s.nextNavy=s.time+100;
   api.event(s,'战役开始。点敌方海岸派舰；首轮空袭即将进入预警。','danger');return ok('已进入战时。先点福州海岸建立据点，留意空袭预警。');
  }
  function shelter(s,api){
@@ -53,14 +55,14 @@
    else{p.levels[key]++;if(key==='diplomacy')s.factions[1].troops=Math.max(0,Math.min(api.capacity(s,1)-api.deployed(s,1),s.factions[1].troops+700));api.event(s,`${projects[key].name}达到 ${p.levels[key]} 级：${projects[key].effect}。`,'success');}
   }
   if(p.phase!=='war')return;
-  if(!p.warning&&s.time>=p.nextStrike){const seconds=p.partners.philippines?16:12;p.warning={startedAt:s.time,impactAt:s.time+seconds,sheltered:false};api.event(s,`空袭预警：${seconds} 秒后抵达！可花 60 资金紧急疏散。`,'danger');}
+  if(!p.warning&&s.time>=p.nextStrike){const seconds=partners(s).philippines?16:12;p.warning={startedAt:s.time,impactAt:s.time+seconds,sheltered:false};api.event(s,`空袭预警：${seconds} 秒后抵达！可花 60 资金紧急疏散。`,'danger');}
   if(p.warning&&s.time>=p.warning.impactAt){
    const factor=(1-protection(s))*(p.warning.sheltered?.35:1),damage=36*factor;
    const before=s.factions[1].troops+api.deployed(s,1);s.factions[1].troops*=1-.45*factor;
    for(const fleet of s.fleets)if(fleet.faction===1)fleet.force*=1-.6*factor;
    for(const unit of s.units||[])if(!s.terrain[unit.tile]||s.towns.some(t=>t.country==='TWN'&&Math.hypot(t.x-unit.tile%api.W,t.y-Math.floor(unit.tile/api.W))<20))unit.force*=1-(s.terrain[unit.tile]?.45:.6)*factor;
    p.integrity=Math.max(0,p.integrity-damage);p.lastStrike={at:s.time,damage,lost:Math.round(before-s.factions[1].troops-api.deployed(s,1))};
-   p.warning=null;p.nextStrike=s.time+36+p.levels.diplomacy*18;
+   p.warning=null;p.nextStrike=s.time+Math.min(90,36+p.levels.diplomacy*18+(deterrence(s)?20:0));
    api.event(s,`空袭造成 ${Math.ceil(damage)} 点设施损伤，损失 ${p.lastStrike.lost} 兵力。`, 'danger');
    if(p.integrity<=0){s.result='defeat';api.event(s,'基础设施全面瘫痪，远征无法继续。','danger');}
   }
@@ -77,5 +79,5 @@
   if(v.lastStrike&&(!num(v.lastStrike.at,v.warAt,time)||!num(v.lastStrike.damage,0,36)||!num(v.lastStrike.lost,0,1000000)))bad();
   return {phase:v.phase,funds:v.funds,integrity:v.integrity,levels:{economy:v.levels.economy,technology:v.levels.technology,diplomacy:v.levels.diplomacy},partners,project:v.project?{key:v.project.key,endsAt:v.project.endsAt}:null,warAt:v.warAt,nextStrike:v.nextStrike,warning:v.warning?{startedAt:v.warning.startedAt,impactAt:v.warning.impactAt,sheltered:v.warning.sheltered}:null,lastStrike:v.lastStrike?{at:v.lastStrike.at,damage:v.lastStrike.damage,lost:v.lastStrike.lost}:null,repairAt:v.repairAt};
  }
- return {projects,init,income,bonusCap,bonusGrowth,protection,attackFactor,partner,upgrade,startWar,shelter,repair,tick,validate};
+ return {projects,init,income,bonusCap,bonusGrowth,protection,attackFactor,partner,upgrade,startWar,shelter,repair,tick,validate,support,deterrence};
 });
