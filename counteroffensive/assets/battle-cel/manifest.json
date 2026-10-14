@@ -1,0 +1,225 @@
+{
+  "title": "渡海 1.7 / 2D 赛璐璐地图与战斗素材",
+  "provider": "built-in image_gen.imagegen",
+  "date": "2026-10-14",
+  "note": "Original PNG files preserved; source rectangles are runtime sprite coordinates, not edited image files.",
+  "assets": [
+    {
+      "file": "infantry-march-atlas.png",
+      "width": 1330,
+      "height": 1182,
+      "grid": [
+        2,
+        2
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "62dd357659c07330118d6b1aa55e8e7972066a3d9ea3df3c86aa0ce0959a7621",
+      "prompt": "Production 2D game SPRITE SHEET, exactly FOUR animation frames in an exact TWO-COLUMN TWO-ROW equal square grid, transparent background. The SAME compact squad of TWO full-body infantry soldiers in every cell, viewed from an elevated three-quarter side angle facing RIGHT, suitable for a strategic map at 56 pixels wide. Original clean hand-drawn Japanese CEL ANIMATION style, confident bold dark ink outlines, flat sage green uniforms, warm ivory helmets and canvas packs, small orange armbands, simple rifles carried low. Cute proportions with readable helmet, torso, boots silhouettes, no facial detail, no insignia or text. Frames in reading order form one short marching cycle: contact left foot, passing stance, contact right foot, passing stance. Same camera, same soldier designs, same scale and grounded baseline in ALL four frames. Keep both figures side by side staggered so both readable, never overlapping another cell. Transparent generous cell margins, each squad occupies 75% of each cell. Clean flat colors, maximum 2 cel shadow tones, no 3D, no gradients, no glow, no texture, no painted background, no shadows baked under feet, NO box or border, no labels or numbers, no panel dividers. True alpha transparency through all empty spaces. Output ONLY this exact 2x2 animation atlas.",
+      "sourceFrames": [
+        [
+          100,
+          60,
+          523,
+          472
+        ],
+        [
+          765,
+          60,
+          523,
+          472
+        ],
+        [
+          100,
+          651,
+          523,
+          472
+        ],
+        [
+          765,
+          651,
+          523,
+          472
+        ]
+      ]
+    },
+    {
+      "file": "naval-cel-atlas.png",
+      "width": 2172,
+      "height": 724,
+      "grid": [
+        3,
+        1
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "0f0ff771e106f6f79bd8e815198c90d14447360d00195ed635676666100fce42",
+      "prompt": "Production 2D strategy game SPRITE ATLAS with exactly THREE ships in a precise ONE-ROW THREE-COLUMN grid, all equal SQUARE cells, genuine transparent background. Left cell: chunky naval troop TRANSPORT SHIP with open cargo deck, bridge at rear, orange lifeboats. Middle cell: sleek DESTROYER with two clearly visible gun turrets, central mast and smoke stacks. Right cell: small fast MISSILE BOAT with two angled box missile launchers at the rear. All ships same elevated three-quarter SIDE CAMERA, bows facing RIGHT, visible side hull and upper deck, each ship entirely within its own cell with 12% transparent margins. Consistent original 2D hand-drawn CEL ANIMATION art, clean thick charcoal outlines, flat ivory hulls, blue-gray decks, sage shadows, bright small orange markings. Distinct silhouettes legible at 64 pixels, simplify tiny machinery. Chic clean-color tactical anime look matching an orange/black/ivory HUD. Ships are standalone artwork, NOT inside tokens, cards, circles or frames. NO ocean, water, ground shadows, lettering, logos or flags. No grid lines, no captions. NO 3D, photorealism, gradients, glow, fuzzy painterly shading or noisy details. True transparent alpha outside the ships. Wide landscape atlas, EXACT 3 equal columns.",
+      "sourceFrames": [
+        [
+          21,
+          80,
+          682,
+          547
+        ],
+        [
+          752,
+          87,
+          696,
+          531
+        ],
+        [
+          1448,
+          196,
+          686,
+          421
+        ]
+      ]
+    },
+    {
+      "file": "combat-fx-atlas.png",
+      "width": 1536,
+      "height": 1024,
+      "grid": [
+        3,
+        2
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "45077091b42801256d17576b2fc3277a5bc2a338068a8c965f0ff996b8a4cd87",
+      "prompt": "Production 2D game FX ANIMATION SPRITE ATLAS, exactly SIX animation frames in a precise THREE-COLUMN TWO-ROW equal square grid on true transparent background. A single clean stylized orange-yellow EXPLOSION evolving in reading order: frame 1 a small sharp white ignition star, frame 2 a compact jagged yellow-orange impact burst, frame 3 a large clean round-lobed orange cel fireball with white core, frame 4 expanded orange fireball surrounded by bold charcoal smoke lobes, frame 5 charcoal and muted gray smoke puffs with tiny orange embers, frame 6 a few dispersing gray smoke wisps. Every frame centered identically, each fully inside its cell, 12% transparent margins, no cross-cell overlap. Original fashionable hand-drawn 2D CEL ANIMATION with strong variable-weight ink contour, two or three CLEAN FLAT color layers, no rendering gradients. Designed to animate quickly at small 40-85 pixel sizes on a game map. No gore, no scenery, no units, no craters, no numbers, no words, no labels, no borders, no grid. NO 3D, realistic fire, blur, glow, grunge or baked background. Actual transparent alpha between and within sprite silhouettes.",
+      "sourceFrames": [
+        [
+          30,
+          32,
+          471,
+          431
+        ],
+        [
+          542,
+          32,
+          471,
+          431
+        ],
+        [
+          1054,
+          32,
+          471,
+          431
+        ],
+        [
+          30,
+          544,
+          471,
+          431
+        ],
+        [
+          542,
+          544,
+          471,
+          431
+        ],
+        [
+          1054,
+          544,
+          471,
+          431
+        ]
+      ]
+    },
+    {
+      "file": "map-landmarks-atlas.png",
+      "width": 1536,
+      "height": 1024,
+      "grid": [
+        3,
+        2
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sha256": "0e75a103901cca1752d3f5e95b9026b39090511bbcafb4958c144f4290e78049",
+      "prompt": "Production 2D game MAP DECORATION SPRITE ATLAS with exactly SIX separate motifs in a precise THREE-COLUMN TWO-ROW grid of equal square cells, TRUE TRANSPARENT BACKGROUND. TOP ROW left-to-right: (1) compact cluster of three clean angular jade-green mountain peaks with warm ivory sunlit facets; (2) compact grove of six sage/jade rounded and triangular trees viewed at an elevated map angle; (3) a tiny clean coastal CITY cluster of ivory low buildings and one orange-roofed tall building, no writing. BOTTOM ROW left-to-right: (4) small HARBOR illustration with an ivory quay and one simple orange crane; (5) three gentle curved ocean wave strokes in pale turquoise and ivory, only the strokes no background patch; (6) a small cluster of two soft ivory flat cel clouds. Unified original 2D hand-inked CEL ANIMATION strategic map art, charming but restrained, clear bold dark-blue contours, clean flat colors in sage green, muted jade, warm ivory, small tangerine accents. Sparse low detail readable at 30-65 pixels. Each standalone motif centered and fully contained within its square cell, 15% transparent margin and fully transparent gutters. No map outlines, ground tiles or rectangular patches, no labels, no text, logos, flags, grid lines or borders. NO 3D, photorealism, gradients, texture, glow or noisy shading. A clean reusable hand-painted cel game atlas, exact regular 3 columns and 2 rows.",
+      "sourceFrames": [
+        [
+          71,
+          109,
+          434,
+          329
+        ],
+        [
+          571,
+          119,
+          388,
+          346
+        ],
+        [
+          1074,
+          97,
+          393,
+          354
+        ],
+        [
+          89,
+          556,
+          355,
+          380
+        ],
+        [
+          569,
+          636,
+          401,
+          238
+        ],
+        [
+          1070,
+          630,
+          396,
+          272
+        ]
+      ]
+    },
+    {
+      "file": "weapon-fx-atlas.png",
+      "width": 2172,
+      "height": 724,
+      "grid": [
+        3,
+        1
+      ],
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sha256": "1abd3cdcae972c0a5b7903d9ef97f11908e1ab0286d77e1f0feeaa22e0010570",
+      "prompt": "Production 2D tactical game VFX SPRITE ATLAS, exactly THREE isolated FX motifs in one horizontal row of THREE equal SQUARE CELLS, true transparent background. LEFT: a sharp short gun MUZZLE FLASH pointing RIGHT, ivory hot core, yellow-orange inked jagged star, tiny orange backward flicks. MIDDLE: a stylized small GUIDED MISSILE pointing RIGHT, ivory cylindrical body with charcoal fins and orange aft section, attached compact yellow-orange flame and two thin orange speed streaks behind it. RIGHT: one white-and-pale-turquoise V-SHAPED SHIP WAKE trailing to the LEFT with two sweeping tapered water ribbons and a few tiny white foam dots, no ship in this cell. All three motifs fully inside their own square cells with 15 percent transparent margin, exact three-column grid, never cross cells. Clean confident 2D hand-drawn CEL ANIMATION style, bold charcoal outlines except thin clean wake strokes, flat solid colors, only two or three cel tones, excellent readability when shrunk to 35-65 pixels. NO framing tokens, cards, backgrounds, ocean blocks, grid lines, lettering, labels, numbers, logos, gradients, realistic lighting, 3D, glow, blur, grunge or scattered texture. Actual alpha transparency outside every motif.",
+      "sourceFrames": [
+        [
+          99,
+          161,
+          580,
+          391
+        ],
+        [
+          784,
+          253,
+          609,
+          214
+        ],
+        [
+          1514,
+          142,
+          576,
+          418
+        ]
+      ]
+    }
+  ]
+}

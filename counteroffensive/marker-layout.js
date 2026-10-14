@@ -16,11 +16,11 @@
   }
   return output;
  }
- function callout(marker,width,height,obstacles=[],markers=[],w=132,h=29){
+ function callout(marker,width,height,obstacles=[],markers=[],w=132,h=29,size=34){
   if(!marker||marker.hidden)return null;
-  for(const [dx,dy] of [[24,-14],[-w-24,-14],[-w/2,-54],[-w/2,27]]){
+  for(const [dx,dy] of [[size/2+8,-14],[-w-size/2-8,-14],[-w/2,-size/2-h-8],[-w/2,size/2+8]]){
    const b={x:marker.x+dx,y:marker.y+dy,w,h};
-   if(b.x<8||b.y<8||b.x+w>width-8||b.y+h>height-8||obstacles.some(o=>overlaps(b,o,4))||markers.some(m=>!m.hidden&&overlaps(b,box(m.x,m.y,34),4)))continue;
+   if(b.x<8||b.y<8||b.x+w>width-8||b.y+h>height-8||obstacles.some(o=>overlaps(b,o,4))||markers.some(m=>!m.hidden&&overlaps(b,box(m.x,m.y,size),4)))continue;
    return b;
   }
   return null;
