@@ -166,6 +166,49 @@
         418
       ]
     ]
+  },
+  "water-impact-atlas": {
+    "src": "./assets/battle-cel/water-impact-atlas.png",
+    "width": 1536,
+    "height": 1024,
+    "frames": [
+      [
+        29,
+        49,
+        468,
+        451
+      ],
+      [
+        541,
+        49,
+        468,
+        451
+      ],
+      [
+        1053,
+        49,
+        468,
+        451
+      ],
+      [
+        29,
+        561,
+        468,
+        451
+      ],
+      [
+        541,
+        561,
+        468,
+        451
+      ],
+      [
+        1053,
+        561,
+        468,
+        451
+      ]
+    ]
   }
 };
   if(typeof module==='object'&&module.exports)module.exports=art;else root.FrontBattleArt=art;

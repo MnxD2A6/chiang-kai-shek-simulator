@@ -1,5 +1,5 @@
 {
-  "title": "渡海 1.7 / 2D 赛璐璐地图与战斗素材",
+  "title": "渡海 1.8 / 2D 赛璐璐地图与战斗素材",
   "provider": "built-in image_gen.imagegen",
   "date": "2026-10-14",
   "note": "Original PNG files preserved; source rectangles are runtime sprite coordinates, not edited image files.",
@@ -220,6 +220,59 @@
           418
         ]
       ]
+    },
+    {
+      "file": "water-impact-atlas.png",
+      "width": 1536,
+      "height": 1024,
+      "grid": [
+        3,
+        2
+      ],
+      "alphaExtrema": [
+        0,
+        254
+      ],
+      "sourceFrames": [
+        [
+          29,
+          49,
+          468,
+          451
+        ],
+        [
+          541,
+          49,
+          468,
+          451
+        ],
+        [
+          1053,
+          49,
+          468,
+          451
+        ],
+        [
+          29,
+          561,
+          468,
+          451
+        ],
+        [
+          541,
+          561,
+          468,
+          451
+        ],
+        [
+          1053,
+          561,
+          468,
+          451
+        ]
+      ],
+      "sha256": "38b93b54e51087c62be1cd25a94f5cb78e31b6c5d0074b2c42ac4bbfc02efdc3",
+      "prompt": "Production 2D game WATER IMPACT ANIMATION SPRITE ATLAS, exact SIX equal square cells in a precise THREE-COLUMN TWO-ROW grid. GENUINELY TRANSPARENT background. A SINGLE naval shell hitting the ocean evolves in reading order. Frame 1: very small white sharp contact star and two cyan droplets. Frame 2: compact ivory-white water crown with three pale turquoise pointed splashes. Frame 3: a tall clean white-and-turquoise splash column with arc-shaped side jets and scattered large clear droplets. Frame 4: spreading low water crown with two broad curved side splashes. Frame 5: low flat foam ring breaking into white turquoise segments. Frame 6: a few small residual white foam strokes and falling droplets. Same center/baseline for all six frames, each silhouette entirely inside its equal square cell with 12 percent empty transparent margins, nothing crossing cell boundaries. Original clean hand-drawn 2D CEL ANIMATION style for a stylish naval tactical game. Bold dark blue ink contours, clean flat ivory white and pale turquoise, maximum 2 cel shadow tones. NO gradient, NO photorealism, no 3D, no glow, no blur, no noisy texture. No rectangular water patch, ocean backdrop, ships, explosion flames, circles enclosing icons, frames, grid lines, numbers or words. Actual transparent alpha outside and between water shapes. This must be a usable sequence of six stages, not six identical splashes."
     }
   ]
 }

@@ -4,18 +4,53 @@
   const time=t=>`${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}`;
   let state=F.createStrategic(1357),started=false,saved=null,selected=null,navy=true,rosterOpen=window.innerWidth>=900,missileMode=false,storage=true,last=0,refresh=0,lastSave=0,reported=false,drag=null,toastTimer;
   try{const raw=localStorage.getItem('strait-front-v5')||localStorage.getItem('strait-front-v4')||localStorage.getItem('strait-front-v3');if(raw)saved=F.decode(raw);}catch{storage=false;}
+  const audio=new FrontAudio();let ambientSound=false,soundOpen=false;
+  try{const prefs=JSON.parse(localStorage.getItem('strait-front-audio-v1')||'{}');audio.enabled=prefs.enabled!==false;audio.volume=Number.isFinite(prefs.volume)?Math.max(0,Math.min(100,prefs.volume)):55;ambientSound=!!prefs.ambient;}catch{}
   const view=new FrontMap($('map')),strategyUI=new StrategyUI(()=>state,fn=>action(fn));strategyUI.open=false;
+  audio.onChange=paintSound;view.onFeedback=playFeedback;
+  function soundPrefs(){try{localStorage.setItem('strait-front-audio-v1',JSON.stringify({enabled:audio.enabled,volume:audio.volume,ambient:ambientSound}));}catch{}}
+  function paintSound(){
+    $('sound').hidden=false;$('sound').setAttribute('aria-expanded',soundOpen);$('soundPanel').hidden=!soundOpen;
+    $('soundEnabled').checked=audio.enabled;$('soundVolume').value=audio.volume;$('soundVolumeValue').textContent=audio.volume+'%';$('soundAmbient').checked=ambientSound;
+    $('soundGlyph').textContent=audio.enabled&&audio.volume?'♪':'×';$('sound').classList.toggle('muted',!audio.enabled||!audio.volume);
+    $('soundStatus').textContent=!audio.enabled||!audio.volume?'已静音':audio.phase==='unavailable'?'音效暂不可用，点击试听重试':audio.phase==='loading'?'正在载入音效':audio.phase!=='ready'?'点击后启用声音':audio.suspended?'战场暂停 · 可试听':'声音已启用';
+    $('sound').dataset.state=audio.phase;$('sound').dataset.context=audio.ctx?.state||'locked';$('sound').dataset.starts=audio.playCount;$('sound').dataset.lastClip=audio.lastClip;
+  }
+  function syncAudio(){
+    audio.setSuspended(!started||state.paused||!!state.result||$('modal').open||document.hidden);
+    const actor=state.units.find(u=>u.id===selected)||state.naval.ships.find(u=>u.id===selected),moving=actor?.path.length&&actor.status!=='waiting';
+    const point=actor?view.markerPoint(actor.id,actor.tile):null,pan=point?Math.max(-.8,Math.min(.8,point.x/view.width*2-1)):0;
+    audio.loop('movement',!audio.suspended&&moving?(actor.kind||!state.terrain[actor.tile]?'engine':'march'):null,{pan,gain:.16});
+    audio.loop('ambient',!audio.suspended&&ambientSound?'ocean':null,{gain:.09});
+    const level=audio.level();$('soundMeter').style.setProperty('--level',Math.min(1,level*10));$('sound').dataset.level=level.toFixed(5);$('sound').dataset.voices=audio.active.size;
+  }
+  function uiSound(name){if(!audio.enabled||!audio.volume)return;audio.unlock().then(ok=>{if(ok&&!document.hidden)audio.play(name,{channel:'ui',gain:.35});});}
+  function playFeedback(e){
+    const major=['warning','airstrike','capture','loss','victory','defeat'].includes(e.type),point=e.tile!==undefined?view.markerPoint(e.id,e.tile):null;
+    if(!major&&(view.zoom<3||(point&&!view.visible(point,90))))return;
+    const pan=point?Math.max(-.8,Math.min(.8,point.x/view.width*2-1)):0,options={pan,channel:'battle'};
+    if(e.type==='gun'||e.type==='rifle')audio.play(e.type,{...options,gain:e.type==='gun'?.55:.3,rate:.96+((e.id||0)%5)*.02});
+    else if(e.type==='launch')audio.play('missile',{...options,gain:.6});
+    else if(e.type==='impact'){
+      const water=!state.terrain[e.tile]&&e.kind!=='intercept';
+      audio.play(e.kind==='sink'?'sink':e.kind==='intercept'?'intercept':e.kind==='gun'?(water?'water':'impact'):'explosion',{...options,gain:e.kind==='gun'?.3:.65});
+      if(water&&e.kind!=='gun')audio.play('water',{...options,gain:.35});
+    }else if(e.type==='warning'||e.type==='loss')audio.play('warning',{channel:'battle',gain:.45});
+    else if(e.type==='airstrike')audio.play('explosion',{...options,gain:.65});
+    else if(e.type==='capture')audio.play('capture',{...options,gain:.55});
+    else if(e.type==='victory'||e.type==='defeat')audio.play(e.type,{channel:'ui',gain:.6});
+  }
   function toast(text){$('toast').classList.toggle('order-toast',/→|正在前往|自动进攻/.test(text));$('toast').textContent=text;$('toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('visible'),4200);}
   function save(){if(!started)return;try{localStorage.setItem('strait-front-v5',F.encode(state));storage=true;}catch{storage=false;}}
-  function action(fn){const r=fn();toast(r.message);save();render();return r;}
+  function action(fn){const r=fn();uiSound(r.ok?'order':'select');toast(r.message);save();render();return r;}
   function show(html){$('modalBody').innerHTML=html;if(!$('modal').open)$('modal').showModal();}
   function close(){$('modal').close();}
   function begin(resume){
-    state=resume&&saved?saved:F.createStrategic(Date.now());state.paused=false;started=true;reported=false;selected=null;missileMode=false;navy=true;last=0;lastSave=state.time;
+    audio.stopAll();uiSound('order');state=resume&&saved?saved:F.createStrategic(Date.now());state.paused=false;started=true;reported=false;selected=null;missileMode=false;navy=true;last=0;lastSave=state.time;
     view.lastTexture=-10;view.resetBattleFX();view.home();strategyUI.open=false;strategyUI.selected=null;$('startScreen').hidden=true;document.body.classList.remove('intro');close();save();render();
     toast(resume?'战役已恢复；点选军队即可继续指挥。':'点军队或舰船，再点城市或海域。选择后即可直接下令。');
   }
-  function select(id,focus=false){selected=id;missileMode=false;const u=state.units.find(a=>a.id===id)||state.naval.ships.find(a=>a.id===id);navy=!!u?.kind;if(!u)return;if(focus)view.focus(u.tile);render();}
+  function select(id,focus=false){if(id!==selected)uiSound('select');selected=id;missileMode=false;const u=state.units.find(a=>a.id===id)||state.naval.ships.find(a=>a.id===id);navy=!!u?.kind;if(!u)return;if(focus)view.focus(u.tile);render();}
   function target(tile){
     if(!started||$('modal').open||tile===null)return;
     if(missileMode){const boat=state.naval.ships.find(a=>a.id===selected&&a.kind==='missile');const r=action(()=>F.missile(state,{tile},boat?.id??null));if(r.ok)missileMode=false;render();return;}
@@ -24,7 +59,7 @@
     const r=action(()=>F.order(state,selected,tile));if(r.ok)view.rings.push({tile,t:performance.now()/1000});
   }
   function help(){show(`<span class="eyebrow">两次点击就能下令</span><h2 id="modalTitle">你只需要选人，再选地方。</h2><div class="how-steps"><div><em>01</em><span><b>点地图上的我方军队。</b><small>也可在部队列表选择。选中的部队会亮起，显示路线和兵力。</small></span></div><div><em>02</em><span><b>点一座城市。</b><small>我方城市：移动后驻守。敌方城市：自动渡海、进攻，攻下后驻守。重新点另一座城市即可改令。筹备期先试试台北与高雄之间的调动。</small></span></div><div><em>03</em><span><b>留意兵力，守住夺下的城市。</b><small>补兵从预备兵转入选中的军队；驻守部队会抵抗附近反攻。「停止 / 驻守」只取消这支部队的命令。控制福州、南京、广州获胜。</small></span></div></div><p><b>海战：</b>运输舰靠近陆军后自动运兵；驱逐舰自动护航和拦截附近导弹；导弹艇可选中后用「导弹打击」。选舰船后点海域移动，点敌舰靠近交战。俄罗斯、朝鲜援军抵达后会反攻我方大陆据点。</p><p>准备进攻时打开「发展」：可投资经济、科技、外交，再决定开战。空袭时疏散，受损后修复。空格暂停，暂停也能下令。拖动与缩放地图。</p><button id="helpClose" class="primary-btn">开始指挥 →</button>`);$('helpClose').onclick=close;}
-  function archives(){show(`<span class="eyebrow">渡海 / 赛璐璐指挥版 1.7</span><h2 id="modalTitle">战役存档</h2><p>${storage?'自动保存已开启。':'本地保存不可用，请导出存档。'}旧版地图进度会自动迁移，原存档保留。打开菜单时战场暂停。</p><div class="modal-actions"><button id="export" ${started?'':'disabled'}>导出 JSON</button><button id="import">导入存档</button><button id="newRun">开始新战役</button></div>`);
+  function archives(){show(`<span class="eyebrow">渡海 / 赛璐璐指挥版 1.8</span><h2 id="modalTitle">战役存档</h2><p>${storage?'自动保存已开启。':'本地保存不可用，请导出存档。'}旧版地图进度会自动迁移，原存档保留。打开菜单时战场暂停。</p><div class="modal-actions"><button id="export" ${started?'':'disabled'}>导出 JSON</button><button id="import">导入存档</button><button id="newRun">开始新战役</button></div>`);
     $('export').onclick=()=>{const url=URL.createObjectURL(new Blob([F.encode(state)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=`strait-front-v5-${Math.floor(state.time)}s.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
     $('import').onclick=()=>$('importFile').click();$('newRun').onclick=()=>{show('<h2 id="modalTitle">开始新战役？</h2><p>本版自动存档将被替换，可以先导出留档。</p><div class="modal-actions"><button id="cancelNew">返回</button><button id="confirmNew" class="primary-btn">开始新远征</button></div>');$('cancelNew').onclick=archives;$('confirmNew').onclick=()=>begin(false);};
   }
@@ -57,7 +92,7 @@
   }
   function screenObstacles(){
     const frame=$('map').getBoundingClientRect(),out=[];
-    for(const id of ['selectedPanel','commandTray','armyDock','strategyPanel','fieldGuide','missileWarning']){const el=$(id),r=el.getBoundingClientRect();if(!el.hidden&&r.width&&r.height&&getComputedStyle(el).display!=='none')out.push({x:r.left-frame.left,y:r.top-frame.top,w:r.width,h:r.height});}
+    for(const id of ['selectedPanel','commandTray','armyDock','strategyPanel','fieldGuide','missileWarning','soundPanel']){const el=$(id),r=el.getBoundingClientRect();if(!el.hidden&&r.width&&r.height&&getComputedStyle(el).display!=='none')out.push({x:r.left-frame.left,y:r.top-frame.top,w:r.width,h:r.height});}
     for(const sel of ['.mission-panel','.map-navigation','.zoom-controls']){const r=document.querySelector(sel).getBoundingClientRect();out.push({x:r.left-frame.left,y:r.top-frame.top,w:r.width,h:r.height});}
     for(const t of state.towns)if(view.visibleTowns.has(t.id)){const p=view.townScreen(t);out.push({x:p.x-20,y:p.y-24,w:92,h:44});}
     return out;
@@ -84,7 +119,8 @@
   $('start').onclick=()=>begin(false);$('continue').hidden=!saved;$('continue').onclick=()=>begin(true);$('help').onclick=help;$('brand').onclick=e=>{e.preventDefault();help();};$('save').onclick=archives;$('modalClose').onclick=close;
   $('pause').onclick=()=>{if(started&&!state.result){state.paused=!state.paused;save();render();}};
   $('hold').onclick=()=>action(()=>state.naval.ships.some(a=>a.id===selected)?F.stopShip(state,selected):F.hold(state,selected));$('reinforce').onclick=()=>action(()=>state.naval.ships.some(a=>a.id===selected)?F.repairShip(state,selected):F.reinforce(state,selected));$('locate').onclick=()=>{const u=state.units.find(a=>a.id===selected)||state.naval.ships.find(a=>a.id===selected);if(u)view.focus(u.tile);};
-  $('recruit').onclick=()=>{const r=action(()=>F.recruit(state));if(r.ok)select(r.id,true);};$('sound').hidden=true;
+  $('sound').onclick=()=>{soundOpen=!soundOpen;audio.unlock();paintSound();};$('soundClose').onclick=()=>{soundOpen=false;paintSound();};$('soundEnabled').onchange=e=>{audio.setEnabled(e.target.checked);if(audio.enabled)audio.unlock();soundPrefs();};$('soundVolume').oninput=e=>{audio.setVolume(e.target.value);soundPrefs();};$('soundAmbient').onchange=e=>{ambientSound=e.target.checked;soundPrefs();};$('soundPreview').onclick=()=>audio.preview();document.addEventListener('pointerdown',()=>audio.unlock(),{once:true});
+  $('recruit').onclick=()=>{const r=action(()=>F.recruit(state));if(r.ok)select(r.id,true);};paintSound();
   $('zoomIn').onclick=()=>view.setZoom(view.zoom*1.3);$('zoomOut').onclick=()=>view.setZoom(view.zoom/1.3);$('fit').onclick=()=>view.overview();$('homeView').onclick=()=>{strategyUI.open=false;view.home();render();};$('pacificView').onclick=()=>{strategyUI.open=false;view.overview();render();};
   $('focusRegion').onclick=()=>{view.focusRegion(strategyUI.selected);strategyUI.open=false;render();};$('worldOverview').onclick=()=>{strategyUI.open=false;view.overview();render();toast('点击美国、日本、韩国或菲律宾洽谈合作。');};
   $('rosterToggle').onclick=()=>{rosterOpen=!rosterOpen;render();};$('rosterClose').onclick=()=>{rosterOpen=false;render();};
@@ -112,8 +148,8 @@
   canvas.onpointerup=e=>{if(!drag)return;const d=drag;drag=null;if(!d.moved)target(view.tile(e.clientX-d.rect.left,e.clientY-d.rect.top));};canvas.onpointercancel=()=>drag=null;canvas.onlostpointercapture=()=>drag=null;
   canvas.onwheel=e=>{e.preventDefault();const r=canvas.getBoundingClientRect();view.setZoom(view.zoom*(e.deltaY<0?1.16:1/1.16),e.clientX-r.left,e.clientY-r.top);};
   document.addEventListener('keydown',e=>{if($('modal').open||!started||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;if(e.key===' '&&!e.repeat){e.preventDefault();$('pause').click();}if(e.key==='Escape'){selected=null;missileMode=false;render();}if(['1','2','3','4','5','6'].includes(e.key)){const u=state.units[Number(e.key)-1];if(u)select(u.id,true);}});
-  window.addEventListener('resize',()=>{view.resize();if(window.innerWidth<700)rosterOpen=false;render();});window.addEventListener('blur',()=>{drag=null;if(started&&!state.result){state.paused=true;save();render();}});document.addEventListener('visibilitychange',()=>{last=0;if(document.hidden&&started&&!state.result){state.paused=true;save();render();}});
+  window.addEventListener('resize',()=>{view.resize();if(window.innerWidth<700)rosterOpen=false;render();});window.addEventListener('blur',()=>{drag=null;if(started&&!state.result){state.paused=true;save();render();}});document.addEventListener('visibilitychange',()=>{last=0;if(document.hidden)audio.stopAll();if(document.hidden&&started&&!state.result){state.paused=true;save();render();}});
   $('importFile').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;try{if(file.size>1500000)throw Error('存档文件过大。');const raw=await file.text(),version=JSON.parse(raw)?.version;if(version===1||version===2){show('<h2 id="modalTitle">旧地图存档</h2><p>请在旧地图恢复这份存档。</p><a href="./legacy/">前往 1.1 版</a>');return;}saved=F.decode(raw);begin(true);toast('存档已恢复，部队和命令已保留。');}catch(err){toast(err.message);}};
-  function tick(now){const dt=last?Math.min(.1,(now-last)/1000):0;last=now;if(started&&!$('modal').open&&!document.hidden)F.step(state,dt);view.draw(state,now/1000);updateMarkers();refresh+=dt;if(refresh>.25){refresh=0;render();}if(started&&state.time-lastSave>2){lastSave=state.time;save();}requestAnimationFrame(tick);}
+  function tick(now){const dt=last?Math.min(.1,(now-last)/1000):0;last=now;syncAudio();if(started&&!$('modal').open&&!document.hidden)F.step(state,dt);view.draw(state,now/1000);updateMarkers();refresh+=dt;if(refresh>.25){refresh=0;render();}if(started&&state.time-lastSave>2){lastSave=state.time;save();}requestAnimationFrame(tick);}
   document.body.classList.add('intro');render();requestAnimationFrame(tick);
 })();
