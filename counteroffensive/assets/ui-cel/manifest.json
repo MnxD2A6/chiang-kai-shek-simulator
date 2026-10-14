@@ -1,0 +1,70 @@
+{
+  "title": "渡海 / 2D赛璐璐战术 UI 素材",
+  "provider": "built-in image_gen.imagegen",
+  "date": "2026-10-14",
+  "background": "transparent RGBA",
+  "palette": [
+    "#111318",
+    "#f7f4ed",
+    "#ff6b24",
+    "#ffcd24"
+  ],
+  "assets": [
+    {
+      "key": "motion-speedband",
+      "prompt": "Production game UI sprite asset. ONE wide horizontal movement-and-attack SPEED RIBBON, on a genuinely transparent background. Original fashionable 2D hand-drawn CEL ANIMATION graphic design, bold black ink contours, CLEAN FLAT SOLID COLORS. Matte near-black #111318 and vivid tangerine orange #ff6b24 with tiny warm-white negative highlights. A confident left-to-right sweeping band with long sharp tapered speed streaks on the left, one punchy orange diagonal central slash, and a few clipped black/orange trailing wedges on the right. Contemporary Japanese tactical anime game HUD energy, graphic editorial fashion, deliberate asymmetry and elegant negative space. The middle portion has a calm near-black area suitable for live white Chinese text to be rendered by the game later. The silhouette is energetic and irregular; no ordinary rectangle or button card. Wide low horizontal composition, everything fully contained with generous transparent padding. NO text, NO letters, NO numerals, NO logos, NO characters, NO map. Absolutely NO 3D, metallic material, brass, bevels, gradients, realistic lighting, blur, bloom, grunge, paint splatter, or noisy textures. Two or three sharp cel layers only, crisp hand-inked edges, actual alpha transparency around all exterior shapes, no baked checkerboard, no opaque backdrop. Clean reusable game overlay asset, legible when shown about 420 pixels wide.",
+      "file": "motion-speedband.png",
+      "width": 1983,
+      "height": 793,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "bytes": 512996,
+      "sha256": "c9e2ff84f800794bc615d0ec843daf2640d3c375867eb8ababe960bae92ef951"
+    },
+    {
+      "key": "hazard-warning-wrap",
+      "prompt": "Production game UI sprite asset. ONE integrated YELLOW-AND-BLACK HAZARD TAPE WRAP for a missile danger alert. Wide horizontal composition on a GENUINELY TRANSPARENT background. Original stylish 2D hand-drawn CEL ANIMATION UI art, clean flat solid colors: safety yellow #ffcd24, near-black #111318, tiny warm-white highlights. Two taut strips of warning tape with precise bold alternating 45-degree yellow/black stripes run across the upper and lower edges of a long alert area, with short slanted tape returns wrapping around the ends; asymmetric torn-cut angular ends and one small triangular warning notch. The tapes feel wrapped around an invisible alert block, leaving the central content area genuinely transparent and spacious so the game can render its own countdown and emergency button. Chic graphic design, confident variable-weight black ink contours, excellent small-scale legibility. A single coherent overlay, not several examples, no separate objects. Entire sprite fully inside frame with transparent margin. NO text, NO letters, NO numerals, NO fake labels, NO logos, NO map. NO metal, NO 3D, NO bevels, NO photographic texture, NO dirt, NO gradients, NO blur or glow. Crisp hard-edged two-tone cel art; actual alpha transparency outside and through the central aperture; no baked checkerboard or solid backdrop.",
+      "file": "hazard-warning-wrap.png",
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "bytes": 545954,
+      "sha256": "d3db8b1cc794a7fd98158584a219cf245f90ad1e41b73ab77314fb87799beb72"
+    },
+    {
+      "key": "missile-warning-badge",
+      "prompt": "Production game UI icon, ONE isolated MISSILE WARNING emblem on a genuinely transparent square background. Clean fashionable original 2D CEL ANIMATION / hand-inked graphic style, bold expressive precise black outlines, flat solid safety yellow #ffcd24, near-black #111318, vivid orange #ff6b24, a small warm-white highlight. A strong yellow triangular warning sign tilted very slightly, containing a highly recognizable black guided missile silhouette pointing diagonally up-right. A small orange warning burst / exclamation accent is integrated at the lower-right outside the triangle, with just two short orange motion slashes. Refined aggressive graphic rhythm, clean colors, excellent clarity at 32 to 64 pixels, no surrounding square button background. Keep the icon centered, fully contained with 15 percent transparent margin. NO words, NO letters, NO numerals, NO logos. NO 3D, metallic rendering, bevels, realistic reflections, gradients, blur, glow, grunge, halftone, or scenery. Two or three crisp cel-shaded color layers, intentional hand-drawn contour, true transparent alpha outside the icon; no checkerboard pattern, no opaque background.",
+      "file": "missile-warning-badge.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "bytes": 721294,
+      "sha256": "614adbfb6b921a7bb33f6e0a1c4d62f6602110c67905026020d501255963e1c5"
+    },
+    {
+      "key": "command-icons-cel-atlas",
+      "prompt": "Production UI SPRITE ATLAS for an original stylish naval tactical anime game, exactly SIX separate command icons arranged in a precise regular THREE-COLUMN by TWO-ROW grid. Same cell size, generous fully transparent gutters, each icon centered and similar optical size, no icon crosses its cell. TOP ROW left to right: (1) movement - a sharp forward arrow with two orange speed slashes; (2) attack - a crisp target reticle cut by one dynamic orange strike slash; (3) hold/guard - a simple sturdy white shield with one black central chevron. BOTTOM ROW left to right: (4) army - a compact infantry emblem of two crossed rifles; (5) fleet - a recognizable warship silhouette from above, bow upward, simple distinct turret forms; (6) pause - two clean parallel orange vertical bars. Style: fashionable 2D HAND-DRAWN CEL ANIMATION game icon art, bold clean near-black ink outlines and confident angular contours, FLAT SOLID warm white #f7f4ed, near-black #111318, vivid tangerine #ff6b24, only two or three flat color layers. Each is a bespoke readable graphic glyph rather than a detailed illustration, highly legible at 40 pixels. NO metal, NO brass, NO 3D, NO bevels, NO gradients, NO shadows, NO glow, NO noisy texture, NO realistic lighting. No button card backgrounds, no rounded squares, no circles enclosing the whole icon. NO text, letters, numbers, labels, grid lines, logos, scenery, or watermark. GENUINELY TRANSPARENT background and cell gutters; no opaque backdrop, no baked checkerboard. Wide landscape atlas with a precise equal 3 by 2 cell structure.",
+      "file": "command-icons-cel-atlas.png",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA",
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "bytes": 1399593,
+      "sha256": "90c0f25b6d9bb77635733632da6da855660803d19f7672baa9429ee987287533"
+    }
+  ]
+}
