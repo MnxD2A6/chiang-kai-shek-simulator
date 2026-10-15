@@ -21,7 +21,7 @@
  const notices={watch:'大陆正在重新评估局势',trade:'大陆将调整区域贸易报价',diplomatic:'大陆正在向合作方施加外交压力',scrutiny:'大陆将公开质疑新增科研支出',mobilize:'大陆沿海部队开始集结',patrol:'大陆沿海舰艇准备出港',counter:'大陆准备反击登陆部队'};
  function announce(s,kind=intent(s)){const c=s.campaign;c.pending={kind,due:s.time+6+random(s)*6};record(s,notices[kind]+'，部署将在约 '+F.realSeconds(s,c.pending.due-s.time)+' 秒后落实。',kind);c.nextReaction=s.time+36+random(s)*24;posture(s);}
  function muster(s,counter){
-  const existing=s.naval.ground.filter(a=>a.key==='china');if(existing.length>=2){for(const a of existing)a.force=Math.min(1800,a.force+350);return '大陆沿海守备队获得补充，现有部队继续执行任务。';}
+  const existing=s.naval.ground.filter(a=>a.key==='china'&&a.mission!=='taiwan');if(existing.length>=2){for(const a of existing)a.force=Math.min(1800,a.force+350);return '大陆沿海守备队获得补充，现有部队继续执行任务。';}
   const target=s.units.find(u=>F.geography.mainland(u.tile)),p=target?F.xy(target.tile):{x:245,y:190};
   const town=s.towns.filter(t=>t.country==='CHN'&&s.owners[t.tile]!==1&&!existing.some(a=>a.tile===t.tile)).sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y))[0];
   if(!town||s.naval.ground.length>=8)return '大陆沿海驻军进入戒备，现有反击力量保持待命。';

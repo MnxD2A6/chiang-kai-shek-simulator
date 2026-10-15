@@ -1,4 +1,4 @@
-(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory();else root.FrontStrategy=factory();})(typeof globalThis!=='undefined'?globalThis:this,function(){
+(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./homefront.js'));else root.FrontStrategy=factory(root.FrontHomefront);})(typeof globalThis!=='undefined'?globalThis:this,function(H){
  'use strict';
  const projects={economy:{name:'经济建设',effect:'收入 +3/秒，兵力上限 +1,800'},technology:{name:'科技研发',effect:'空袭减伤 +22%，进攻损耗 −18%'},diplomacy:{name:'外交支援',effect:'援军 +700，空袭间隔 +18秒，减伤 +4%'}};
  const no=message=>({ok:false,message}),ok=message=>({ok:true,message});
@@ -12,10 +12,10 @@
  const support=(s,key)=>!s.world||(s.world.sanctions<2&&s.world.relations[key]>-30&&!(s.world.flags.koreaWar&&['usa','korea'].includes(key))&&!(s.world.flags.duckBlockade&&key==='japan'));
  const partners=s=>Object.fromEntries(Object.entries(s.strategy?.partners||{}).map(([key,value])=>[key,value&&support(s,key)]));
  const deterrence=s=>!!s.world?.nuclear?.disclosed&&s.world.nuclear.stock>0&&!s.world.nuclear.used;
- const income=s=>(4+levels(s).economy*3+(partners(s).japan?2:0))*(.4+.6*(s.strategy?.integrity??100)/100)*(s.world?(s.world.sanctions===2?.4:s.world.sanctions===1?.72:1)*(s.world.flags.europeCrisis?.9:1)*(s.world.opinion<25?.85:s.world.opinion>75?1.1:1):1);
+ const income=s=>(4+levels(s).economy*3+(partners(s).japan?2:0))*(s.homefront?H.economy(s):(.4+.6*(s.strategy?.integrity??100)/100))*(s.world?(s.world.sanctions===2?.4:s.world.sanctions===1?.72:1)*(s.world.flags.europeCrisis?.9:1)*(s.world.opinion<25?.85:s.world.opinion>75?1.1:1):1);
  const bonusCap=s=>levels(s).economy*1800+levels(s).technology*700+levels(s).diplomacy*1200+(partners(s).usa?2000:0)+(partners(s).japan?1000:0)+Math.min(3,s.operations?.wins||0)*600;
  const bonusGrowth=s=>levels(s).economy*12+levels(s).diplomacy*10+(partners(s).japan?8:0);
- const protection=s=>levels(s).technology*.22+levels(s).diplomacy*.04+(partners(s).korea?.08:0);
+ const protection=s=>s.homefront?H.protection(s):levels(s).technology*.22+levels(s).diplomacy*.04+(partners(s).korea?.08:0);
  const attackFactor=s=>1-levels(s).technology*.18-(partners(s).korea?.05:0);
  function partner(s,key,api){const p=s.strategy,r=api.regions.find(r=>r.id===key);
   if(s.result||!p||!r)return no('当前无法开展这项合作。');
@@ -38,7 +38,7 @@
  function shelter(s,api){
   const p=s.strategy;if(s.result||!p?.warning||p.warning.sheltered)return no('当前没有需要响应的新预警。');
   if(p.funds<60)return no('紧急疏散需要 60 资金。');
-  p.funds-=60;p.warning.sheltered=true;api.event(s,'紧急疏散已安排，本轮空袭损失额外降低 65%。','success');return ok('本轮空袭防护已生效。');
+  p.funds-=60;p.warning.sheltered=true;api.event(s,s.homefront?'疏散已安排：人员损失降低 65%，建筑和工厂仍会受损。':'紧急疏散已安排，本轮空袭损失额外降低 65%。','success');return ok(s.homefront?'疏散保人员；防空拦导弹，维修恢复生产。':'本轮空袭防护已生效。');
  }
  function repair(s,api){
   const p=s.strategy;if(s.result||!p||p.integrity>=100)return no('基础设施目前完好。');
@@ -49,21 +49,23 @@
  }
  function tick(s,dt,api){
   const p=s.strategy;if(!p)return;
-  p.funds=Math.min(99999,p.funds+income(s)*dt);
+  if(s.homefront)H.tick(s,api);p.funds=Math.min(99999,p.funds+income(s)*dt);
   if(p.project&&s.time>=p.project.endsAt){const key=p.project.key;p.project=null;
    if(key.startsWith('partner:')){const id=key.slice(8),r=api.regions.find(r=>r.id===id);p.partners[id]=true;if(id==='usa')s.factions[1].troops=Math.max(0,Math.min(api.capacity(s,1)-api.deployed(s,1),s.factions[1].troops+1500));api.event(s,`${r.name}合作已达成：${r.effect}。`,'success');}
-   else{p.levels[key]++;if(key==='diplomacy')s.factions[1].troops=Math.max(0,Math.min(api.capacity(s,1)-api.deployed(s,1),s.factions[1].troops+700));api.event(s,`${projects[key].name}达到 ${p.levels[key]} 级：${projects[key].effect}。`,'success');}
+   else{p.levels[key]++;if(key==='diplomacy')s.factions[1].troops=Math.max(0,Math.min(api.capacity(s,1)-api.deployed(s,1),s.factions[1].troops+700));api.event(s,`${projects[key].name}达到 ${p.levels[key]} 级：${s.homefront?(key==='technology'?'设施加固 +6%，进攻损耗 −18%':key==='diplomacy'?'援军 +700，空袭间隔 +18秒，设施加固 +2%':projects[key].effect):projects[key].effect}。`,'success');}
   }
   if(p.phase!=='war')return;
-  if(!p.warning&&s.time>=p.nextStrike){const seconds=partners(s).philippines?16:12;p.warning={startedAt:s.time,impactAt:s.time+seconds,sheltered:false};api.event(s,`空袭预警：${seconds} 秒后抵达！可花 60 资金紧急疏散。`,'danger');}
+  if(!p.warning&&s.time>=p.nextStrike){const seconds=partners(s).philippines?16:12;p.warning={startedAt:s.time,impactAt:s.time+seconds,sheltered:false};if(s.homefront)H.warn(s);api.event(s,`空袭预警：${seconds} 秒后抵达！可花 60 资金紧急疏散。`,'danger');}
   if(p.warning&&s.time>=p.warning.impactAt){
+   if(s.homefront)H.strike(s,api);else{
    const factor=(1-protection(s))*(p.warning.sheltered?.35:1),damage=36*factor;
    const before=s.factions[1].troops+api.deployed(s,1);s.factions[1].troops*=1-.45*factor;
    for(const fleet of s.fleets)if(fleet.faction===1)fleet.force*=1-.6*factor;
    for(const unit of s.units||[])if(!s.terrain[unit.tile]||s.towns.some(t=>t.country==='TWN'&&Math.hypot(t.x-unit.tile%api.W,t.y-Math.floor(unit.tile/api.W))<20))unit.force*=1-(s.terrain[unit.tile]?.45:.6)*factor;
    p.integrity=Math.max(0,p.integrity-damage);p.lastStrike={at:s.time,damage,lost:Math.round(before-s.factions[1].troops-api.deployed(s,1))};
-   p.warning=null;p.nextStrike=s.time+Math.min(90,36+p.levels.diplomacy*18+(deterrence(s)?20:0));
    api.event(s,`空袭造成 ${Math.ceil(damage)} 点设施损伤，损失 ${p.lastStrike.lost} 兵力。`, 'danger');
+   }
+   p.warning=null;p.nextStrike=s.time+Math.min(90,36+p.levels.diplomacy*18+(deterrence(s)?20:0));
    if(p.integrity<=0){s.result='defeat';api.event(s,'基础设施全面瘫痪，远征无法继续。','danger');}
   }
  }

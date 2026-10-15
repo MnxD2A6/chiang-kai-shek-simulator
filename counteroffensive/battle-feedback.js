@@ -44,7 +44,7 @@
       for(const town of s.towns){const owner=s.owners[town.tile],old=this.towns.get(town.id);if(old!==undefined&&old!==owner)emit({type:owner===1?'capture':'loss',tile:town.tile,name:town.name});this.towns.set(town.id,owner);}
       const warning=s.strategy?.warning,warningAt=warning?.startedAt??null,strikeAt=s.strategy?.lastStrike?.at??null;
       if(warningAt!==null&&warningAt!==this.warningAt)emit({type:'warning',at:warningAt});
-      if(strikeAt!==null&&strikeAt!==this.strikeAt)emit({type:'airstrike',at:strikeAt,tile:s.towns.find(t=>t.id==='taipei').tile});
+      if(strikeAt!==null&&strikeAt!==this.strikeAt)emit({type:'airstrike',at:strikeAt,tile:s.towns.find(t=>t.id===(s.homefront?.lastStrike?.city||'taipei')).tile});
       if(s.result&&s.result!==this.result)emit({type:s.result});
       for(const u of s.units||[]){const next=u.path[0],fighting=next!==undefined&&s.terrain[next]&&s.owners[next]!==1&&s.strategy.phase==='war',bucket=Math.floor(s.time*1.8+u.id*.3);if(fighting&&this.rifles.get(u.id)!==bucket)emit({type:'rifle',id:u.id,tile:u.tile,to:next});this.rifles.set(u.id,bucket);}
       const units=new Set((s.units||[]).map(u=>u.id));for(const id of this.rifles.keys())if(!units.has(id))this.rifles.delete(id);

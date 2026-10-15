@@ -73,7 +73,7 @@
     if(s.paused||s.result||!Number.isFinite(dt)||dt<=0)return;
     dt=Math.min(.2,dt);for(const u of s.units)march(s,u,dt);
     Base.step(s,dt);s.units=s.units.filter(u=>u.force>0);
-    if(!s.result&&s.towns.filter(t=>t.goal).every(t=>s.owners[t.tile]===1)){s.result='victory';log(s,'福州、南京、广州已全部控制，战役胜利！','success');}
+    if(!s.homefront&&!s.result&&s.towns.filter(t=>t.goal).every(t=>s.owners[t.tile]===1)){s.result='victory';log(s,'福州、南京、广州已全部控制，战役胜利！','success');}
   };
   F.encode=s=>JSON.stringify({...JSON.parse(Base.encode(s)),version:4,units:s.units});
   F.decode=function(text){
