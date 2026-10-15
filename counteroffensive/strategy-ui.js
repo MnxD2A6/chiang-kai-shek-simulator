@@ -3,6 +3,7 @@
  const F=window.FrontCore,$=id=>document.getElementById(id),fmt=n=>Math.floor(n).toLocaleString();
  class StrategyUI{
   constructor(getState,action){this.getState=getState;this.action=action;this.open=true;this.selected=null;
+   const agenda=document.createElement('section');agenda.id='preparationAgenda';agenda.className='preparation-agenda';agenda.setAttribute('aria-label','战前议程');agenda.innerHTML='<header><b>战前议程</b><small>选方案 → 达标 → 事件验收</small></header><div id="preparationProjects"></div><p>开战会中止未兑现项目，投入不返还；已完成收益保留。</p>';const cards=$('strategyPanel').querySelectorAll('.development-card');cards[cards.length-1].after(agenda);const jump=document.createElement('button');jump.id='preparationJump';jump.className='preparation-jump';jump.textContent='战前议程 · 发展后解锁 ↘';jump.onclick=()=>agenda.scrollIntoView({behavior:'smooth',block:'start'});$('strategyPanel').querySelector('.strategy-budget').after(jump);this.agendaKey='';
    for(const key of Object.keys(F.strategy.projects))$('develop-'+key).onclick=()=>action(()=>F.upgrade(getState(),key));
    $('declareWar').onclick=()=>action(()=>{const result=F.startWar(getState());if(result.ok)this.open=false;return result;});
    $('shelter').onclick=()=>action(()=>F.shelter(getState()));$('repair').onclick=()=>action(()=>F.repair(getState()));
@@ -15,7 +16,8 @@
    $('strategyToggle').hidden=!enabled;$('strategyPanel').hidden=!enabled||!this.open;$('strategicStatus').hidden=!enabled;$('missileWarning').hidden=!enabled||!p.warning||!!s.result;
    document.body.classList.toggle('preparing',enabled&&p.phase==='preparation');document.body.classList.toggle('strategy-open',enabled&&this.open);
    if(!enabled)return;
-   const region=F.regions.find(r=>r.id===this.selected);$('partnerDetails').hidden=!region;$('strategyPanel').classList.toggle('viewing-partner',!!region);
+   const agendas=F.preparationSummary(s),agendaKey=JSON.stringify(agendas);const waiting=agendas.filter(a=>['active','offered','review'].includes(a.phase)).length,done=agendas.filter(a=>a.phase==='complete').length,deferred=agendas.filter(a=>a.phase==='deferred').length;$('preparationJump').textContent='战前议程 · '+waiting+'待完成 / '+done+'已兑现'+(deferred?' / '+deferred+'可再议':'')+' ↘';if(this.agendaKey!==agendaKey){this.agendaKey=agendaKey;$('preparationProjects').replaceChildren(...agendas.map(a=>{const row=document.createElement('article');row.dataset.phase=a.phase;const name=document.createElement('b'),detail=document.createElement('span'),effect=document.createElement('small');name.textContent=a.name;detail.textContent=a.detail;effect.textContent=a.effect;row.append(name,detail,effect);if(a.phase==='deferred'&&s.strategy.phase==='preparation'){const reopen=document.createElement('button');reopen.textContent='重新洽谈';reopen.onclick=()=>this.action(()=>F.reopenPreparation(this.getState(),a.id));row.append(reopen);}return row;}));}
+   const region=F.regions.find(r=>r.id===this.selected);$('partnerDetails').hidden=!region;$('preparationAgenda').hidden=!!region;$('preparationJump').hidden=!!region;$('strategyPanel').classList.toggle('viewing-partner',!!region);
    if(region){const held=p.partners[region.id],building=p.project?.key==='partner:'+region.id;$('partnerName').textContent=region.name+' · 合作机会';$('partnerDescription').textContent=region.description;$('partnerEffect').textContent=region.effect;$('partnerAction').textContent=held?'合作已达成':building?'合作中 · '+F.realSeconds(s,p.project.endsAt-s.time)+'秒':'达成合作 · '+region.cost+'资金 / '+F.realSeconds(s,12)+'秒';$('partnerAction').disabled=!!s.result||held||!!p.project||p.funds<region.cost;}
    $('phaseLabel').textContent=p.phase==='preparation'?'筹备期 · 由你决定何时开战':'战时发展';
    $('funds').textContent=fmt(p.funds);$('income').textContent='+'+F.displayRate(s,F.strategy.income(s)).toFixed(1)+'/秒';
@@ -34,7 +36,8 @@
    const capable=p.levels.technology>=2&&(p.levels.economy>=2||p.levels.diplomacy>=2)&&(!s.homefront||s.homefront.airDefense.batteries>0);
    $('readiness').textContent=s.result?'本局已结束，可以查看战果或重新开始。':p.project?.key.startsWith('partner:')?'地区合作正在推进，完成后可继续投资其他路线。':p.phase==='war'?'导弹会持续损伤生产；到「后方 / 防空」重建、补弹，留意本岛登陆威胁。':capable?'已有科技、生产与防空。留下本岛驻军、备好拦截舰队后，可以选择开战。':'推荐先发展经济和科技，再到「后方 / 防空」购买900资金的防空系统。开战前给台湾两城留守军。';
    $('declareWar').hidden=p.phase!=='preparation';$('declareWar').disabled=!!s.result;
-   $('declareWar').textContent=capable?'决定开战 →':'提前开战 · 风险高 →';
+   const pending=agendas.filter(a=>['offered','active','review'].includes(a.phase)).length;if(pending&&p.phase==='preparation')$('readiness').textContent+=' 尚有'+pending+'项议程待兑现，提前开战会中止。';
+   $('declareWar').textContent=pending?'开战 · 中止'+pending+'项议程 →':capable?'决定开战 →':'提前开战 · 风险高 →';
    $('repair').disabled=!!s.result||p.integrity>=100||p.funds<100||s.time<p.repairAt;
    $('repair').textContent=s.time<p.repairAt?'修复周转 '+F.realSeconds(s,p.repairAt-s.time)+'秒':'修复 +25 · 100资金';
    $('strategicStatus').textContent=(p.phase==='preparation'?'筹备':'战时')+' · 资金 '+fmt(p.funds)+' · 设施 '+Math.ceil(p.integrity)+'%';

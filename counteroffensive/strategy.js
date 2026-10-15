@@ -1,4 +1,4 @@
-(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./homefront.js'));else root.FrontStrategy=factory(root.FrontHomefront);})(typeof globalThis!=='undefined'?globalThis:this,function(H){
+(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./homefront.js'),require('./preparation.js'));else root.FrontStrategy=factory(root.FrontHomefront,root.FrontPreparation);})(typeof globalThis!=='undefined'?globalThis:this,function(H,P){
  'use strict';
  const projects={economy:{name:'经济建设',effect:'收入 +3/秒，兵力上限 +1,800'},technology:{name:'科技研发',effect:'空袭减伤 +22%，进攻损耗 −18%'},diplomacy:{name:'外交支援',effect:'援军 +700，空袭间隔 +18秒，减伤 +4%'}};
  const no=message=>({ok:false,message}),ok=message=>({ok:true,message});
@@ -12,7 +12,7 @@
  const support=(s,key)=>!s.world||(s.world.sanctions<2&&s.world.relations[key]>-30&&!(s.world.flags.koreaWar&&['usa','korea'].includes(key))&&!(s.world.flags.duckBlockade&&key==='japan'));
  const partners=s=>Object.fromEntries(Object.entries(s.strategy?.partners||{}).map(([key,value])=>[key,value&&support(s,key)]));
  const deterrence=s=>!!s.world?.nuclear?.disclosed&&s.world.nuclear.stock>0&&!s.world.nuclear.used;
- const income=s=>(4+levels(s).economy*3+(partners(s).japan?2:0))*(s.homefront?H.economy(s):(.4+.6*(s.strategy?.integrity??100)/100))*(s.world?(s.world.sanctions===2?.4:s.world.sanctions===1?.72:1)*(s.world.flags.europeCrisis?.9:1)*(s.world.opinion<25?.85:s.world.opinion>75?1.1:1):1);
+ const income=s=>(4+levels(s).economy*3+(partners(s).japan?2:0)+P.bonuses(s).income)*(s.homefront?H.economy(s):(.4+.6*(s.strategy?.integrity??100)/100))*(s.world?(s.world.sanctions===2?.4:s.world.sanctions===1?.72:1)*(s.world.flags.europeCrisis?.9:1)*(s.world.opinion<25?.85:s.world.opinion>75?1.1:1):1);
  const bonusCap=s=>levels(s).economy*1800+levels(s).technology*700+levels(s).diplomacy*1200+(partners(s).usa?2000:0)+(partners(s).japan?1000:0)+Math.min(3,s.operations?.wins||0)*600;
  const bonusGrowth=s=>levels(s).economy*12+levels(s).diplomacy*10+(partners(s).japan?8:0);
  const protection=s=>s.homefront?H.protection(s):levels(s).technology*.22+levels(s).diplomacy*.04+(partners(s).korea?.08:0);
@@ -55,7 +55,7 @@
    else{p.levels[key]++;if(key==='diplomacy')s.factions[1].troops=Math.max(0,Math.min(api.capacity(s,1)-api.deployed(s,1),s.factions[1].troops+700));api.event(s,`${projects[key].name}达到 ${p.levels[key]} 级：${s.homefront?(key==='technology'?'设施加固 +6%，进攻损耗 −18%':key==='diplomacy'?'援军 +700，空袭间隔 +18秒，设施加固 +2%':projects[key].effect):projects[key].effect}。`,'success');}
   }
   if(p.phase!=='war')return;
-  if(!p.warning&&s.time>=p.nextStrike){const seconds=partners(s).philippines?16:12;p.warning={startedAt:s.time,impactAt:s.time+seconds,sheltered:false};if(s.homefront)H.warn(s);api.event(s,`空袭预警：${seconds} 秒后抵达！可花 60 资金紧急疏散。`,'danger');}
+  if(!p.warning&&s.time>=p.nextStrike){const seconds=(partners(s).philippines?16:12)+P.bonuses(s).warningBonus;p.warning={startedAt:s.time,impactAt:s.time+seconds,sheltered:false};if(s.homefront)H.warn(s);api.event(s,`空袭预警：${seconds} 秒后抵达！可花 60 资金紧急疏散。`,'danger');}
   if(p.warning&&s.time>=p.warning.impactAt){
    if(s.homefront)H.strike(s,api);else{
    const factor=(1-protection(s))*(p.warning.sheltered?.35:1),damage=36*factor;
@@ -77,7 +77,7 @@
   if(v.project){const key=v.project.key;if(typeof key!=='string'||!num(v.project.endsAt,time,time+12.1))bad();if(key.startsWith('partner:')){if(!Object.hasOwn(partners,key.slice(8))||partners[key.slice(8)])bad();}else if(!Object.hasOwn(projects,key)||v.levels[key]>=3)bad();}
   if(v.phase==='preparation'){if(v.warAt!==null||v.nextStrike!==null||v.warning!==null||v.lastStrike!==null)bad();}
   else if(!num(v.warAt,0,time)||!num(v.nextStrike,v.warAt,time+91))bad();
-  if(v.warning&&(!num(v.warning.startedAt,v.warAt,time)||!num(v.warning.impactAt,time,time+(partners.philippines?16.1:12.1))||typeof v.warning.sheltered!=='boolean'))bad();
+  if(v.warning&&(!num(v.warning.startedAt,v.warAt,time)||!num(v.warning.impactAt,time,time+(partners.philippines?20.1:16.1))||typeof v.warning.sheltered!=='boolean'))bad();
   if(v.lastStrike&&(!num(v.lastStrike.at,v.warAt,time)||!num(v.lastStrike.damage,0,36)||!num(v.lastStrike.lost,0,1000000)))bad();
   return {phase:v.phase,funds:v.funds,integrity:v.integrity,levels:{economy:v.levels.economy,technology:v.levels.technology,diplomacy:v.levels.diplomacy},partners,project:v.project?{key:v.project.key,endsAt:v.project.endsAt}:null,warAt:v.warAt,nextStrike:v.nextStrike,warning:v.warning?{startedAt:v.warning.startedAt,impactAt:v.warning.impactAt,sheltered:v.warning.sheltered}:null,lastStrike:v.lastStrike?{at:v.lastStrike.at,damage:v.lastStrike.damage,lost:v.lastStrike.lost}:null,repairAt:v.repairAt};
  }

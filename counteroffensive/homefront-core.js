@@ -36,7 +36,7 @@
  }
  F.step=(s,dt)=>{if(s.paused||s.result||!Number.isFinite(dt)||dt<=0)return;const before=s.time;Base.step(s,dt);const elapsed=s.time-before;if(!elapsed)return;s.units=s.units.filter(u=>u.force>0);for(const a of s.naval.ships)if(a.cargo!==null&&!s.units.some(u=>u.id===a.cargo))a.cargo=null;if(s.result&&s.result!=='defeat')return;if(s.strategy.phase==='war')invasion(s);status(s,elapsed);};
  F.homeDefenseFocus=s=>{const i=s.homefront.invasion,ship=s.naval.ships.find(a=>i.payloads.some(p=>p.shipId===a.id)),u=s.naval.ground.find(a=>a.mission==='taiwan');return ship?.tile??u?.tile??s.towns.find(t=>t.id===(i.target||'taipei')).tile;};
- F.encode=s=>JSON.stringify({...JSON.parse(Base.encode(s)),version:10,homefront:s.homefront});
- F.decode=text=>{const raw=JSON.parse(text);if(![9,10].includes(raw.version))return H.init(Base.decode(text));const s=Base.decode(JSON.stringify({...raw,version:8}));if(raw.version===9&&raw.homefront?.invasion)raw.homefront.invasion.repelled=0;s.homefront=H.validate(s,raw.homefront);return s;};
+ F.encode=s=>JSON.stringify({...JSON.parse(Base.encode(s)),version:11,homefront:s.homefront});
+ F.decode=text=>{const raw=JSON.parse(text);if(raw.version===11&&!raw.world?.preparation)throw Error('战前议程存档缺失。');if(![9,10,11].includes(raw.version))return H.init(Base.decode(text));const s=Base.decode(JSON.stringify({...raw,version:8}));if(raw.version===9&&raw.homefront?.invasion)raw.homefront.invasion.repelled=0;s.homefront=H.validate(s,raw.homefront);return s;};
  return F;
 });
