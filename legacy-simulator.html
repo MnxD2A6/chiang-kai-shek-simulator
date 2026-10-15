@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#252c24">
+  <meta name="description" content="十二座城市、三军团，自由调兵、攻城与守城。保留五个可走动场景、人物互动与电话对白，浏览器直接玩。">
+  <title>蒋介石模拟器 · 另一条时间线</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css?v=3.0.0">
+  <link rel="stylesheet" href="./upgrade.css?v=3.0.0">
+  <link rel="stylesheet" href="./frontline.css?v=3.0.0">
+  <link rel="stylesheet" href="./campaign.css?v=3.0.0">
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="#" aria-label="蒋介石模拟器主页"><span class="brand-seal">蔣</span><span><strong>蒋介石模拟器</strong><small>另一条时间线 / AN ALTERNATE TIMELINE</small></span></a>
+    <div class="header-meta"><span class="edition">1936 — 1949<br>2D · STRATEGY / ROLEPLAY</span><div class="toolbar"><button id="soundBtn" class="icon-btn" title="开启音效" aria-label="开启音效">♫<span>音效关</span></button><button id="helpBtn" class="icon-btn" aria-label="游戏说明">?<span>指南</span></button><button id="archiveBtn" class="icon-btn" aria-label="存档管理">▤<span>存档</span></button></div></div>
+  </header>
+
+  <main id="game" class="game-shell">
+    <section class="turn-strip" aria-label="回合状态">
+      <div class="date-group"><span class="eyebrow">当前时间</span><strong id="date">1936.12</strong><span id="era" class="era-label">危局与谈判</span></div>
+      <div class="turn-progress"><span id="turnLabel">第 01 / 12 回合</span><div id="timeline" class="timeline" aria-label="时间线进度"></div></div>
+      <label class="mode-toggle"><input id="dramaToggle" type="checkbox" checked><span class="switch"></span><span>戏剧模式<small>加入架空幽默选项</small></span></label>
+    </section>
+
+    <section id="resources" class="resource-strip" aria-label="资源"></section>
+
+    <div class="command-layout">
+      <aside class="left-column">
+        <section class="room-panel">
+          <div class="panel-heading"><span class="eyebrow">01 / 指挥部</span><span class="live-dot">可自由走动</span></div>
+          <h2 id="capitalLabel">南京 · 作战室</h2>
+          <div class="room-frame"><canvas id="room" width="320" height="256" tabindex="0" aria-label="像素作战室。WASD 或方向键移动，E 互动；也可点击电话或顾问。">你的浏览器需要支持 Canvas。</canvas><span id="roomPrompt" class="room-prompt">WASD 移动 · E 互动</span></div>
+          <div class="room-controls"><span>WASD / ↑↓←→ 移动</span><span>E 互动 · 点击顾问也可</span></div>
+          <div class="touch-controls" aria-label="移动控制"><div class="dpad"><button data-move="up" aria-label="向上">↑</button><button data-move="left" aria-label="向左">←</button><button data-move="down" aria-label="向下">↓</button><button data-move="right" aria-label="向右">→</button></div><button id="interactBtn">E · 互动</button></div>
+        </section>
+
+        <button id="phoneBtn" class="phone-panel" aria-label="打开电话"><span class="phone-icon">☎</span><span><b id="phoneStatus">总机来电</b><small id="phoneSub">拿起听筒，处理本轮电报</small></span><span class="phone-indicator"></span></button>
+
+        <section class="notebook"><span class="eyebrow">参谋备忘</span><h3>先稳后方，再看前线。</h3><p id="advice">先接来电，了解本轮局势。每回合可下达三次命令。</p><div class="notebook-facts"><span>工业等级 <b id="industryValue">1</b></span><span>协商进度 <b id="peaceValue">0 / 12</b></span></div></section>
+      </aside>
+
+      <section class="map-panel">
+        <div class="map-top"><div><span class="eyebrow">02 / 战略地图</span><h2>山河之间，落子有声。</h2></div><span id="heldCount" class="territory-count">9 / 9<span>控制城市</span></span></div>
+        <div class="map-stage" id="mapStage">
+          <svg class="strategic-map" viewBox="0 0 900 620" role="img" aria-label="抽象战区示意图：点击城市安排守备、生产或民生。">
+            <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#6a705e" stroke-width=".5" opacity=".19"/></pattern><pattern id="land" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".65" fill="#67725c" opacity=".17"/></pattern><filter id="paper"><feTurbulence baseFrequency=".6" numOctaves="2" seed="4" type="fractalNoise"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".07"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter></defs>
+            <rect width="900" height="620" fill="#e9e8d9"/><rect width="900" height="620" fill="url(#grid)"/>
+            <path d="M870 0H820L790 110L775 177L789 232L806 273L802 321L763 379L736 440L687 489L637 568L574 603L590 620H900V0Z" fill="#cfdcd6"/>
+            <path d="M34 142L94 120L125 161L163 138L189 155L232 107L267 89L320 93L375 59L401 97L458 69L509 85L536 128L587 123L624 154L677 133L711 172L770 170L790 232L808 274L798 320L763 379L736 439L685 489L638 569L574 603L537 559L489 567L444 597L397 577L342 581L299 548L248 558L211 521L161 503L141 451L116 426L95 372L61 350L46 307L66 263L30 225Z" fill="#dedfc8" stroke="#8b9176" stroke-width="1.5"/>
+            <path d="M34 142L94 120L125 161L163 138L189 155L232 107L267 89L320 93L375 59L401 97L458 69L509 85L536 128L587 123L624 154L677 133L711 172L770 170L790 232L808 274L798 320L763 379L736 439L685 489L638 569L574 603L537 559L489 567L444 597L397 577L342 581L299 548L248 558L211 521L161 503L141 451L116 426L95 372L61 350L46 307L66 263L30 225Z" fill="url(#land)"/>
+            <g fill="none" stroke="#a2a88b" stroke-width="1" stroke-dasharray="4 5"><path d="M300 93L279 185L307 266L213 290L163 399L141 451"/><path d="M401 97L439 178L400 250L463 294L409 381L441 447L398 577"/><path d="M536 128L531 225L583 258L583 335L621 405L563 475L574 603"/><path d="M677 133L631 224L672 293L690 368L736 439"/><path d="M61 350L214 347L306 403L409 381L530 400L621 405"/><path d="M211 521L327 476L441 447L563 475L685 489"/></g>
+            <g fill="none" stroke="#94aaa3" stroke-width="4" opacity=".75"><path d="M77 261C156 308 213 300 254 330S323 393 372 373S464 307 537 322S634 289 688 295S758 328 800 311"/><path d="M241 113C294 161 256 174 347 199S408 224 464 177S560 181 591 210S682 201 718 227"/></g>
+            <g class="mountains" fill="none" stroke="#a0a68d" stroke-width="1.6" opacity=".65"><path d="M85 238l13-23 14 23m4-8 13-23 14 23m4 1 14-25 14 25m-70 180 14-25 14 25m5-7 14-25 14 25m-30 86 15-28 15 28m8-13 14-25 14 25M213 219l13-23 14 23m4-8 13-23 14 23m74 63 15-28 15 28m7-15 14-25 14 25m-88 175 14-25 14 25m5-7 14-25 14 25m42 64 14-25 14 25m6-13 14-25 14 25M430 125l13-23 14 23m4-8 13-23 14 23M608 455l13-23 14 23m4-8 13-23 14 23"/></g>
+            <g id="routeLines" fill="none" stroke="#798169" stroke-width="1.4" opacity=".55"><path d="M345 205L250 345L363 366L545 316L672 251L772 289M363 366L544 418L444 516L238 506L250 345M545 316L544 418M345 205L545 316"/></g>
+            <g class="map-text" fill="#8a9179"><text x="178" y="215">西 北</text><text x="157" y="385">西 南</text><text x="475" y="235">华 中</text><text x="643" y="393">华 东</text><text x="501" y="552">华 南</text><text x="832" y="416" transform="rotate(90 832 416)" fill="#8da29a">东 海</text></g>
+            <g id="attackArrow" fill="none" stroke="#ae5945" stroke-width="2.5" stroke-dasharray="8 7"></g>
+            <g transform="translate(815 63)" stroke="#626b55" fill="none"><path d="M0 0v55m-12-26 12-25 12 25-12-8Z"/><text y="-10" x="-4" fill="#626b55" stroke="none" font-size="12">N</text></g>
+            <text x="30" y="589" fill="#8b917a" font-size="11" letter-spacing="2">战区示意 · 不代表实际疆界或兵力</text><text x="710" y="589" fill="#8b917a" font-size="11" letter-spacing="2">1 : FICTION</text>
+          </svg>
+          <div id="cityNodes" class="city-nodes"></div>
+          <div class="map-coordinates">战略档案 / NO. <span id="mapNumber">01</span></div>
+        </div>
+        <div class="map-legend"><span><i class="legend-dot held"></i>控制</span><span><i class="legend-dot lost"></i>失守</span><span><i class="legend-dot selected"></i>选中</span><span class="legend-hint">点击城市 · 下达命令</span></div>
+        <div id="forecast" class="forecast-strip"></div>
+        <div class="city-command"><div class="city-heading"><div><span class="eyebrow">当前选中</span><h3 id="cityName">南京 <small>行政中心</small></h3></div><div id="cityStats" class="city-stats"></div></div><div id="actions" class="action-grid"></div></div>
+      </section>
+
+      <aside class="right-column">
+        <section class="dispatch-panel"><div class="panel-heading"><span class="eyebrow">03 / 来电与决策</span><span id="eventStamp" class="stamp">待处理</span></div><div class="dispatch-number">密电 · <span id="dispatchNumber">001</span></div><h2 id="eventTitle">西安的电报</h2><p id="eventText"></p><div id="eventChoices" class="event-choices"></div><details class="history-note"><summary>历史背景与创作说明</summary><p id="historyText"></p><p>对白、选项、数值和结局为架空创作；戏剧选项以「架空」标识。</p></details></section>
+        <section class="log-panel"><div class="panel-heading"><span class="eyebrow">指挥日志</span><span id="logCount"></span></div><ol id="log"></ol></section>
+      </aside>
+    </div>
+
+    <section class="end-turn-bar"><div class="ap-group"><span class="eyebrow">剩余行动</span><div id="apDots" class="ap-dots"></div><span id="apText">3 / 3</span></div><div id="turnHint" class="turn-hint">先处理来电，再结束回合。<small>事件不消耗行动点 · 每轮自动存档</small></div><button id="endTurnBtn" class="primary-btn">结束回合 <span>→</span></button></section>
+  </main>
+
+  <footer><span>历史是背景，选择是你的。<b>所有结局均为架空。</b></span><span>零依赖 · 本地存档 · v3.0</span></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="modal" aria-labelledby="modalTitle"><button id="modalClose" class="modal-close" aria-label="关闭">×</button><div id="modalBody"></div></dialog>
+  <input type="file" id="importFile" accept=".json,application/json" hidden>
+  <script src="./content.js?v=3.0.0"></script><script src="./engine.js?v=3.0.0"></script><script src="./room.js?v=3.0.0"></script><script src="./director.js?v=3.0.0"></script><script src="./experience.js?v=3.0.0"></script><script src="./tactics.js?v=3.0.0"></script><script src="./world.js?v=3.0.0"></script><script src="./frontline-view.js?v=3.0.0"></script><script src="./frontline.js?v=3.0.0"></script><script src="./campaign-core.js?v=3.0.0"></script><script src="./campaign.js?v=3.0.0"></script><script src="./app.js?v=3.0.0"></script>
+</body>
+</html>

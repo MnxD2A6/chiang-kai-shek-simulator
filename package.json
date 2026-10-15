@@ -1,8 +1,8 @@
 {
-  "name": "chiang-kai-shek-simulator",
-  "version": "3.0.0",
+  "name": "strait-front-pages",
+  "version": "1.10.0",
   "private": true,
-  "description": "A playable Chinese 2D free campaign with twelve cities, army movement, city sieges and defenses, plus pixel exploration and telephone stories.",
+  "description": "渡海·反攻大陆：中文2D即时军队与舰船指挥，国际危机、34张事件插图、外交与抽象秘密科研。GitHub Pages直接玩。",
   "license": "MIT",
   "engines": {
     "node": ">=22"
