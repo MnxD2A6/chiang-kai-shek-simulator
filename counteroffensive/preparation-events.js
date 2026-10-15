@@ -1,8 +1,8 @@
-(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./world-events.js'));else root.FrontPreparationEvents=factory(root.FrontWorldEvents);})(typeof globalThis!=='undefined'?globalThis:this,function(Base){
+(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./world-events.js'),require('./world-stories.js'));else root.FrontPreparationEvents=factory(root.FrontWorldEvents,root.FrontWorldStories);})(typeof globalThis!=='undefined'?globalThis:this,function(Base,Stories){
  'use strict';
  const action=(project,stage,route)=>({project,stage,route});
  const choice=(id,label,cost,summary,project,stage,route,extra={})=>({id,label,cost,summary,effects:{...extra,preparation:action(project,stage,route)},next:[]});
- return {...Base,
+ return {...Base,...Stories,
   prep_industry_offer:{preparation:true,illustration:'trade_review',chapter:'产线订单 / 签约',country:'日本 / 产业协调组',tag:'战前发展',title:'日本订单来了：出口，还是先加固自己的工厂？',body:'承包商把“战略储备”误写成了“巨型饭团”，但产线用途由你决定。一次投入100资金，达标并筹备约0.8周后验收。开战会中止未兑现项目，投入不返还。',choices:[
    choice('exports','签出口长单',100,'完成经济2级和日本合作后，出口税收 +3/模拟秒；日本贸易受阻时暂停。','industry','enroll','exports'),
    choice('resilience','建设本地韧性产线',100,'完成经济2级后，城市建筑与工厂的导弹物理损伤 −20%。','industry','enroll','resilience'),

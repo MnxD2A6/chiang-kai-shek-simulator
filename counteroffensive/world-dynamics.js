@@ -6,7 +6,7 @@
  const force=s=>s.units.reduce((n,u)=>n+u.force,0)+s.factions[1].troops;
  function init(s,fresh){
   s.campaign={pace:.5,nextReaction:s.time+32+random(s)*18,alert:18,posture:'观察',lastAction:'沿海保持观察，尚未宣布新的部署。',pending:null,history:[],talkAt:0,restraintUntil:0,landingSeen:false};
-  if(fresh){const pool=Object.entries(F.worldEvents).filter(([,e])=>e.starter&&!e.requires);const id=pool[Math.floor(random(s)*pool.length)][0];s.world.queue=[{id,due:s.time+12+random(s)*12}];s.world.nextStory=s.time+48+random(s)*24;}
+  if(fresh){const pool=Object.entries(F.worldEvents).filter(([,e])=>e.starter&&F.worldEventEligible(s,e));const id=pool[Math.floor(random(s)*pool.length)][0];s.world.queue=[{id,due:s.time+12+random(s)*12}];s.world.nextStory=s.time+48+random(s)*24;}
   return s;
  }
  F.createStrategic=seed=>init(Base.createStrategic(seed),true);
