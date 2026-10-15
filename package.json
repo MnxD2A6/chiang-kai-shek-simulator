@@ -1,6 +1,6 @@
 {
   "name": "strait-front-pages",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "private": true,
   "description": "Realtime geographic strategy with persistent city damage, air defence, mainland landings and illustrated world events.",
   "license": "MIT",

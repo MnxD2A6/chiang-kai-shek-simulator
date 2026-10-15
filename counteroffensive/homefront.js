@@ -3,7 +3,7 @@
  const clamp=(n,a=0,b=100)=>Math.max(a,Math.min(b,n)),yes=message=>({ok:true,message}),no=message=>({ok:false,message});
  const town=(s,id)=>s.towns.find(t=>t.id===id),owned=(s,c)=>s.owners[town(s,c.id).tile]===1;
  const average=(s,key)=>s.homefront.cities.reduce((sum,c)=>sum+c[key],0)/s.homefront.cities.length;
- function init(s){const health=s.strategy.integrity;s.homefront={cities:s.towns.filter(t=>t.country==='TWN').map(t=>({id:t.id,buildings:health,industry:health,repair:null,occupied:s.owners[t.tile]!==1})),support:80,airDefense:{batteries:0,ammo:0,order:null},salvos:0,strikeTarget:null,lastStrike:null,invasion:{phase:'idle',nextAt:null,launchAt:null,target:null,payloads:[],wave:0,lastAction:'尚未宣布登陆行动。'},victoryHold:0,homeLost:0,defeatReason:null};if(s.strategy.warning)warn(s);return s;}
+ function init(s){const health=s.strategy.integrity;s.homefront={cities:s.towns.filter(t=>t.country==='TWN').map(t=>({id:t.id,buildings:health,industry:health,repair:null,occupied:s.owners[t.tile]!==1})),support:80,airDefense:{batteries:0,ammo:0,order:null},salvos:0,strikeTarget:null,lastStrike:null,invasion:{phase:'idle',nextAt:null,launchAt:null,target:null,payloads:[],wave:0,repelled:0,lastAction:'尚未宣布登陆行动。'},victoryHold:0,homeLost:0,defeatReason:null};if(s.strategy.warning)warn(s);return s;}
  function economy(s){const h=s.homefront,production=h.cities.reduce((n,c)=>n+(owned(s,c)?c.industry:0),0)/h.cities.length;return (.2+.8*production/100)*(.65+.35*average(s,'buildings')/100)*(.6+.5*h.support/100);}
  const protection=s=>Math.min(.3,s.strategy.levels.technology*.06+s.strategy.levels.diplomacy*.02+(s.strategy.partners.korea&&s.world.sanctions<2&&s.world.relations.korea>-30&&!s.world.flags.koreaWar?.04:0));
  const permit=s=>s.world.relations.usa>=10&&s.world.sanctions===0&&!s.world.flags.koreaWar;
@@ -33,7 +33,7 @@
   if(Math.abs(v.cities.reduce((n,c)=>n+c.buildings,0)/v.cities.length-s.strategy.integrity)>1e-5)bad();
   const d=v.airDefense;if(!d||!int(d.batteries,0,2)||!int(d.ammo,0,d.batteries*8)||d.order!==null&&(!d.order||d.batteries>=2||!num(d.order.endsAt,0,s.time+24.1)))bad();
   const i=v.invasion;if(!i||!['idle','assembling','sailing','landed','repelled'].includes(i.phase)||!int(i.wave,0,10000)||!(i.target===null||ids.includes(i.target))||!Array.isArray(i.payloads)||i.payloads.length>2||new Set(i.payloads.map(p=>p?.shipId)).size!==i.payloads.length||typeof i.lastAction!=='string'||i.lastAction.length>200||!(i.nextAt===null||num(i.nextAt,0,s.time+90.1))||!(i.launchAt===null||num(i.launchAt,0,s.time+18.1)))bad();
-  if(i.phase==='assembling'&&(i.launchAt===null||!ids.includes(i.target))||i.phase==='sailing'&&(!i.payloads.length||!ids.includes(i.target))||i.phase!=='sailing'&&i.payloads.length)bad();
+  if(!int(i.repelled,0,i.wave)||i.phase==='assembling'&&(i.launchAt===null||!ids.includes(i.target))||i.phase==='sailing'&&(!i.payloads.length||!ids.includes(i.target))||i.phase!=='sailing'&&i.payloads.length)bad();
   for(const p of i.payloads)if(!p||!int(p.force,1,1800)||!ids.includes(p.target)||!s.naval.ships.some(a=>a.id===p.shipId&&a.faction===3&&a.kind==='transport'))bad();
   const r=v.lastStrike;if(r!==null&&(!r||!num(r.at,0,s.time)||!ids.includes(r.city)||r.incoming!==6||!int(r.intercepted,0,4)||r.hits!==6-r.intercepted||typeof r.sheltered!=='boolean'||!num(r.buildingDamage,0,36)||!num(r.industryDamage,0,60)||!num(r.supportLoss,0,30)||!num(r.bill,0,210)||!num(r.lost,0,1000000)))bad();
   return JSON.parse(JSON.stringify(v));

@@ -10,6 +10,7 @@
    $('homePause').onclick=()=>$('pause').click();$('homefrontTab').onclick=()=>this.show();$('developmentTab').onclick=()=>{this.home=false;this.render();};$('buyAirDefense').onclick=()=>action(()=>F.buyAirDefense(getState()));$('reloadAirDefense').onclick=()=>action(()=>F.reloadAirDefense(getState()));$('invasionFocus').onclick=()=>{strategy.open=false;focus(F.homeDefenseFocus(getState()));};
    const quick=document.createElement('button');quick.id='homefrontQuick';quick.className='homefront-quick';$('countryStates').before(quick);quick.onclick=()=>{this.show();$('countryRail').classList.remove('expanded');};
    const threat=document.createElement('button');threat.id='homeThreat';threat.hidden=true;$('game').append(threat);threat.onclick=()=>{strategy.open=false;focus(F.homeDefenseFocus(getState()));};
+   const progress=document.createElement('section');progress.id='defenseProgress';progress.className='defense-progress';progress.setAttribute('aria-label','军事胜利进度');progress.innerHTML='<div><span id="victoryAirstrikes"></span><span id="victoryLandings"></span><span id="victoryHold"></span></div><progress id="victoryHoldBar" max="30" value="0" aria-label="三城连续驻守进度"></progress><p id="victoryNext"></p>';$('operationBrief').after(progress);
   }
   show(){this.home=true;this.strategy.selected=null;this.strategy.open=true;this.onOpen();this.render();}
   render(){const s=this.getState(),h=s.homefront,d=h.airDefense,i=h.invasion;if(this.strategy.selected)this.home=false;
@@ -25,7 +26,9 @@
    $('invasionTime').textContent=h.homeLost>0?'后方全面失守！'+F.realSeconds(s,15-h.homeLost)+' 秒内夺回一城':i.phase==='assembling'?'距出港 '+F.realSeconds(s,i.launchAt-s.time)+' 秒':i.phase==='sailing'?'剩余运输舰 '+i.payloads.length+' 艘 · 点击敌舰拦截':'留一支军队驻守，驱逐舰拦截运输舰。';
    const r=h.lastStrike;$('strikeReport').textContent=r?s.towns.find(t=>t.id===r.city).name+'：6枚来袭 / '+r.intercepted+'枚拦截 / '+r.hits+'枚命中。建筑 −'+Math.ceil(r.buildingDamage)+'，工厂 −'+Math.ceil(r.industryDamage)+'，民心 −'+Math.ceil(r.supportLoss)+'。应急支出 '+Math.floor(r.bill)+'，兵员损失 '+r.lost+'。'+(r.sheltered?'已疏散，物理损伤仍然生效。':'本轮未疏散。'):'尚无袭击。';
    $('homefrontQuick').textContent='后方 / 防空 ↗　民心 '+Math.round(h.support)+' · 生产 '+$('homeProduction').textContent;
-   $('homeVictory').textContent=h.victoryHold>0?'目标城市已控制，还需守住 '+F.realSeconds(s,30-h.victoryHold)+' 秒，并保住台北、高雄。':'军事胜利：控制福州、广州、南京并守住一周，同时保住台湾两城。';
+   const v=F.victoryProgress(s);$('defenseProgress').hidden=s.strategy.phase!=='war';$('victoryAirstrikes').textContent='空袭 '+Math.min(2,v.airstrikes)+'/2';$('victoryLandings').textContent='击退登陆 '+Math.min(2,v.landings)+'/2';$('victoryHold').textContent='守城 '+Math.floor(v.hold/30*100)+'%';$('victoryHoldBar').value=v.hold;
+   const next=s.result?'本局已结束。':!v.home?'先夺回台湾城市，守城进度已重置。':v.airstrike?'导弹正在接近：先疏散，受损后重建。':v.landing?'当前登陆威胁尚未解除：留驻军，或拦截运输舰。':v.cities<3?'继续夺取目标城；空袭与反登陆进度会保留。':v.airstrikes<2?'三城在手，继续防守；等待第二轮城市空袭。':v.landings<2?'三城在手，继续防守；下一次登陆'+(i.nextAt!==null?'约 '+F.realSeconds(s,i.nextAt-s.time)+' 秒后开始集结。':'正在准备。'):v.hold<30?'继续守城 '+F.realSeconds(s,30-v.hold)+' 秒，别抽走驻军。':'反击已解除，正在确认战果。';
+   $('victoryNext').textContent=next;$('homeVictory').textContent='军事胜利：三城守满一周，抵御两轮空袭、击退两次登陆，并保住台湾两城。'+next;
    const danger=!s.result&&s.strategy.phase==='war'&&(i.phase==='assembling'||i.phase==='sailing'||s.naval.ground.some(a=>a.mission==='taiwan')||h.cities.some(c=>c.occupied));$('homeThreat').hidden=!danger||document.body.classList.contains('intro');$('homeThreat').textContent=h.homeLost>0?'台湾两城失守 · '+F.realSeconds(s,15-h.homeLost)+' 秒内夺回一城！':i.phase==='assembling'?'大陆宣布“收复台湾” · '+F.realSeconds(s,i.launchAt-s.time)+' 秒后出港 ↗':i.phase==='sailing'?'大陆登陆舰 → '+s.towns.find(t=>t.id===i.target).name+' · 点击定位拦截 ↗':'大陆部队已登陆台湾 · 点击定位增援 ↗';
   }
  }

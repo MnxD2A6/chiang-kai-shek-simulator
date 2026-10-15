@@ -1,0 +1,9 @@
+# 画风对照素材
+
+- `current-game.png`：2.2公开版真实实机截图。
+- `pixel-concept.png`：通过内置 imagegen 工具对上述截图作风格概念转换，未实装到游戏，不是缩放滤镜。对照页图片独立加载，游戏不引用它们。
+- 原版截图保留，未覆盖任何现有游戏素材。
+
+## 生成提示词
+
+Use case: style-transfer / ui-mockup. Create ONE high quality pixel-art concept preview of the attached actual strategy game screenshot. This is an alternative visual direction for the SAME game, not a new game or a change in geography or controls. Keep the vertical aspect ratio, crop, flat geographic map, China coastline, island of Taiwan, city positions, panel layout, unit positions and count, and all visible Chinese labels as close to the reference as possible. Convert map terrain, trees, mountain icons, infantry squads, warships, cities and orange explosion to cohesive sophisticated 2D military pixel art: carefully authored crisp pixel clusters, 32-48px sprite design enlarged using nearest-neighbor, restrained olive sage land and desaturated teal sea, warm cream city labels, orange friendly indicators, red enemy indicators. Preserve realistic coastlines; avoid square land tiles or a hex board. Give naval vessels strong distinct silhouettes with readable hulls and wakes, troops clearer recognizable tiny uniforms and rifles. Make selected army/city labels compact and clearly separated so ships and armies are readable. Keep interface panels a clean dark charcoal and cream with orange highlights, mostly unchanged typography and layout so this comparison fairly tests art style. The grayscale historical Chiang Kai-shek commander photo at bottom left can remain a photo, as a framed archive portrait. Crisp detailed pixel illustration, no smooth painted rendering, no blurry pixelation filter, no fake isometric 3D, no scanlines, no game logos or watermark. Maintain exact town label locations such as 福州, 南京, 台北, 高雄, 上海. This is a CONCEPT IMAGE only, not a claim of implemented gameplay. Output just the full concept screenshot.

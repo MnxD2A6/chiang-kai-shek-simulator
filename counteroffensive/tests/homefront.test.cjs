@@ -98,9 +98,9 @@ test('pre-positioned destroyers sink an invasion transport before its troops can
  for(const a of guards)assert.ok(F.followShip(s,a.id,transport.id).ok);run(s,4);
  assert.equal(s.naval.ships.some(a=>a.id===transport.id),false);assert.equal(s.naval.ground.some(a=>a.mission==='taiwan'),false);
 });
-test('holding all objectives for a full week wins only after the defence interval',()=>{
+test('holding all objectives for a full week keeps the campaign running for later counterattacks',()=>{
  const s=fresh();F.startWar(s);s.homefront.invasion.nextAt=80;s.campaign.nextReaction=80;
- for(const t of s.towns.filter(t=>t.goal)){F.claim(s,t.tile,1);s.units.push({id:s.serial++,faction:1,name:'目标驻军',force:1000,tile:t.tile,goal:t.tile,path:[],progress:0,status:'guard'});}run(s,29);assert.equal(s.result,null);run(s,1.2);assert.equal(s.result,'victory');
+ for(const t of s.towns.filter(t=>t.goal)){F.claim(s,t.tile,1);s.units.push({id:s.serial++,faction:1,name:'目标驻军',force:1000,tile:t.tile,goal:t.tile,path:[],progress:0,status:'guard'});}run(s,29);assert.equal(s.result,null);run(s,1.2);assert.equal(s.result,null);assert.equal(s.homefront.victoryHold,30);
  assert.doesNotThrow(()=>F.decode(F.encode(s)));
 });
 test('losing both home cities gives a recovery countdown and states the final defeat reason',()=>{
