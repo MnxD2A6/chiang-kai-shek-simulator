@@ -32,6 +32,9 @@ for kind, base, entries in [('source', root, source_entries), ('web', root / 'di
         assert 'counteroffensive/tactical-tools.js' in names and 'counteroffensive/battle-motion.js' in names
         assert 'counteroffensive/assets/field-cel/mech-walk-atlas.png' in names
         assert 'counteroffensive/assets/field-cel/garrison-flags-atlas.png' in names
+        assert 'counteroffensive/realtime.html' in names
+        assert 'counteroffensive/hex-core.js' in names and 'counteroffensive/hex-map.js' in names
+        assert 'counteroffensive/hex-app.js' in names and 'counteroffensive/hex-ui.css' in names
         assert sum(n.startswith('counteroffensive/assets/event-posters/') and n.endswith('.png') for n in names) == 34
         if kind == 'source':
             assert '.github/workflows/pages.yml' in names

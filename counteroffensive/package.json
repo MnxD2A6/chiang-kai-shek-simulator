@@ -1,9 +1,15 @@
 {
   "name": "counteroffensive-front",
-  "version": "1.11.0",
+  "version": "2.0.0",
   "private": true,
   "license": "MIT",
-  "description": "An original single-player real-time territory and naval landing strategy game.",
-  "engines": {"node": ">=22"},
-  "scripts": {"start": "node scripts/serve.cjs", "test": "node --test tests/*.test.cjs", "build": "node scripts/build.cjs"}
+  "description": "Geographic hex turn strategy with naval transport, illustrated world events and simple command controls.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node scripts/serve.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "build": "node scripts/build.cjs"
+  }
 }
