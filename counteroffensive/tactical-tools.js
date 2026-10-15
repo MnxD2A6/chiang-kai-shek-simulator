@@ -19,7 +19,7 @@
   if(u?.status==='waiting')return {label:'等待运输舰 · '+name,detail:'运输舰靠近后自动搭载；目标保留。',tile:u.goal,kind:'waiting'};
   if(u?.status==='blocked')return {label:'推进已停止',detail:'兵力不足；在我方陆地补兵，再重新下令。',tile:u.tile,kind:'blocked'};
   if(!a.path.length)return {label:u?'驻守 · '+(s.towns.find(t=>t.tile===a.tile)?.name||'当前据点'):'舰艇待命',detail:'点地图上的城市'+(u?'移动或进攻。':'近海、海域或敌舰下令。'),tile:a.tile,kind:'guard'};
-  const seconds=Math.ceil(a.path.reduce((n,t,i)=>n+((i===0?1-a.progress:1)/(ship?4:!s.terrain[t]?3.8:2.8)),0));
+  const seconds=Math.ceil(a.path.reduce((n,t,i)=>n+((i===0?1-a.progress:1)/(ship?F.shipTypes[ship.kind].speed:!s.terrain[t]?3.8:2.8)),0)/(s.campaign?.pace||1));
   return {label:(u?(s.owners[a.goal]===1?'前往驻守':'进攻'):'航行')+' · '+name,detail:'移动约 '+seconds+' 秒（不含交战）· 可改令。',tile:a.goal,kind:u&&s.owners[a.goal]!==1?'attack':'move'};
  }
  function victories(s){const goals=s.towns.filter(t=>t.goal),n=s.world.nuclear;return {goals,held:goals.filter(t=>s.owners[t.tile]===1).length,canNegotiate:n.status==='ready'&&n.disclosed&&n.stock>0&&!n.used,research:Math.floor(n.progress),used:!!n.used};}

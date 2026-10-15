@@ -1,9 +1,9 @@
 {
   "name": "counteroffensive-front",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "license": "MIT",
-  "description": "Geographic hex turn strategy with naval transport, illustrated world events and simple command controls.",
+  "description": "Realtime geographic strategy with random illustrated world events, responsive mainland forces and a weekly timeline.",
   "engines": {
     "node": ">=22"
   },

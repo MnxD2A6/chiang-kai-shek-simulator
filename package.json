@@ -1,8 +1,8 @@
 {
   "name": "strait-front-pages",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
-  "description": "渡海·反攻大陆：真实地图六角格回合战略，军队与舰船、国际事件与抽象科研。无需登录直接玩。",
+  "description": "Realtime geographic strategy with random illustrated world events, responsive mainland forces and a weekly timeline.",
   "license": "MIT",
   "engines": {
     "node": ">=22"

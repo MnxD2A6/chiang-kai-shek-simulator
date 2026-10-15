@@ -3,7 +3,7 @@
  const c=(id,label,cost,summary,effects={},next=[])=>({id,label,cost,summary,effects,next});
  const next=(id,delay=28)=>({id,delay});
  return {
-  korea_rps:{chapter:'半岛猜拳危机',country:'朝鲜 / 韩国',tag:'荒诞突发',title:'将军猜拳输了，半岛进入战备',body:'一场原定增进友谊的石头剪刀布直播，以金正恩连续出布三次告终。朝方宣布“对手使用了战略性剪刀”，开始集结部队。韩国来电请求各方表态。',choices:[
+  korea_rps:{starter:true,chapter:'半岛猜拳危机',country:'朝鲜 / 韩国',tag:'荒诞突发',title:'将军猜拳输了，半岛进入战备',body:'一场原定增进友谊的石头剪刀布直播，以金正恩连续出布三次告终。朝方宣布“对手使用了战略性剪刀”，开始集结部队。韩国来电请求各方表态。',choices:[
    c('mediate','派观察团调停',60,'韩国态度 +15、国际观感 +8；等待会谈结果。',{relations:{korea:15,usa:5},opinion:8},[next('korea_summit',24)]),
    c('support','公开支持韩国',30,'美韩态度改善、半岛紧张上升；朝方会回应。',{relations:{usa:12,korea:18,northkorea:-20},tension:12},[next('korea_war',24)]),
    c('watch','保持中立，继续观察',0,'保留资金；半岛双方会自行行动。',{},[next('korea_war',20)])]},

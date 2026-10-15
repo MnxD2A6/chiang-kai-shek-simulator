@@ -2,12 +2,13 @@
   'use strict';
   const F=window.FrontCore,$=id=>document.getElementById(id),fmt=n=>Math.max(0,Math.floor(n)).toLocaleString(),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const time=t=>`${String(Math.floor(t/60)).padStart(2,'0')}:${String(Math.floor(t%60)).padStart(2,'0')}`;
-  let state=F.createStrategic(1357),started=false,saved=null,selected=null,navy=true,rosterOpen=window.innerWidth>=900,missileMode=false,storage=true,last=0,refresh=0,lastSave=0,reported=false,drag=null,toastTimer;
-  try{const raw=localStorage.getItem('strait-front-v7')||localStorage.getItem('strait-front-v6')||localStorage.getItem('strait-front-v5')||localStorage.getItem('strait-front-v4')||localStorage.getItem('strait-front-v3');if(raw)saved=F.decode(raw);}catch{storage=false;}
+  let state=F.createStrategic(1357),started=false,saved=null,selected=null,navy=true,rosterOpen=false,missileMode=false,storage=true,last=0,refresh=0,lastSave=0,reported=false,drag=null,toastTimer;
+  try{const raw=localStorage.getItem('strait-front-v8')||localStorage.getItem('strait-front-v7')||localStorage.getItem('strait-front-v6')||localStorage.getItem('strait-front-v5')||localStorage.getItem('strait-front-v4')||localStorage.getItem('strait-front-v3');if(raw)saved=F.decode(raw);}catch{storage=false;}
   const audio=new FrontAudio();let ambientSound=false,soundOpen=false;
   try{const prefs=JSON.parse(localStorage.getItem('strait-front-audio-v1')||'{}');audio.enabled=prefs.enabled!==false;audio.volume=Number.isFinite(prefs.volume)?Math.max(0,Math.min(100,prefs.volume)):55;ambientSound=!!prefs.ambient;}catch{}
   const view=new FrontMap($('map')),strategyUI=new StrategyUI(()=>state,fn=>action(fn));strategyUI.open=false;
   const worldUI=new WorldUI(()=>state,fn=>action(fn),{onOpen:()=>{strategyUI.open=false;rosterOpen=false;render();},onPartner:key=>{strategyUI.choose(key);render();},onEscort:()=>startOperation('escort'),onStrike:()=>{view.home();render();},onMajor:()=>{uiSound('warning');save();}});
+  const campaignUI=new CampaignUI(()=>state,fn=>action(fn),worldUI,()=>{const a=state.naval.ground.find(a=>a.key==='china'),t=state.towns.find(t=>t.id==='shanghai');strategyUI.open=false;worldUI.open=false;view.focus(a?.tile??t.tile);render();});
   audio.onChange=paintSound;view.onFeedback=playFeedback;
   function soundPrefs(){try{localStorage.setItem('strait-front-audio-v1',JSON.stringify({enabled:audio.enabled,volume:audio.volume,ambient:ambientSound}));}catch{}}
   function paintSound(){
@@ -42,14 +43,14 @@
     else if(e.type==='victory'||e.type==='defeat')audio.play(e.type,{channel:'ui',gain:.6});
   }
   function toast(text){$('toast').classList.toggle('order-toast',/→|正在前往|自动进攻/.test(text));$('toast').textContent=text;$('toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('visible'),4200);}
-  function save(){if(!started)return;try{localStorage.setItem('strait-front-v7',F.encode(state));storage=true;}catch{storage=false;}}
+  function save(){if(!started)return;try{localStorage.setItem('strait-front-v8',F.encode(state));storage=true;}catch{storage=false;}}
   function action(fn){const r=fn();uiSound(r.ok?'order':'select');toast(r.message);save();render();return r;}
   function show(html){$('modalBody').innerHTML=html;if(!$('modal').open)$('modal').showModal();}
   function close(){$('modal').close();}
   function begin(resume){
     audio.stopAll();uiSound('order');state=resume&&saved?saved:F.createStrategic(Date.now());state.paused=!!state.world.active;worldUI.reset();started=true;reported=false;selected=null;missileMode=false;navy=true;last=0;lastSave=state.time;
     view.lastTexture=-10;view.resetBattleFX();view.home();if(state.operations.active){selected=state.naval.ships.find(v=>v.faction===1&&v.kind==='destroyer')?.id??null;rosterOpen=false;view.focus(F.operationFocus(state));}strategyUI.open=false;strategyUI.selected=null;$('startScreen').hidden=true;document.body.classList.remove('intro');close();save();render();
-    if(!resume)worldUI.openPane('news');toast(resume?'战役已恢复；重大新闻会暂停等待你的回应。':'点「国际」处理新闻、经营关系，或在「机密」启动曙光计划。');
+    toast(resume?'战役已恢复；重大新闻会暂停等待你的回应。':'点「国际」处理新闻、经营关系，或在「机密」启动曙光计划。');
   }
   function select(id,focus=false){if(id!==selected)uiSound('select');selected=id;view.intent=null;missileMode=false;const u=state.units.find(a=>a.id===id)||state.naval.ships.find(a=>a.id===id);navy=!!u?.kind;if(!u)return;if(focus)view.focus(u.tile);render();}
   function acknowledge(tile){if(Number.isInteger(tile))view.commandAck={tile,at:state.time};}
@@ -63,9 +64,9 @@
     if(selected===null){toast('先选一支我方军队，再点目的地城市。');return;}
     const r=action(()=>F.order(state,selected,tile));if(r.ok)acknowledge(tile);
   }
-  function help(){show(`<span class="eyebrow">两次点击就能下令</span><h2 id="modalTitle">你只需要选人，再选地方。</h2><div class="how-steps"><div><em>01</em><span><b>点地图上的我方军队。</b><small>也可在部队列表选择。选中的部队会亮起，显示路线和兵力。</small></span></div><div><em>02</em><span><b>点一座城市。</b><small>我方城市：移动后驻守。敌方城市：自动渡海、进攻，攻下后驻守。重新点另一座城市即可改令。筹备期先试试台北与高雄之间的调动。</small></span></div><div><em>03</em><span><b>留意兵力，守住夺下的城市。</b><small>补兵从预备兵转入选中的军队；驻守部队会抵抗附近反攻。「停止 / 驻守」只取消这支部队的命令。控制福州、南京、广州获胜。</small></span></div></div><p><b>海战：</b>运输舰靠近陆军后自动运兵；驱逐舰自动护航和拦截附近导弹；导弹艇可选中后用「导弹打击」。选舰船后点海域移动，点敌舰靠近交战。俄罗斯、朝鲜援军抵达后会反攻我方大陆据点。</p><p><b>国际：</b>右上「国际」查看架空新闻、国家关系和曙光计划。重大事件会暂停，选择后继续；后续剧情和国家行动会影响援助、制裁与战役。科研用稳步、加速、暂停三档操作，完成后可威慑、谈判或实际使用并承担严重后果。</p><p>先点左上「护送补给」或「拦截敌舰」打一场约一分钟的海战，成功后部队直接获得兵员补给。合作与建设可选；点「准备登陆」可直接进入首场登陆战。空袭时疏散，受损后修复。空格暂停，暂停也能下令。拖动与缩放地图。</p><button id="helpClose" class="primary-btn">开始指挥 →</button>`);$('helpClose').onclick=close;}
-  function archives(){show(`<span class="eyebrow">渡海 / 战场反馈版 1.11</span><h2 id="modalTitle">战役存档</h2><p>${storage?'自动保存已开启。':'本地保存不可用，请导出存档。'}旧版地图进度会自动迁移，原存档保留。打开菜单时战场暂停。</p><div class="modal-actions"><button id="export" ${started?'':'disabled'}>导出 JSON</button><button id="import">导入存档</button><button id="newRun">开始新战役</button></div>`);
-    $('export').onclick=()=>{const url=URL.createObjectURL(new Blob([F.encode(state)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=`strait-front-v7-${Math.floor(state.time)}s.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+  function help(){show(`<span class="eyebrow">两次点击就能下令</span><h2 id="modalTitle">你只需要选人，再选地方。</h2><div class="how-steps"><div><em>01</em><span><b>点地图上的我方军队。</b><small>也可在部队列表选择。选中的部队会亮起，显示路线和兵力。</small></span></div><div><em>02</em><span><b>点一座城市。</b><small>我方城市：移动后驻守。敌方城市：自动渡海、进攻，攻下后驻守。重新点另一座城市即可改令。筹备期先试试台北与高雄之间的调动。</small></span></div><div><em>03</em><span><b>留意兵力，守住夺下的城市。</b><small>补兵从预备兵转入选中的军队；驻守部队会抵抗附近反攻。「停止 / 驻守」只取消这支部队的命令。控制福州、南京、广州获胜。</small></span></div></div><p><b>海战：</b>运输舰靠近陆军后自动运兵；驱逐舰自动护航和拦截附近导弹；导弹艇可选中后用「导弹打击」。选舰船后点海域移动，点敌舰靠近交战。俄罗斯、朝鲜援军抵达后会反攻我方大陆据点。</p><p><b>国际：</b>右上「国际」查看架空新闻、国家关系和曙光计划。重大事件会暂停，选择后继续；后续剧情和国家行动会影响援助、制裁与战役。科研用稳步、加速、暂停三档操作，完成后可威慑、谈判或实际使用并承担严重后果。</p><p>先点左上「护送补给」或「拦截敌舰」打一场约两分钟的海战，成功后部队直接获得兵员补给。合作与建设可选；点「准备登陆」可直接进入首场登陆战。空袭时疏散，受损后修复。空格暂停，暂停也能下令。拖动与缩放地图。</p><button id="helpClose" class="primary-btn">开始指挥 →</button>`);$('helpClose').onclick=close;}
+  function archives(){show(`<span class="eyebrow">渡海 / 实时世界版 2.1</span><h2 id="modalTitle">战役存档</h2><p>${storage?'自动保存已开启。':'本地保存不可用，请导出存档。'}原实时版存档可继续，六角格存档从独立入口进入。打开菜单时战场暂停。</p><div class="modal-actions"><button id="export" ${started?'':'disabled'}>导出 JSON</button><button id="import">导入存档</button><button id="newRun">开始新战役</button></div>`);
+    $('export').onclick=()=>{const url=URL.createObjectURL(new Blob([F.encode(state)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=`strait-front-v8-${Math.floor(state.time)}s.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
     $('import').onclick=()=>$('importFile').click();$('newRun').onclick=()=>{show('<h2 id="modalTitle">开始新战役？</h2><p>本版自动存档将被替换，可以先导出留档。</p><div class="modal-actions"><button id="cancelNew">返回</button><button id="confirmNew" class="primary-btn">开始新远征</button></div>');$('cancelNew').onclick=archives;$('confirmNew').onclick=()=>begin(false);};
   }
   function render(){
@@ -73,7 +74,7 @@
     const vessel=state.naval.ships.find(a=>a.id===selected&&a.faction===1),u=state.units.find(a=>a.id===selected),reserve=state.factions[1].troops,owned=state.towns.filter(t=>t.goal&&state.owners[t.tile]===1);
     view.selectedUnit=selected;
     $('game').dataset.time=state.time.toFixed(1);$('game').dataset.result=state.result||'';$('game').dataset.selected=selected??'';
-    $('headerPhase').textContent=state.result?'战役结束':state.strategy.phase==='preparation'?'筹备期':'战斗中';$('headerReserve').textContent=fmt(reserve);document.body.classList.toggle('battle-paused',state.paused);$('headerFundsValue').textContent=fmt(state.strategy.funds);$('clock').textContent=time(state.time);$('troops').textContent=fmt(reserve);$('growth').textContent='预备兵 +'+fmt(F.growth(state,1))+'/秒';$('capacity').textContent=fmt(F.capacity(state,1));$('deployed').textContent=fmt(F.deployed(state,1));$('land').textContent=fmt(F.landCount(state,1));
+    $('headerPhase').textContent=state.result?'战役结束':state.strategy.phase==='preparation'?'筹备期':'战斗中';$('headerReserve').textContent=fmt(reserve);document.body.classList.toggle('battle-paused',state.paused);$('headerFundsValue').textContent=fmt(state.strategy.funds);$('clock').textContent=time(state.time);$('troops').textContent=fmt(reserve);$('growth').textContent='预备兵 +'+fmt(F.displayRate(state,F.growth(state,1)))+'/秒';$('capacity').textContent=fmt(F.capacity(state,1));$('deployed').textContent=fmt(F.deployed(state,1));$('land').textContent=fmt(F.landCount(state,1));
     $('objectiveCount').textContent=owned.length+' / 3';$('controlPercent').textContent=(F.progress(state).ratio*100).toFixed(1)+'%';
     $('pause').disabled=!started||!!state.result;$('pauseIcon').textContent=state.paused?'▶':'Ⅱ';$('pauseText').textContent=state.paused?'继续战场':'暂停战场';$('paused').hidden=!started||!state.paused||!!state.result;
     if(!$('objectives').children.length)for(const t of state.towns.filter(t=>t.goal)){const b=document.createElement('button');b.dataset.goal=t.id;b.onclick=()=>{view.focus(t.tile);const r=action(()=>FrontTactics.goalOrder(state,selected,t.id));if(r.ok&&r.kind==='order')acknowledge(t.tile);};b.onpointerenter=()=>intentAt(t.tile);b.onpointerleave=()=>intentAt(null);$('objectives').append(b);}
@@ -84,7 +85,7 @@
     for(const el of [...$('armyRoster').children])if(!ids.has(el.dataset.unit))el.remove();
     for(const a of state.units){let b=$('roster-'+a.id);if(!b){b=document.createElement('button');b.id='roster-'+a.id;b.dataset.unit=a.id;b.onclick=()=>select(a.id,true);$('armyRoster').append(b);}b.className='army-card'+(a.id===selected?' selected':'');b.setAttribute('aria-label','选择'+a.name);b.setAttribute('aria-pressed',a.id===selected);const content=`<span class="roster-unit-sprite" aria-hidden="true"></span><span><b>${esc(a.name)}</b><small>${F.unitStatus(state,a)}${a.path.length?' → '+esc(state.towns.find(t=>t.tile===a.goal)?.name||'目的地'):''}</small></span><strong>${fmt(a.force)}</strong>`;if(b.innerHTML!==content)b.innerHTML=content;}
     $('selectionLabel').textContent=u?'已选择 · '+fmt(u.force)+' 人':'指挥提示';$('selectedName').textContent=u?u.name:'点选地图上的军队';
-    $('selectedStatus').textContent=u?(u.path.length?'前往 '+(state.towns.find(t=>t.tile===u.goal)?.name||'指定位置')+' · 约 '+Math.ceil(u.path.length/2.8)+' 秒 · 再点城市可改令':F.unitStatus(state,u)+' · 点城市下达新命令'):'再点城市，自动移动、进攻或驻守。';
+    $('selectedStatus').textContent=u?(u.path.length?'前往 '+(state.towns.find(t=>t.tile===u.goal)?.name||'指定位置')+' · 约 '+F.realSeconds(state,u.path.length/2.8)+' 秒 · 再点城市可改令':F.unitStatus(state,u)+' · 点城市下达新命令'):'再点城市，自动移动、进攻或驻守。';
     $('hold').disabled=!(u||vessel)||!!state.result||!((u||vessel).path.length||vessel?.follow);$('reinforce').disabled=!u||!!state.result||reserve<1||state.owners[u.tile]!==1;$('locate').disabled=!(u||vessel);
     $('guideTitle').textContent=u?'点目的地城市':'选一支军队';$('guideText').textContent=u?(state.strategy.phase==='preparation'?'试着点台北或高雄；准备进攻时打开「发展」。':'我方城市 = 移动驻守 · 敌方城市 = 进攻'):'点地图上我方军队的图标。';document.querySelector('.step-number').textContent=u?'2':'1';
     renderNavy(vessel);renderSelection(u,vessel);
@@ -92,7 +93,7 @@
     $('buildDrawer').hidden=!navy;
     $('moveOrder').disabled=!(u||vessel)||!!state.result;
     $('commandLabel').textContent=(u||vessel)?.name?'COMMAND / '+(u||vessel).name:'SELECT A UNIT / 选择单位';
-    strategyUI.render(started);$('strategyToggle').textContent='发展';renderOperation();worldUI.render(started);const order=FrontTactics.current(state,selected);if(order){$('selectedStatus').textContent=order.label+' · '+order.detail;$('selectedName').title=order.label;$('selectedPanel').dataset.order=order.kind;}paintOrderHint();updateMarkers();
+    strategyUI.render(started);$('strategyToggle').textContent='发展';renderOperation();worldUI.render(started);campaignUI.render(started);const order=FrontTactics.current(state,selected);if(order){$('selectedStatus').textContent=order.label+' · '+order.detail;$('selectedName').title=order.label;$('selectedPanel').dataset.order=order.kind;}paintOrderHint();updateMarkers();
     if(state.result&&!reported){const ending=F.worldEndings[state.world.ending];reported=true;save();show(`<span class="eyebrow">战役结束 · ${time(state.time)}</span><h2 id="modalTitle">${ending?esc(ending.title):state.result==='victory'?'三座目标城市已控制。':'这次远征结束了。'}</h2><p>${ending?esc(ending.text):state.result==='victory'?'你的部队完成了这次战役。':'重新积累实力，并留下部队守住后方；空袭前及时疏散和修复设施。'}</p><div class="modal-actions"><button id="again" class="primary-btn">再来一局</button><button id="viewResult">查看地图</button></div>`);$('again').onclick=()=>begin(false);$('viewResult').onclick=close;}
   }
   function renderOperation(){
@@ -103,10 +104,10 @@
     $('operationBrief').hidden=false;$('operationStats').hidden=!prep;
     if(prep){
       $('missionTitle').textContent=a?F.operationTypes[a.kind].name:r?.outcome==='success'?'补给到位，继续出击':'筹备期 · 选择你的路线';
-      $('objectiveCount').textContent=a?Math.max(0,Math.ceil(a.endsAt-state.time))+'秒':'支援 '+Math.min(3,o.wins)+'/3';
+      $('objectiveCount').textContent=a?F.realSeconds(state,a.endsAt-state.time)+'秒':'支援 '+Math.min(3,o.wins)+'/3';
       const convoy=a&&state.naval.ships.find(v=>v.id===a.convoyId),enemies=a?a.enemyIds.filter(id=>state.naval.ships.some(v=>v.id===id)).length:0;
-      $('operationBrief').textContent=a?F.operationTypes[a.kind].description:r?r.reason:'点“国际”处理新闻、推进秘密科研；也可以调舰队护送补给、拦截敌舰，准备登陆。';
-      $('operationStats').textContent=a?(convoy?'补给船 '+Math.ceil(convoy.hp)+'/180 HP · ':'')+'剩余敌舰 '+enemies+' · 成功：'+(o.wins<3?'部队 +600 / 资金 +160':'资金 +160 / 导弹 +1'):r?r.reward:'每场约 1 分钟 · 点舰船 → 点敌舰靠近开火';
+      $('operationBrief').textContent=a?F.operationTypes[a.kind].description.replace('60 秒',F.realSeconds(state,60)+' 秒'):r?r.reason:'点“国际”处理新闻、推进秘密科研；也可以调舰队护送补给、拦截敌舰，准备登陆。';
+      $('operationStats').textContent=a?(convoy?'补给船 '+Math.ceil(convoy.hp)+'/180 HP · ':'')+'剩余敌舰 '+enemies+' · 成功：'+(o.wins<3?'部队 +600 / 资金 +160':'资金 +160 / 导弹 +1'):r?r.reward:'每场最多 '+F.realSeconds(state,60)+' 秒，可暂停 · 点舰船 → 点敌舰靠近开火';
       $('beginLanding').textContent=o.wins?'带兵登陆 →':'准备登陆 →';
     }else{
       const next=state.towns.find(t=>t.goal&&state.owners[t.tile]!==1);$('missionTitle').textContent=next?'下一目标：'+next.name:'三座目标城市已控制';$('operationBrief').textContent='选陆军 → 点下方目标即可进攻或驻守。';
@@ -120,7 +121,7 @@
   }
   function screenObstacles(){
     const frame=$('map').getBoundingClientRect(),out=[];
-    for(const id of ['selectedPanel','commandTray','armyDock','strategyPanel','fieldGuide','missileWarning','soundPanel','worldPanel','worldTicker']){const el=$(id),r=el.getBoundingClientRect();if(!el.hidden&&r.width&&r.height&&getComputedStyle(el).display!=='none')out.push({x:r.left-frame.left,y:r.top-frame.top,w:r.width,h:r.height});}
+    for(const id of ['selectedPanel','commandTray','armyDock','strategyPanel','fieldGuide','missileWarning','soundPanel','worldPanel','worldTicker','weekTimeline','countryRail','countryRailToggle']){const el=$(id),r=el.getBoundingClientRect();if(!el.hidden&&r.width&&r.height&&getComputedStyle(el).display!=='none')out.push({x:r.left-frame.left,y:r.top-frame.top,w:r.width,h:r.height});}
     for(const sel of ['.mission-panel','.map-navigation','.zoom-controls']){const r=document.querySelector(sel).getBoundingClientRect();out.push({x:r.left-frame.left,y:r.top-frame.top,w:r.width,h:r.height});}
     for(const t of state.towns)if(view.visibleTowns.has(t.id)){const p=view.townScreen(t);out.push({x:p.x-20,y:p.y-24,w:92,h:44});}
     return out;
@@ -160,7 +161,7 @@
   document.querySelectorAll('[data-build]').forEach(b=>b.onclick=()=>{const r=action(()=>F.buildShip(state,b.dataset.build));if(r.ok)select(r.id,true);});
   $('missileMode').onclick=()=>{missileMode=!missileMode;render();};
   $('enemyOverview').onclick=()=>{view.overview();strategyUI.open=false;showEnemy();};
-  function showEnemy(key){const h=F.hostiles.find(a=>a.id===key);show(`<span class="eyebrow">敌方支援 / 架空战役</span><h2 id="modalTitle">${h?h.name+' · 大陆援军':'大陆援军态势'}</h2><p>${h?h.description:'开战后俄罗斯和朝鲜会派出可见的运输纵队。到达大陆后，援军会向我方据点推进，舰艇会参与海战。'}</p><div class="aid-list">${state.naval.aid.length?state.naval.aid.filter(a=>!key||a.key===key).map(a=>`<p><b>${a.key==='russia'?'俄罗斯':'朝鲜'}</b> · ${a.delivered?'已抵达':Math.max(0,Math.ceil(a.arrive-state.time))+' 秒后抵达'} · ${fmt(a.force)} 兵力</p>`).join(''):'<p>筹备期：敌方援军尚未出发。</p>'}</div><button id="enemyClose" class="primary-btn">返回指挥</button>`);$('enemyClose').onclick=close;}
+  function showEnemy(key){const h=F.hostiles.find(a=>a.id===key);show(`<span class="eyebrow">敌方支援 / 架空战役</span><h2 id="modalTitle">${h?h.name+' · 大陆援军':'大陆援军态势'}</h2><p>${h?h.description:'开战后俄罗斯和朝鲜会派出可见的运输纵队。到达大陆后，援军会向我方据点推进，舰艇会参与海战。'}</p><div class="aid-list">${state.naval.aid.length?state.naval.aid.filter(a=>!key||a.key===key).map(a=>`<p><b>${a.key==='russia'?'俄罗斯':'朝鲜'}</b> · ${a.delivered?'已抵达':F.realSeconds(state,a.arrive-state.time)+' 秒后抵达'} · ${fmt(a.force)} 兵力</p>`).join(''):'<p>筹备期：敌方援军尚未出发。</p>'}</div><button id="enemyClose" class="primary-btn">返回指挥</button>`);$('enemyClose').onclick=close;}
   function renderNavy(vessel){
     const ships=state.naval.ships.filter(a=>a.faction===1);$('shipCount').textContent=ships.length;$('armyRoster').hidden=navy;$('shipRoster').hidden=!navy;$('fleetBuild').hidden=!navy;$('recruit').hidden=navy;$('landTab').setAttribute('aria-pressed',!navy);$('navyTab').setAttribute('aria-pressed',navy);
     const ids=new Set(ships.map(a=>String(a.id)));for(const el of [...$('shipRoster').children])if(!ids.has(el.dataset.ship))el.remove();
@@ -170,7 +171,7 @@
     if(vessel){$('selectionLabel').textContent=F.shipTypes[vessel.kind].name+' · '+Math.ceil(vessel.hp)+' HP';$('selectedName').textContent=vessel.name;$('selectedStatus').textContent=vessel.kind==='transport'?(vessel.cargo!==null?'运兵中 · 通过搭载的陆军改令':'靠近我方军队后自动承接渡海运输'):vessel.follow?'持续'+(state.naval.ships.find(v=>v.id===vessel.follow)?.faction===1?'护航':'追击')+' · '+(state.naval.ships.find(v=>v.id===vessel.follow)?.name||'目标')+' · 点其他海域可改令':vessel.kind==='destroyer'?'点敌舰持续追击；点补给船持续护航':'舰载导弹 '+vessel.ammo+' 枚 · 点「导弹打击」再点敌舰或敌城';}
     $('radioLine').textContent='指挥部 / '+(state.events[0]?.text||'通讯接入，等待指令。');
     const boat=vessel?.kind==='missile'?vessel:null;$('missileStock').textContent=boat?boat.ammo:state.naval.stock;$('missileMode').disabled=!started||!!state.result||(state.strategy.phase!=='war'&&!state.operations.active);$('missileMode').classList.toggle('armed',missileMode);$('missileMode').setAttribute('aria-pressed',missileMode);
-    const pending=state.naval.aid.filter(a=>!a.delivered).sort((a,b)=>a.arrive-b.arrive)[0];$('aidStatus').textContent=pending?Math.ceil(Math.max(0,pending.arrive-state.time))+'秒':state.naval.aid.length?'已抵达':'待机';
+    const pending=state.naval.aid.filter(a=>!a.delivered).sort((a,b)=>a.arrive-b.arrive)[0];$('aidStatus').textContent=pending?F.realSeconds(state,pending.arrive-state.time)+'秒':state.naval.aid.length?'已抵达':'待机';
     $('guideTitle').textContent=missileMode?'选择导弹目标':vessel?'点海域或敌舰':selected===null?'选择军队或舰船':$('guideTitle').textContent;
     if(missileMode)$('guideText').textContent='点敌舰或敌方城市发射 · 40资金 · Esc取消';else if(vessel)$('guideText').textContent=vessel.kind==='transport'?'运输舰靠近陆军，自动搭载渡海。':'点海域移动，靠近敌舰自动交战。';else if(selected===null)$('guideText').textContent='橙色标记是我方，黄色标记是敌军。在部队列表切换陆军 / 舰队。';
   }

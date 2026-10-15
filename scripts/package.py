@@ -33,6 +33,9 @@ for kind, base, entries in [('source', root, source_entries), ('web', root / 'di
         assert 'counteroffensive/assets/field-cel/mech-walk-atlas.png' in names
         assert 'counteroffensive/assets/field-cel/garrison-flags-atlas.png' in names
         assert 'counteroffensive/realtime.html' in names
+        assert 'counteroffensive/hex.html' in names
+        assert 'counteroffensive/world-dynamics.js' in names
+        assert 'counteroffensive/campaign-ui.js' in names and 'counteroffensive/campaign-ui.css' in names
         assert 'counteroffensive/hex-core.js' in names and 'counteroffensive/hex-map.js' in names
         assert 'counteroffensive/hex-app.js' in names and 'counteroffensive/hex-ui.css' in names
         assert sum(n.startswith('counteroffensive/assets/event-posters/') and n.endswith('.png') for n in names) == 34
