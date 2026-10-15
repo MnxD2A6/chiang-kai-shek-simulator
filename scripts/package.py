@@ -29,6 +29,9 @@ for kind, base, entries in [('source', root, source_entries), ('web', root / 'di
         names = z.namelist()
         assert 'index.html' in names and 'legacy-simulator.html' in names
         assert 'counteroffensive/index.html' in names and 'counteroffensive/world-core.js' in names
+        assert 'counteroffensive/tactical-tools.js' in names and 'counteroffensive/battle-motion.js' in names
+        assert 'counteroffensive/assets/field-cel/mech-walk-atlas.png' in names
+        assert 'counteroffensive/assets/field-cel/garrison-flags-atlas.png' in names
         assert sum(n.startswith('counteroffensive/assets/event-posters/') and n.endswith('.png') for n in names) == 34
         if kind == 'source':
             assert '.github/workflows/pages.yml' in names

@@ -1,0 +1,20 @@
+{
+  "version": "1.11.0",
+  "tool": "OpenAI built-in image_gen",
+  "intent": "generate",
+  "transparent": true,
+  "entries": [
+    {
+      "id": "mech-walk-atlas",
+      "file": "mech-walk-atlas.png",
+      "prompt": "Use case: stylized-concept. Production game sprite sheet, 2D clean hand-drawn cel animation with black ink outlines, muted olive armor, cream highlights, small vermilion accents. ONE original transforming tank biped robot, stocky angular silhouette, two articulated legs, shoulder armor and a short integrated tank cannon, no licensed character, no logos, text or national symbols. Orthographic three-quarter side view facing RIGHT. Create exactly FOUR walk-cycle frames of the SAME robot with identical silhouette, scale, camera and lighting, arranged in a strict TWO by TWO equal-cell grid. Canvas landscape 1536 x 1024; each cell 768 x 512. Each robot entirely inside its own cell, centered, grounded at equal height with 12% empty transparent margin. Top left: left leg planted, right knee forward; top right: passing pose with weight on left foot; bottom left: right foot planted, left knee forward; bottom right: passing pose with weight on right foot. Clear bent knees and alternating leg positions, coherent mechanical walk, not four static duplicates. Simple 2 to 3 flat colors per armor region, bold readable silhouette for display at 64 pixels. Genuinely TRANSPARENT background around every frame, no ground plane, grid lines, divider lines, border, shadow rectangle, labels, scenery or floating particles. This must be a usable transparent raster game sprite atlas, not a UI mockup.",
+      "sha256": "147a8cdb80c86218332dc0ed84c319d7588c110753513d15aa2acfa7a20525f1"
+    },
+    {
+      "id": "garrison-flags-atlas",
+      "file": "garrison-flags-atlas.png",
+      "prompt": "Use case: stylized-concept. Create ONE transparent 2D game sprite atlas in a clean hand-drawn cel style, bold irregular dark ink outlines, flat warm cream highlights. EXACTLY FOUR single flagpole sprites in a strict 2 by 2 equal-cell grid. Landscape canvas 1536 x 1024, each cell 768 x 512. A slender dark charcoal pole standing in a small simple ring base, flag cloth waving toward the RIGHT. Every pole and base is the SAME shape, height and position within its cell. Top left: vibrant burnt orange flag, cloth bends upward. Top right: SAME orange flag, cloth bends downward, only the cloth changes shape for an alternating two-frame flutter. Bottom left: golden yellow flag, cloth bends upward. Bottom right: SAME yellow flag, cloth bends downward. Each isolated full pole plus flag silhouette completely contained and centered within its cell, with at least 16% transparent margin; flag tall and chunky enough to read at 32 screen pixels. No emblem, lettering, numbers, stars, insignia, border, divider, grid, scenery or extra props. Genuinely TRANSPARENT background, no white paper or ground rectangle, no shadow plane. Original tactical map ownership markers; not any real nation's flag.",
+      "sha256": "f0285503d9db891391b82ee86585738558429dc7d64f80e5c6de0b8747d2a273"
+    }
+  ]
+}

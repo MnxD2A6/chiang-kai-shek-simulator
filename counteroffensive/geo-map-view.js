@@ -53,7 +53,7 @@
    for(const r of F.regions){const p=this.regionScreen(r);if(!this.visible(p,0))continue;this.visibleRegions.add(r.id);const purchased=s.strategy?.partners[r.id],available=F.worldPartnerAvailable?F.worldPartnerAvailable(s,r.id):true,held=purchased&&available;c.fillStyle=held?'#b1e8b8':'#a9c4cf';c.strokeStyle='#17313d';c.lineWidth=2;c.beginPath();c.arc(p.x,p.y,5,0,Math.PI*2);c.fill();c.stroke();this.label(r.name,p.x,p.y-14,this.zoom<2?14:16,'#244c50','center',true);this.label(held?'合作生效':purchased?'支援暂停':available?'可洽谈合作':'关系待修复',p.x,p.y+19,9,'#244c50','center');}
    // Priority labels have screen-sized markers and never scale into unreadable text.
    const cityList=[...s.towns].sort((a,b)=>Number(b.country==='TWN')-Number(a.country==='TWN')||Number(b.goal)-Number(a.goal));
-   for(const town of cityList){const p=this.townScreen(town);if(!this.visible(p,0))continue;const detail=this.zoom>=4;if(!detail&&!['taipei','beijing'].includes(town.id))continue;this.visibleTowns.add(town.id);const owner=s.owners[town.tile],r=town.goal?5:4;c.fillStyle=owner===1?'#ddf3c9':'#f5dab0';c.strokeStyle='#162e37';c.lineWidth=2;c.beginPath();c.arc(p.x,p.y,3,0,Math.PI*2);c.fill();c.stroke();if(this.zoom>=4)this.sprite('map-landmarks-atlas',2,p.x,p.y-8,this.zoom>=10?29:22);const name=this.zoom<3&&town.id==='taipei'?'台湾':town.name;this.label(name,p.x+19,p.y-9,this.zoom>=10?13:12,owner===1?'#244c50':'#244c50');if(town.goal){c.strokeStyle=owner===1?'#65c7da66':'#efb78a66';c.lineWidth=1;c.beginPath();c.moveTo(p.x,p.y-10);c.lineTo(p.x+10,p.y);c.lineTo(p.x,p.y+10);c.lineTo(p.x-10,p.y);c.closePath();c.stroke();}}
+   for(const town of cityList){const p=this.townScreen(town);if(!this.visible(p,0))continue;const detail=this.zoom>=4;if(!detail&&!['taipei','beijing'].includes(town.id))continue;this.visibleTowns.add(town.id);const owner=s.owners[town.tile],r=town.goal?5:4;c.fillStyle=owner===1?'#ddf3c9':'#f5dab0';c.strokeStyle='#162e37';c.lineWidth=2;c.beginPath();c.arc(p.x,p.y,3,0,Math.PI*2);c.fill();c.stroke();if(this.zoom>=4)this.sprite('map-landmarks-atlas',2,p.x,p.y-8,this.zoom>=10?29:22);if(this.zoom>=10)this.sprite('garrison-flags-atlas',(owner===1?0:2)+(this.reducedMotion?0:Math.floor(s.time*2.5)%2),p.x-5,p.y-21,38);const name=this.zoom<3&&town.id==='taipei'?'台湾':town.name;this.label(name,p.x+19,p.y-9,this.zoom>=10?13:12,owner===1?'#244c50':'#244c50');if(town.goal){c.strokeStyle=owner===1?'#65c7da66':'#efb78a66';c.lineWidth=1;c.beginPath();c.moveTo(p.x,p.y-10);c.lineTo(p.x+10,p.y);c.lineTo(p.x,p.y+10);c.lineTo(p.x-10,p.y);c.closePath();c.stroke();}}
    if(this.zoom>=2.5)for(const town of G.data.cities){if(cityList.some(t=>t.id===town.id))continue;const p=this.townScreen(town);if(!this.visible(p,0))continue;c.fillStyle='#c0d1d2';c.beginPath();c.arc(p.x,p.y,3,0,Math.PI*2);c.fill();this.label(town.name,p.x+8,p.y-3,12,'#244c50');}
    if(this.zoom>=6)for(const place of G.data.places){if(this.zoom<10&&place.population<1000000)continue;const p=this.townScreen(place);if(!this.visible(p,0))continue;c.fillStyle='#97b4b4';c.beginPath();c.arc(p.x,p.y,2.5,0,Math.PI*2);c.fill();this.label(place.name,p.x+7,p.y-3,11,'#244c50');}
    for(const a of s.armies){if(this.zoom<3)continue;if(a.faction!==1&&a.target!==1)continue;const p=F.xy(a.source),g=F.xy(a.goal),from=this.screen(p.x+.5,p.y+.5),to=this.screen(g.x+.5,g.y+.5);if(!this.visible(from))continue;this.arrow(from,to,a.faction===1?'#bce6c9b0':'#efa48eaf',s.time);this.sprite('infantry-march-atlas',Math.floor(s.time*7)%4,from.x,from.y,40,0,to.x<from.x);c.fillStyle='#ffcc24';c.fillRect(from.x-10,from.y+19,20,3);this.unitHits.push({x:from.x,y:from.y,tile:a.source});}
@@ -85,7 +85,7 @@
    if(!s.naval)return;const c=this.ctx;
    for(const h of F.hostiles||[]){const p=this.hostileScreen(h);if(!this.visible(p,0))continue;c.fillStyle='#ff879c';c.beginPath();c.arc(p.x,p.y,6,0,Math.PI*2);c.fill();this.label(h.name,p.x,p.y-15,14,'#244c50','center',true);this.label(s.world?.relations[h.id]>=35?'暂停增援':h.id==='northkorea'&&s.world?.flags.koreaWar?'半岛牵制':'大陆援军',p.x,p.y+23,10,'#244c50','center',true);}
    for(const a of s.naval.aid){if(a.delivered||s.time<a.depart)continue;const h=F.hostiles.find(h=>h.id===a.key),town=s.towns.find(t=>t.id===a.city),from=this.townScreen(h),to=this.townScreen(town),n=(s.time-a.depart)/(a.arrive-a.depart),p={x:from.x+(to.x-from.x)*n,y:from.y+(to.y-from.y)*n};this.arrow(from,to,'#ff89986b',s.time);this.sprite('naval-cel-atlas',0,p.x,p.y,Math.min(38,Math.max(12,this.zoom*8)),0,to.x<from.x);this.label(h.name+'增援 '+Math.ceil(a.arrive-s.time)+'秒',p.x,p.y-13,11,'#244c50','center',true);}
-   for(const a of s.naval.ground){if(this.zoom<3)continue;const pos=F.unitPosition(a),p=this.screen(pos.x,pos.y);if(!this.visible(p))continue;this.sprite('infantry-march-atlas',a.path.length?Math.floor(s.time*7)%4:0,p.x,p.y,44,0,a.path.length&&F.xy(a.path[0]).x<F.xy(a.tile).x);c.fillStyle='#ffcc24';c.fillRect(p.x-12,p.y+21,24,3);if(a.name.includes('机甲'))this.label('MECH',p.x,p.y-5,9,'#bd391f','center',true);if(this.zoom>=12)this.label(a.name,p.x,p.y-16,10,'#244c50','center');}
+   for(const a of s.naval.ground){if(this.zoom<3)continue;const pos=F.unitPosition(a),p=this.screen(pos.x,pos.y);if(!this.visible(p))continue;const mech=a.name.includes('机甲'),pose=root.FrontMotion.pose(s.time,a.id,!!a.path.length,false,this.reducedMotion);this.sprite(mech?'mech-walk-atlas':'infantry-march-atlas',pose.frame,p.x,p.y+pose.bob,mech?78:44,0,a.path.length&&F.xy(a.path[0]).x<F.xy(a.tile).x);c.fillStyle='#ffcc24';c.fillRect(p.x-12,p.y+21,24,3);if(a.name.includes('机甲'))this.label('MECH',p.x,p.y-5,9,'#bd391f','center',true);if(this.zoom>=12)this.label(a.name,p.x,p.y-16,10,'#244c50','center');}
    for(const a of s.naval.ships){const pos=F.shipPosition(a),p=this.screen(pos.x,pos.y),next=F.xy(a.path[0]??a.tile),curr=F.xy(a.tile),selected=a.id===this.selectedUnit;if(a.path.length){const g=F.xy(a.goal);this.arrow(p,this.screen(g.x+.5,g.y+.5),a.faction===1?'#86e0ee80':'#ff849986',s.time);}if(!this.visible(p))continue;c.fillStyle=a.faction===1?'#61bddd':'#e87889';c.beginPath();c.arc(p.x,p.y,2,0,Math.PI*2);c.fill();if(selected&&F.shipTypes[a.kind].range){const range=F.shipTypes[a.kind].range*G.data.grid.cell*this.transform.scale;c.strokeStyle='#ff96584a';c.setLineDash([3,5]);c.lineWidth=1;c.beginPath();c.arc(p.x,p.y,range,0,Math.PI*2);c.stroke();c.setLineDash([]);}}
    for(const m of s.naval.missiles){const a=F.xy(m.from),b=F.xy(m.to),from=this.screen(a.x+.5,a.y+.5),to=this.screen(b.x+.5,b.y+.5),n=Math.min(1,(s.time-m.launched)/4),p={x:from.x+(to.x-from.x)*n,y:from.y+(to.y-from.y)*n-Math.sin(n*Math.PI)*60};this.drawMissileSmoke(from,to,n,s.time);c.strokeStyle=m.faction===1?'#ff8a3d':'#ffda4d';c.lineWidth=2;c.beginPath();c.moveTo(from.x,from.y);c.quadraticCurveTo((from.x+p.x)/2,(from.y+p.y)/2-25,p.x,p.y);c.stroke();this.sprite('weapon-fx-atlas',1,p.x,p.y,Math.min(39,Math.max(10,this.zoom*3)),Math.atan2(to.y-from.y-Math.cos(n*Math.PI)*40,to.x-from.x));if(this.zoom>=3&&this.missileBadge.complete&&this.missileBadge.naturalWidth)c.drawImage(this.missileBadge,p.x+38,p.y-34,35,35);this.label('导弹',p.x+79,p.y-10,9,'#fff4d1');}
 
@@ -97,7 +97,7 @@
    const out=root.FrontMarkerLayout.place(anchors,this.width,this.height,this.hudObstacles||[],null,84);
    for(const r of out)if(!r.hidden){this.regionPins.set(r.key,{x:r.x,y:r.y});if(Math.hypot(r.x-r.anchorX,r.y-r.anchorY)>8){const c=this.ctx;c.strokeStyle='#84badc55';c.lineWidth=1;c.beginPath();c.moveTo(r.anchorX,r.anchorY);c.lineTo(r.x,r.y);c.stroke();c.fillStyle='#8fbbd3';c.beginPath();c.arc(r.anchorX,r.anchorY,2,0,Math.PI*2);c.fill();}}
   }
-  resetBattleFX(){this.feedback=new root.FrontFeedback(F);this.gunShots=[];this.impacts=[];this.launchFlashes=[];}
+  resetBattleFX(){this.feedback=new root.FrontFeedback(F);this.gunShots=[];this.impacts=[];this.launchFlashes=[];this.unitFeedback=[];this.damagePips=[];this.captures=[];this.commandAck=null;this.intent=null;}
   sprite(key,frame,x,y,width,angle=0,mirror=false,alpha=1){
    const art=this.art[key];if(!art||!art.img.complete||!art.img.naturalWidth)return false;
    const r=art.frames[frame%art.frames.length],height=width*r[3]/r[2],c=this.ctx;
@@ -122,12 +122,16 @@
    if(!this.feedback.ready)for(const e of s.naval?.bursts||[])if(s.time-e.at<2)this.impacts.push({...e,water:!s.terrain[e.tile]&&e.kind!=='intercept'});
    const events=this.feedback.read(s);
    for(const e of events){
+    if(e.type==='damage')this.damagePips.push(e);
+    if(e.type==='arrival'||e.type==='landing')this.unitFeedback.push(e);
+    if(e.type==='capture'||e.type==='loss')this.captures.push(e);
     if(e.type==='gun')this.gunShots.push(e);
     if(e.type==='launch')this.launchFlashes.push(e);
     if(e.type==='impact'||e.type==='airstrike')this.impacts.push({...e,kind:e.kind||'airstrike',water:!s.terrain[e.tile]&&e.kind!=='intercept',targetId:s.naval.ships.find(a=>a.tile===e.tile)?.id});
     if(this.onFeedback)this.onFeedback(e);
    }
    this.gunShots=this.gunShots.filter(e=>s.time-e.at<.6).slice(-24);this.impacts=this.impacts.filter(e=>s.time-e.at<3).slice(-36);this.launchFlashes=this.launchFlashes.filter(e=>s.time-e.at<.35).slice(-12);
+   this.damagePips=this.damagePips.filter(e=>s.time-e.at<.9).slice(-30);this.unitFeedback=this.unitFeedback.filter(e=>s.time-e.at<1).slice(-18);this.captures=this.captures.filter(e=>s.time-e.at<1.8).slice(-6);
   }
   markerPoint(id,tile){const m=(this.markerPositions||[]).find(m=>m.id===id&&!m.hidden);if(m)return m;const p=F.xy(tile);return this.screen(p.x+.5,p.y+.5);}
   drawMarkerLeaders(s){
@@ -137,13 +141,14 @@
     const moving=a.path.length&&a.status!=='waiting',sea=m.type==='ship'||!s.terrain[a.tile],enemy=a.faction!==1,flip=moving&&F.xy(a.path[0]).x<F.xy(a.tile).x;
     c.fillStyle=enemy?'#ffcb2470':selected?'#ff6b2470':'#214d5530';c.beginPath();c.ellipse(m.x,m.y+this.markerSize*.3,this.markerSize*.42,8,0,0,Math.PI*2);c.fill();
     if(selected||enemy){c.strokeStyle=enemy?'#997b10':'#d85d21';c.lineWidth=selected?2.5:1.5;c.setLineDash(selected?[9,4]:[]);c.beginPath();c.ellipse(m.x,m.y+this.markerSize*.3,this.markerSize*.45,10,0,0,Math.PI*2);c.stroke();c.setLineDash([]);}
-    const bob=this.reducedMotion?0:sea?Math.sin(s.time*2+a.id)*1:0;
+    const pose=root.FrontMotion.pose(s.time,a.id,moving,sea,this.reducedMotion),arrival=this.unitFeedback.findLast(e=>e.id===a.id&&e.type==='arrival'),hit=this.damagePips.findLast(e=>e.id===a.id),bob=pose.bob+root.FrontMotion.settle(arrival?s.time-arrival.at:2,this.reducedMotion),shake=root.FrontMotion.hit(hit?s.time-hit.at:2,this.reducedMotion);
     if(sea){
      if(moving&&!this.reducedMotion){const next=F.xy(a.path[0]),curr=F.xy(a.tile),from=this.screen(curr.x+.5,curr.y+.5),to=this.screen(next.x+.5,next.y+.5),angle=Math.atan2(to.y-from.y,to.x-from.x);for(let k=1;k<=2;k++)this.sprite('weapon-fx-atlas',2,m.x-Math.cos(angle)*k*18,m.y+9-Math.sin(angle)*k*18,this.markerSize*(1.1+k*.12),angle,false,(.45/k)+Math.sin(s.time*7+a.id)*.06);}
      const shot=this.gunShots.find(e=>e.id===a.id&&s.time-e.at<.17),target=shot?this.markerPoint(shot.targetId,shot.to):null,angle=target?Math.atan2(target.y-m.y,target.x-m.x):0,recoil=shot&&!this.reducedMotion?2.6*(1-(s.time-shot.at)/.17):0;
-     this.sprite('naval-cel-atlas',m.type==='army'?0:({transport:0,destroyer:1,missile:2}[a.kind]),m.x-Math.cos(angle)*recoil,m.y+bob-Math.sin(angle)*recoil,this.markerSize,0,flip);
+     this.sprite('naval-cel-atlas',m.type==='army'?0:({transport:0,destroyer:1,missile:2}[a.kind]),m.x-Math.cos(angle)*recoil+shake,m.y+bob-Math.sin(angle)*recoil,this.markerSize,pose.tilt,flip);
     }
-    else this.sprite('infantry-march-atlas',moving&&!this.reducedMotion?Math.floor(s.time*7+a.id)%4:0,m.x,m.y-1,this.markerSize*.88,0,flip);
+    else this.sprite('infantry-march-atlas',pose.frame,m.x+shake,m.y-1+bob,this.markerSize*.88,0,flip);
+    if(sea&&a.hp!==undefined){const ratio=a.hp/F.shipTypes[a.kind].hp;c.strokeStyle='#234d5566';c.lineWidth=3;c.beginPath();c.moveTo(m.x-18,m.y+this.markerSize*.34+4);c.lineTo(m.x+18,m.y+this.markerSize*.34+4);c.stroke();c.strokeStyle=ratio<.35?'#ba422a':enemy?'#e5b624':'#e76a28';c.beginPath();c.moveTo(m.x-18,m.y+this.markerSize*.34+4);c.lineTo(m.x-18+36*ratio,m.y+this.markerSize*.34+4);c.stroke();}
    }
   }
   drawMissileSmoke(from,to,n,time){
@@ -159,8 +164,19 @@
    if(this.reducedMotion||age>.6)return;const c=this.ctx,count=heavy?11:5;c.save();c.globalAlpha=Math.max(0,1-age/.6);c.lineWidth=2;c.strokeStyle=e.water?'#f4ffff':'#ffb12f';
    for(let i=0;i<count;i++){const seed=Math.abs(Math.sin((e.tile+17)*(i+3))),angle=i/count*Math.PI*2+seed*.5,speed=(heavy?95:42)*(seed+.4),d=speed*age,fall=60*age*age,px=x+Math.cos(angle)*d,py=y+Math.sin(angle)*d+fall;c.beginPath();c.moveTo(px,py);c.lineTo(px-Math.cos(angle)*7,py-Math.sin(angle)*7);c.stroke();}c.restore();
   }
+  drawFieldFeedback(s){
+   const c=this.ctx,current=root.FrontTactics.current(s,this.selectedUnit),intent=this.intent;
+   if(current&&['attack','move','waiting','follow','cargo'].includes(current.kind)||intent){const tile=intent?.tile??current.tile,p=F.xy(tile),q=this.screen(p.x+.5,p.y+.5),blocked=intent?.kind==='blocked',attack=(intent||current).kind==='attack';
+    c.save();c.strokeStyle=blocked?'#a04128':attack?'#e05c26':'#28715f';c.lineWidth=2;c.setLineDash([7,5]);c.lineDashOffset=this.reducedMotion?0:-s.time*12;c.beginPath();c.arc(q.x,q.y,20,0,Math.PI*2);c.stroke();c.setLineDash([]);for(let i=0;i<4;i++){const a=i*Math.PI/2;c.beginPath();c.moveTo(q.x+Math.cos(a)*25,q.y+Math.sin(a)*25);c.lineTo(q.x+Math.cos(a)*31,q.y+Math.sin(a)*31);c.stroke();}this.label(blocked?'暂不可用':attack?'进攻目标':current?.kind==='waiting'?'等待运输':'目的地',q.x,q.y+44,10,c.strokeStyle,'center',true);c.restore();
+   }
+   if(this.commandAck){const age=s.time-this.commandAck.at;if(age>=0&&age<.9){const p=F.xy(this.commandAck.tile),q=this.screen(p.x+.5,p.y+.5);c.save();c.globalAlpha=1-age/.9;c.strokeStyle='#ff6b24';c.lineWidth=3;c.beginPath();c.arc(q.x,q.y,18+(this.reducedMotion?0:age*38),0,Math.PI*2);c.stroke();c.restore();}}
+   for(const e of this.captures){const age=s.time-e.at,p=F.xy(e.tile),q=this.screen(p.x+.5,p.y+.5),own=e.type==='capture';c.save();c.globalAlpha=Math.min(1,(1.8-age)*2);this.sprite('garrison-flags-atlas',own?0:2,q.x,q.y-34-(this.reducedMotion?0:Math.min(14,age*23)),75);this.impactRing(q.x,q.y,age,false,false);this.label((own?'占领 ':'失守 ')+e.name,q.x,q.y-64,13,own?'#b74a20':'#a82c21','center',true);c.restore();}
+   for(const e of this.unitFeedback){const age=s.time-e.at,q=this.markerPoint(e.id,e.tile);if(e.type==='landing'&&age<.7)this.sprite('water-impact-atlas',this.reducedMotion?1:Math.min(4,Math.floor(age*7)),q.x,q.y+10,61,0,false,1-age/.8);if(age<.7&&(e.type==='landing'||!this.unitFeedback.some(v=>v.id===e.id&&v.type==='landing')))this.label(e.type==='landing'?'登岸':'抵达驻守',q.x,q.y-31,10,'#266453','center',true);}
+   const latest=new Map(this.damagePips.map(e=>[e.id,e]));for(const e of latest.values()){const age=s.time-e.at,q=this.markerPoint(e.id,e.tile);c.save();c.globalAlpha=Math.min(1,(.9-age)*3);this.label('−'+Math.round(e.amount),q.x+18,q.y-22-(this.reducedMotion?0:age*19),12,e.faction===1?'#ad3421':'#9a5a0e','center',true);c.restore();}
+  }
   drawCombatFX(s){
    const c=this.ctx;if(!s.naval||this.zoom<3)return;
+   this.drawFieldFeedback(s);
    for(const e of this.gunShots){const age=s.time-e.at,from=this.markerPoint(e.id,e.from),to=this.markerPoint(e.targetId,e.to),angle=Math.atan2(to.y-from.y,to.x-from.x),n=Math.min(1,age/.22);
     if(age<.22&&!this.reducedMotion){const x=from.x+(to.x-from.x)*n,y=from.y+(to.y-from.y)*n;c.strokeStyle='#d05a24';c.lineWidth=4;c.beginPath();c.moveTo(from.x+(to.x-from.x)*Math.max(0,n-.17),from.y+(to.y-from.y)*Math.max(0,n-.17));c.lineTo(x,y);c.stroke();c.strokeStyle='#fff4c8';c.lineWidth=1.5;c.stroke();}
     if(age<.14)this.sprite('weapon-fx-atlas',0,from.x+Math.cos(angle)*23,from.y+Math.sin(angle)*23,38*(1-age/.2),angle);

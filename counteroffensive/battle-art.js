@@ -1,5 +1,7 @@
 (function(root){
   const art={
+  "mech-walk-atlas":{"src":"./assets/field-cel/mech-walk-atlas.png","width":1536,"height":1024,"frames":[[0,0,768,512],[768,0,768,512],[0,512,768,512],[768,512,768,512]]},
+  "garrison-flags-atlas":{"src":"./assets/field-cel/garrison-flags-atlas.png","width":1536,"height":1024,"frames":[[0,0,768,512],[768,0,768,512],[0,512,768,512],[768,512,768,512]]},
   "infantry-march-atlas": {
     "src": "./assets/battle-cel/infantry-march-atlas.png",
     "width": 1330,
