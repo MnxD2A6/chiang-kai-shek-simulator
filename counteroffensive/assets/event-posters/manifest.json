@@ -1,5 +1,5 @@
 {
-  "version": "2.8.0",
+  "version": "2.9.0",
   "tool": "OpenAI built-in image_gen",
   "intent": "generate",
   "style": "Original historical painted poster and lithographic editorial illustrations; red, ink, aged paper, olive, rough pigment",
@@ -641,6 +641,27 @@
       "prompt": "Create ONE original landscape 3:2 editorial illustration, preferably 1536x1024, for a fictional cross-era satirical strategy game. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic illustration, expressive sculptural faces and readable hands, bold irregular navy-black contours, dry-brush hatching, coarse pigment grain, rough offset registration, visibly aged parchment ivory. Limited vermilion red, ink black, cream, muted olive, dusty gold and small desaturated blue/green accents; dramatic diagonal crimson sky or cloth shapes. Gritty painterly handmade print, not clean vector, not anime, not photorealistic or 3D. Full bleed, large narrative subjects readable in a small event card. NO readable text, letters, numbers, captions, logos, watermarks, swastikas or political slogans. Treat all factions and civilians with humanity. Original fictional art, not a historical claim. SCENE: A fictional island parliamentary debate during a distant war: a uniformed elderly commander presents a coastal map while two civilian representatives point to photographs of a factory and families. A worried radio operator waits with dispatches. No writing on maps or papers, no recognizable contemporary politician.",
       "sha256": "fdc17e41f63bb58b53c843cb6b9110fe9e2acd5517f35265b6af5862d2b4f06f",
       "bytes": 3468476
+    },
+    {
+      "id": "civic_promise_due",
+      "file": "./civic_promise_due.png",
+      "prompt": "Use case: illustration-story. ONE original landscape 3:2 event illustration for a fictional cross-era satirical strategy game. Mid-20th-century hand-painted poster and lithographic editorial illustration, sculptural faces and hands, irregular navy-black contours, dry-brush hatching, rough offset ink registration, aged cream paper, coarse pigment grain. Limited vermilion red, parchment, ink, olive and dusty gold. Dramatic diagonals, readable at small size, full bleed. NOT vector, anime, photoreal or 3D. No text, letters, slogans, logos, watermark, Nazi imagery. Scene: A frustrated factory worker and a mother hold an empty relief crate and blank promise slips toward two embarrassed civilian officials in blue and green jackets. A large clock behind them, unopened warehouse padlocks, storm clouds and distant harbor cranes. The promise has expired; no food or money magically appears. Expressive human faces, no violence.",
+      "sha256": "056d359f56360278ffd2124e3dc19087bf1418c8c99a5d1b69c6935a031f06b8",
+      "bytes": 3430593
+    },
+    {
+      "id": "civic_deadlock",
+      "file": "./civic_deadlock.png",
+      "prompt": "Use case: illustration-story. ONE original landscape 3:2 event illustration for a fictional cross-era satirical strategy game. Mid-20th-century hand-painted poster and lithographic editorial illustration, sculptural faces and hands, irregular navy-black contours, dry-brush hatching, rough offset ink registration, aged cream paper, coarse pigment grain. Limited vermilion red, parchment, ink, olive and dusty gold. Dramatic diagonals, readable at small size, full bleed. NOT vector, anime, photoreal or 3D. No text, letters, slogans, logos, watermark, Nazi imagery. Scene: A parliamentary budget table divides rival blue and green civilian delegations. Both tug a thick bundle of blank budget papers in opposite directions; an exasperated quartermaster between them holds a stalled mechanical gear. Behind them, dock workers and an idle ship wait for supplies. Satirical tense argument; both sides have varied individuals and no heroic endorsement.",
+      "sha256": "af6e80945c50ab21409ec234102d84e4e800b8218ef3df887253969903110e2d",
+      "bytes": 3398785
+    },
+    {
+      "id": "civic_recovery_check",
+      "file": "./civic_recovery_check.png",
+      "prompt": "Use case: illustration-story. ONE original landscape 3:2 event illustration for a fictional cross-era satirical strategy game. Mid-20th-century hand-painted poster and lithographic editorial illustration, sculptural faces and hands, irregular navy-black contours, dry-brush hatching, rough offset ink registration, aged cream paper, coarse pigment grain. Limited vermilion red, parchment, ink, olive and dusty gold. Dramatic diagonals, readable at small size, full bleed. NOT vector, anime, photoreal or 3D. No text, letters, slogans, logos, watermark, Nazi imagery. Scene: An engineer with a clipboard and a woman in work overalls show blue and green civilian inspectors a half-repaired factory and relief warehouse. One wing has light and working machinery, the other has broken pipes and a cracked wall; boxes of real supplies in foreground, workers repairing. Practical accountability after promises, hopeful but sober.",
+      "sha256": "dca8d013cc3a773ee14391583ff2df32851cfb4f7126a72d4c43d987786f2838",
+      "bytes": 3330067
     }
   ]
 }
