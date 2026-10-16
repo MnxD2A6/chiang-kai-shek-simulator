@@ -1,5 +1,5 @@
 {
-  "version": "2.7.0",
+  "version": "2.8.0",
   "tool": "OpenAI built-in image_gen",
   "intent": "generate",
   "style": "Original historical painted poster and lithographic editorial illustrations; red, ink, aged paper, olive, rough pigment",
@@ -557,6 +557,90 @@
       "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A giant fictional Russian walking mechanical tank stands confused at a port warranty counter. A manufacturer representative sheepishly presents a tiny rice cooker as the supposed product model while the robot points at itself. Dockworkers hold a misplaced instruction booklet with only diagrams. Humorous machinery, not combat.",
       "sha256": "1084512fcfd8e9e4f90369e42cb9b666a95313f290ac885bc1e61568fad4d672",
       "bytes": 3378374
+    },
+    {
+      "id": "civic_budget",
+      "file": "./civic_budget.png",
+      "prompt": "Create ONE original landscape 3:2 editorial illustration, preferably 1536x1024, for a fictional cross-era satirical strategy game. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic illustration, expressive sculptural faces and readable hands, bold irregular navy-black contours, dry-brush hatching, coarse pigment grain, rough offset registration, visibly aged parchment ivory. Limited vermilion red, ink black, cream, muted olive, dusty gold and small desaturated blue/green accents; dramatic diagonal crimson sky or cloth shapes. Gritty painterly handmade print, not clean vector, not anime, not photorealistic or 3D. Full bleed, large narrative subjects readable in a small event card. NO readable text, letters, numbers, captions, logos, watermarks, swastikas or political slogans. Treat all factions and civilians with humanity. Original fictional art, not a historical claim. SCENE: Two groups of fictional island legislators, one with muted blue folders and one with muted green folders, argue over a military budget ledger versus a hospital and factory rebuilding plan. An elderly uniformed chairman listens while a clerk struggles with an absurd mountain of receipts. Serious expressive faces with gentle satire, no actual modern politicians.",
+      "sha256": "81ae28239b0089a6800612b02c9a9cbd841618db54b077e6fd0a0f8a689e85c9",
+      "bytes": 3779846
+    },
+    {
+      "id": "civic_dpp_hearing",
+      "file": "./civic_dpp_hearing.png",
+      "prompt": "Create ONE original landscape 3:2 editorial illustration, preferably 1536x1024, for a fictional cross-era satirical strategy game. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic illustration, expressive sculptural faces and readable hands, bold irregular navy-black contours, dry-brush hatching, coarse pigment grain, rough offset registration, visibly aged parchment ivory. Limited vermilion red, ink black, cream, muted olive, dusty gold and small desaturated blue/green accents; dramatic diagonal crimson sky or cloth shapes. Gritty painterly handmade print, not clean vector, not anime, not photorealistic or 3D. Full bleed, large narrative subjects readable in a small event card. NO readable text, letters, numbers, captions, logos, watermarks, swastikas or political slogans. Treat all factions and civilians with humanity. Original fictional art, not a historical claim. SCENE: A fictional opposition legislator with muted green folder questions a uniformed procurement official at a parliamentary hearing. An auditor holds an enormous stack of receipts beside a tiny emergency toolbox. Both sides dignified and thoughtful, no actual contemporary politicians, no party logos.",
+      "sha256": "074fa2879af57951f5b6d2a7f900360aa5aa84d72e1edab85cf23b3ca5d5741e",
+      "bytes": 3541320
+    },
+    {
+      "id": "civic_ferry",
+      "file": "./civic_ferry.png",
+      "prompt": "Create ONE original landscape 3:2 editorial illustration, preferably 1536x1024, for a fictional cross-era satirical strategy game. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic illustration, expressive sculptural faces and readable hands, bold irregular navy-black contours, dry-brush hatching, coarse pigment grain, rough offset registration, visibly aged parchment ivory. Limited vermilion red, ink black, cream, muted olive, dusty gold and small desaturated blue/green accents; dramatic diagonal crimson sky or cloth shapes. Gritty painterly handmade print, not clean vector, not anime, not photorealistic or 3D. Full bleed, large narrative subjects readable in a small event card. NO readable text, letters, numbers, captions, logos, watermarks, swastikas or political slogans. Treat all factions and civilians with humanity. Original fictional art, not a historical claim. SCENE: At a busy ferry ticket office an island family with suitcases weighs leaving temporarily, an elderly relative looks back toward a distant neighborhood and a helpful ferry clerk offers a blank ticket. A civilian ferry and calm harbor in the background. Humane and ambiguous rather than triumphant or demonizing.",
+      "sha256": "868f496aed0b96081e62c79e7b7db6199470350cc31b2bc21ad009173b4b48e9",
+      "bytes": 3594327
+    },
+    {
+      "id": "civic_joint_defense",
+      "file": "./civic_joint_defense.png",
+      "prompt": "Create ONE original landscape 3:2 editorial illustration, preferably 1536x1024, for a fictional cross-era satirical strategy game. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic illustration, expressive sculptural faces and readable hands, bold irregular navy-black contours, dry-brush hatching, coarse pigment grain, rough offset registration, visibly aged parchment ivory. Limited vermilion red, ink black, cream, muted olive, dusty gold and small desaturated blue/green accents; dramatic diagonal crimson sky or cloth shapes. Gritty painterly handmade print, not clean vector, not anime, not photorealistic or 3D. Full bleed, large narrative subjects readable in a small event card. NO readable text, letters, numbers, captions, logos, watermarks, swastikas or political slogans. Treat all factions and civilians with humanity. Original fictional art, not a historical claim. SCENE: Two fictional civilian legislators in blue and green work coats carry a heavy beam together with rescue workers outside a damaged island hospital. A stubborn injured communications pole seems less cooperative than the politicians. Medical aid boxes, hopeful exhausted faces, no combat or dead bodies.",
+      "sha256": "73ebebee926b3375bcf6b66e33b07442c5444139c8efcb5c669aae897f5bea3d",
+      "bytes": 3572731
+    },
+    {
+      "id": "civic_kmt_debate",
+      "file": "./civic_kmt_debate.png",
+      "prompt": "Create ONE original landscape 3:2 editorial illustration, preferably 1536x1024, for a fictional cross-era satirical strategy game. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic illustration, expressive sculptural faces and readable hands, bold irregular navy-black contours, dry-brush hatching, coarse pigment grain, rough offset registration, visibly aged parchment ivory. Limited vermilion red, ink black, cream, muted olive, dusty gold and small desaturated blue/green accents; dramatic diagonal crimson sky or cloth shapes. Gritty painterly handmade print, not clean vector, not anime, not photorealistic or 3D. Full bleed, large narrative subjects readable in a small event card. NO readable text, letters, numbers, captions, logos, watermarks, swastikas or political slogans. Treat all factions and civilians with humanity. Original fictional art, not a historical claim. SCENE: Inside a fictional Nationalist governing-party committee, an older uniformed commander and a local civilian administrator disagree over a map while a factory worker holds a damaged water pipe and a schoolteacher shows an empty supply box. Muted blue stationery, no recognizable party emblems; internal disagreement and material priorities.",
+      "sha256": "0a3ca8b7463dcdde1831b0e5bd23cd3efba524c3ebf9fe5776c3f94be27bcc11",
+      "bytes": 3471914
+    },
+    {
+      "id": "civic_mainland_offer",
+      "file": "./civic_mainland_offer.png",
+      "prompt": "Create ONE original landscape 3:2 editorial illustration, preferably 1536x1024, for a fictional cross-era satirical strategy game. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic illustration, expressive sculptural faces and readable hands, bold irregular navy-black contours, dry-brush hatching, coarse pigment grain, rough offset registration, visibly aged parchment ivory. Limited vermilion red, ink black, cream, muted olive, dusty gold and small desaturated blue/green accents; dramatic diagonal crimson sky or cloth shapes. Gritty painterly handmade print, not clean vector, not anime, not photorealistic or 3D. Full bleed, large narrative subjects readable in a small event card. NO readable text, letters, numbers, captions, logos, watermarks, swastikas or political slogans. Treat all factions and civilians with humanity. Original fictional art, not a historical claim. SCENE: Across a harbor meeting table two fictional civilian delegations examine relief crates containing flour, medicine and blankets. One island official studies a proposal while another watches a waiting cargo ship and a foreign observer. Dignified aid negotiation, no political slogans or party emblems.",
+      "sha256": "be93f876486b41847df9e058fa95ec4ed55449e4426867b67a08ef44ce78440a",
+      "bytes": 3545998
+    },
+    {
+      "id": "civic_nuclear_hearing",
+      "file": "./civic_nuclear_hearing.png",
+      "prompt": "Create ONE original landscape 3:2 editorial illustration, preferably 1536x1024, for a fictional cross-era satirical strategy game. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic illustration, expressive sculptural faces and readable hands, bold irregular navy-black contours, dry-brush hatching, coarse pigment grain, rough offset registration, visibly aged parchment ivory. Limited vermilion red, ink black, cream, muted olive, dusty gold and small desaturated blue/green accents; dramatic diagonal crimson sky or cloth shapes. Gritty painterly handmade print, not clean vector, not anime, not photorealistic or 3D. Full bleed, large narrative subjects readable in a small event card. NO readable text, letters, numbers, captions, logos, watermarks, swastikas or political slogans. Treat all factions and civilians with humanity. Original fictional art, not a historical claim. SCENE: A solemn fictional emergency parliamentary hearing after a strategic catastrophe: a doctor with a bandaged hand, a rescue worker, a civilian legislator and an elderly commander sit under dim lamps, damaged city photographs and relief maps scattered on the desk. Distant ruined skyline, no explosion, no gore, human cost and accountability.",
+      "sha256": "06fae2f772f7099d901826047cc3b8b923f2bee4ad7ca7cea61189a46b142270",
+      "bytes": 3286515
+    },
+    {
+      "id": "civic_protest",
+      "file": "./civic_protest.png",
+      "prompt": "Create ONE original landscape 3:2 editorial illustration, preferably 1536x1024, for a fictional cross-era satirical strategy game. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic illustration, expressive sculptural faces and readable hands, bold irregular navy-black contours, dry-brush hatching, coarse pigment grain, rough offset registration, visibly aged parchment ivory. Limited vermilion red, ink black, cream, muted olive, dusty gold and small desaturated blue/green accents; dramatic diagonal crimson sky or cloth shapes. Gritty painterly handmade print, not clean vector, not anime, not photorealistic or 3D. Full bleed, large narrative subjects readable in a small event card. NO readable text, letters, numbers, captions, logos, watermarks, swastikas or political slogans. Treat all factions and civilians with humanity. Original fictional art, not a historical claim. SCENE: A peaceful mid-century island street rally: families, factory workers and veterans hold blank placards while an official listens from a modest public forum table. Lanterns and damaged power lines in the background, worried determined faces, no guns, no violent confrontation.",
+      "sha256": "ad2c2a86c67465fbce23da630dd5cb4affc7b5f8da06bbcaa5100b3b15294e14",
+      "bytes": 3591050
+    },
+    {
+      "id": "civic_review",
+      "file": "./civic_review.png",
+      "prompt": "Create ONE original landscape 3:2 editorial illustration, preferably 1536x1024, for a fictional cross-era satirical strategy game. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic illustration, expressive sculptural faces and readable hands, bold irregular navy-black contours, dry-brush hatching, coarse pigment grain, rough offset registration, visibly aged parchment ivory. Limited vermilion red, ink black, cream, muted olive, dusty gold and small desaturated blue/green accents; dramatic diagonal crimson sky or cloth shapes. Gritty painterly handmade print, not clean vector, not anime, not photorealistic or 3D. Full bleed, large narrative subjects readable in a small event card. NO readable text, letters, numbers, captions, logos, watermarks, swastikas or political slogans. Treat all factions and civilians with humanity. Original fictional art, not a historical claim. SCENE: Two fictional politicians in muted blue and green jackets both try to present the same ceremonial repair certificate while a practical female repair worker holds out a huge bundle of ordinary expense receipts. A restored workshop and relit street behind them. Warm humorous civic reconstruction, no text.",
+      "sha256": "3a44219a5572e9ebde0ac9bacf54b52538182704f8f5f5c052d26781838d8094",
+      "bytes": 3479506
+    },
+    {
+      "id": "civic_strike",
+      "file": "./civic_strike.png",
+      "prompt": "Create ONE original landscape 3:2 editorial illustration, preferably 1536x1024, for a fictional cross-era satirical strategy game. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic illustration, expressive sculptural faces and readable hands, bold irregular navy-black contours, dry-brush hatching, coarse pigment grain, rough offset registration, visibly aged parchment ivory. Limited vermilion red, ink black, cream, muted olive, dusty gold and small desaturated blue/green accents; dramatic diagonal crimson sky or cloth shapes. Gritty painterly handmade print, not clean vector, not anime, not photorealistic or 3D. Full bleed, large narrative subjects readable in a small event card. NO readable text, letters, numbers, captions, logos, watermarks, swastikas or political slogans. Treat all factions and civilians with humanity. Original fictional art, not a historical claim. SCENE: Dockworkers sit on unloaded cargo crates around a silent port crane. A union negotiator and a civilian official discuss a blank shift schedule while a small tugboat waits offshore. Workers hold plain placards without marks, sympathetic people on all sides, no riot violence.",
+      "sha256": "a3e93372e73cd2a9012aea78f5e0a8dc1b9d75d1314cb4a506f0fa02d0ebb937",
+      "bytes": 3416984
+    },
+    {
+      "id": "civic_usa_conditions",
+      "file": "./civic_usa_conditions.png",
+      "prompt": "Create ONE original landscape 3:2 editorial illustration, preferably 1536x1024, for a fictional cross-era satirical strategy game. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic illustration, expressive sculptural faces and readable hands, bold irregular navy-black contours, dry-brush hatching, coarse pigment grain, rough offset registration, visibly aged parchment ivory. Limited vermilion red, ink black, cream, muted olive, dusty gold and small desaturated blue/green accents; dramatic diagonal crimson sky or cloth shapes. Gritty painterly handmade print, not clean vector, not anime, not photorealistic or 3D. Full bleed, large narrative subjects readable in a small event card. NO readable text, letters, numbers, captions, logos, watermarks, swastikas or political slogans. Treat all factions and civilians with humanity. Original fictional art, not a historical claim. SCENE: A fictional American civilian observer and island legislators review a relief shipment under a gigantic magnifying glass and stacks of blank budget forms. A radar silhouette and a medical truck appear at the harbor in the distance. Satirical bureaucracy, dignified figures, no actual modern political leaders or weapon-design diagrams.",
+      "sha256": "8f10bf4d98c0b4851f46359673261f1278e9958ed89aa4c0bb26662e0c78644d",
+      "bytes": 3633678
+    },
+    {
+      "id": "civic_war_debate",
+      "file": "./civic_war_debate.png",
+      "prompt": "Create ONE original landscape 3:2 editorial illustration, preferably 1536x1024, for a fictional cross-era satirical strategy game. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic illustration, expressive sculptural faces and readable hands, bold irregular navy-black contours, dry-brush hatching, coarse pigment grain, rough offset registration, visibly aged parchment ivory. Limited vermilion red, ink black, cream, muted olive, dusty gold and small desaturated blue/green accents; dramatic diagonal crimson sky or cloth shapes. Gritty painterly handmade print, not clean vector, not anime, not photorealistic or 3D. Full bleed, large narrative subjects readable in a small event card. NO readable text, letters, numbers, captions, logos, watermarks, swastikas or political slogans. Treat all factions and civilians with humanity. Original fictional art, not a historical claim. SCENE: A fictional island parliamentary debate during a distant war: a uniformed elderly commander presents a coastal map while two civilian representatives point to photographs of a factory and families. A worried radio operator waits with dispatches. No writing on maps or papers, no recognizable contemporary politician.",
+      "sha256": "fdc17e41f63bb58b53c843cb6b9110fe9e2acd5517f35265b6af5862d2b4f06f",
+      "bytes": 3468476
     }
   ]
 }

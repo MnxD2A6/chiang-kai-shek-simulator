@@ -1,6 +1,6 @@
 (function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./world-core.js'));else root.FrontCore=factory(root.FrontCore);})(typeof globalThis!=='undefined'?globalThis:this,function(Base){
  'use strict';
- const F={...Base},kinds=['watch','trade','diplomatic','scrutiny','mobilize','patrol','counter'];
+ const F={...Base},kinds=['watch','trade','diplomatic','scrutiny','mobilize','patrol','counter','pressure'];
  const clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),yes=message=>({ok:true,message}),no=message=>({ok:false,message});
  const random=s=>{s.world.rng=(Math.imul(s.world.rng,1664525)+1013904223)>>>0;return s.world.rng/4294967296;};
  const force=s=>s.units.reduce((n,u)=>n+u.force,0)+s.factions[1].troops;
@@ -17,8 +17,8 @@
  F.setPace=(s,pace)=>{if(![.5,1].includes(pace))return no('只能选择 1× 或 2×。');s.campaign.pace=pace;return yes(pace===.5?'已切换 1×：每周约 60 秒，随时可暂停。':'已切换 2×：每周约 30 秒。');};
  function record(s,text,kind){const c=s.campaign;c.lastAction=text;c.history.unshift({kind,at:s.time,text});c.history.length=Math.min(12,c.history.length);s.world.news.unshift({text:'大陆动态：'+text,kind:kind==='watch'?'brief':'danger',at:s.time});s.world.news.length=Math.min(50,s.world.news.length);s.events.unshift({text,kind:kind==='watch'?'info':'danger',t:s.time});s.events.length=Math.min(14,s.events.length);}
  function posture(s){const c=s.campaign,n=s.world.nuclear;c.alert=clamp(18+Math.max(0,force(s)-1200)/180+s.units.length*2+Object.values(s.strategy.partners).filter(Boolean).length*5+n.risk*.2+(s.strategy.phase==='war'?30:0)-(s.time<c.restraintUntil?22:0),5,100);c.posture=s.strategy.phase==='war'?'战时反制':c.alert>=55?'沿海戒备':c.alert>=30?'密切关注':'观察';}
- function intent(s){if(s.strategy.phase==='war')return s.units.some(u=>F.geography.mainland(u.tile))?'counter':'patrol';if(s.world.nuclear.status==='research'&&s.world.nuclear.risk>=15)return 'scrutiny';if(Object.values(s.strategy.partners).some(Boolean))return 'diplomatic';if(force(s)>2200||s.units.length>2||s.naval.ships.filter(a=>a.faction===1).length>4)return 'mobilize';if(s.strategy.levels.economy>0)return 'trade';return 'watch';}
- const notices={watch:'大陆正在重新评估局势',trade:'大陆将调整区域贸易报价',diplomatic:'大陆正在向合作方施加外交压力',scrutiny:'大陆将公开质疑新增科研支出',mobilize:'大陆沿海部队开始集结',patrol:'大陆沿海舰艇准备出港',counter:'大陆准备反击登陆部队'};
+ function intent(s){if(s.strategy.phase==='war')return s.units.some(u=>F.geography.mainland(u.tile))?'counter':'patrol';if(s.civic&&s.homefront.support<35&&s.time>=s.civic.foreignAt)return 'pressure';if(s.world.nuclear.status==='research'&&s.world.nuclear.risk>=15)return 'scrutiny';if(Object.values(s.strategy.partners).some(Boolean))return 'diplomatic';if(force(s)>2200||s.units.length>2||s.naval.ships.filter(a=>a.faction===1).length>4)return 'mobilize';if(s.strategy.levels.economy>0)return 'trade';return 'watch';}
+ const notices={pressure:'大陆关注岛内民心，正在准备民生物资与降温提案',watch:'大陆正在重新评估局势',trade:'大陆将调整区域贸易报价',diplomatic:'大陆正在向合作方施加外交压力',scrutiny:'大陆将公开质疑新增科研支出',mobilize:'大陆沿海部队开始集结',patrol:'大陆沿海舰艇准备出港',counter:'大陆准备反击登陆部队'};
  function announce(s,kind=intent(s)){const c=s.campaign;c.pending={kind,due:s.time+6+random(s)*6};record(s,notices[kind]+'，部署将在约 '+F.realSeconds(s,c.pending.due-s.time)+' 秒后落实。',kind);c.nextReaction=s.time+36+random(s)*24;posture(s);}
  function muster(s,counter){
   const existing=s.naval.ground.filter(a=>a.key==='china'&&a.mission!=='taiwan');if(existing.length>=2){for(const a of existing)a.force=Math.min(1800,a.force+350);return '大陆沿海守备队获得补充，现有部队继续执行任务。';}
@@ -33,7 +33,7 @@
   else if(p.kind==='patrol'){
    const town=s.towns.find(t=>t.country==='CHN'&&s.owners[t.tile]!==1),count=s.naval.ships.filter(a=>a.faction!==1).length;
    if(town&&count<12){const a=F.spawnShip(s,'destroyer',3,town.tile,'大陆沿海巡防舰');const own=s.naval.ships.find(a=>a.faction===1);if(own){a.goal=own.tile;a.path=F.navalRoute(s,a.tile,a.goal)||[];}text='大陆巡防舰已出港，地图上出现新的敌舰。';}else text='大陆巡防舰队保持现有部署。';
-  }else if(p.kind==='diplomatic'){s.world.relations.usa=clamp(s.world.relations.usa-6,-100,100);s.world.relations.japan=clamp(s.world.relations.japan-4,-100,100);text='大陆施加外交压力：美国态度 −6，日本态度 −4。可通过外交沟通修复关系。';}
+  }else if(p.kind==='pressure'){if(s.civic&&s.homefront.support<35&&s.time>=s.civic.foreignAt){const r=F.queueWorldEvent(s,'civic_mainland_offer',0);if(r.ok){s.civic.foreignAt=s.time+90;text='大陆的民生物资与降温提案已进入新闻，接受会影响美国态度；由你决定回应。';}else text='大陆的民生提案仍在协调中。';}else text='岛内局势已有改善，大陆暂未追加新的民生提案。';}else if(p.kind==='diplomatic'){s.world.relations.usa=clamp(s.world.relations.usa-6,-100,100);s.world.relations.japan=clamp(s.world.relations.japan-4,-100,100);text='大陆施加外交压力：美国态度 −6，日本态度 −4。可通过外交沟通修复关系。';}
   else if(p.kind==='scrutiny'){const n=s.world.nuclear;if(n.status==='research'&&!n.disclosed){n.risk=clamp(n.risk+6,0,100);text='大陆公开质疑科研预算，项目暴露风险 +6；可暂停投入降低风险。';}else text='大陆对科研支出的质疑未形成新的调查依据。';}
   else if(p.kind==='trade'){const loss=Math.min(40,Math.floor(s.strategy.funds));s.strategy.funds-=loss;text='大陆下调区域贸易报价，临时订单流失 '+loss+' 资金；这次损失已结算。';}
   else{s.world.tension=Math.max(0,s.world.tension-3);text='大陆暂缓升级部署，地区紧张 −3。筹备期仍由你决定何时开战。';}
