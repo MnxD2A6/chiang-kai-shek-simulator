@@ -1,5 +1,5 @@
 {
-  "version": "1.10.0",
+  "version": "2.7.0",
   "tool": "OpenAI built-in image_gen",
   "intent": "generate",
   "style": "Original historical painted poster and lithographic editorial illustrations; red, ink, aged paper, olive, rough pigment",
@@ -242,6 +242,321 @@
       "prompt": "Use case: illustration-story. Generate ONE original landscape 3:2 illustration for a fictional satirical strategy game's event card. Style: mid-20th-century hand-painted wartime poster and lithographic editorial art, sculptural expressive faces and hands, bold dark navy-black irregular outlines, dry-brush hatching, rough offset ink registration, coarse pigment grain on aged cream paper. Limited vermilion red, parchment ivory, ink black, muted olive and dusty gold, large dramatic crimson cloth or sky shapes, strong diagonal composition, readable focal subjects at a small card size. Painterly gritty illustration, not clean vector, not anime, not photoreal or 3D. Full-bleed artwork, no border, NO letters, words, captions, logos, watermarks, swastikas or political campaign slogans. Scene: An imposing multinational intervention fleet enters a fictional Taiwan Strait, large angular destroyer in foreground with churning cream waves and searchlights, anxious local harbor observers on shore, red-black storm sky; strategic consequences, no technical targeting details or writing.",
       "sha256": "de75a19d713799040d1f215d3536a0f9c4d42c09979ae3453314a7b85a9497c5",
       "bytes": 3617759
+    },
+    {
+      "id": "consequence_cargo_departure",
+      "file": "./consequence_cargo_departure.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: At an island civilian port, a worried bamboo merchant stands between two real shipping choices: a small transport ship escorted by a destroyer offshore, and a civilian charter vessel with a captain holding out a blank contract. Foreground bundled bamboo awaits loading, no victory or money yet. Strong diagonal quay composition.",
+      "sha256": "4e7dbf51559d7deb47d20047a1f95a61c0767aae9de19f8f35f406fe0ac69103",
+      "bytes": 3605498
+    },
+    {
+      "id": "consequence_cargo_failure",
+      "file": "./consequence_cargo_failure.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: After a failed fictional civilian bamboo delivery, an exhausted freight merchant opens a rescued crate and finds a jar of seawater instead of bamboo. A damaged empty cargo boat and floating bamboo bundles are visible offshore, all people are safely on the quay. Rueful non-graphic loss, no bodies or triumph.",
+      "sha256": "2de79aa61e534bfcf00a90096c9493e94ad370d25cb54d05ef56d4722ebcfdaf",
+      "bytes": 3742302
+    },
+    {
+      "id": "consequence_cargo_success",
+      "file": "./consequence_cargo_success.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A civilian cargo vessel safely reaches harbor carrying tightly bundled bamboo. Relieved dockworkers actually unload the bamboo while a merchant ceremonially counts a single bundle and offers a sealed payment envelope to the transport coordinator. A diligent escort ship waits offshore. Completed delivery, no battlefield conquest.",
+      "sha256": "f6e489545353c1928cff823bbee5a87b8166471a51fb80c8e92182875a646a70",
+      "bytes": 3468807
+    },
+    {
+      "id": "consequence_harbor_renewal",
+      "file": "./consequence_harbor_renewal.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A giant yellow rubber duck waits outside a locked alternate harbor berth while a dock official examines an expired blank employee card and a civilian port coordinator weighs a renewal contract. Shipping traffic pauses beyond a simple chain gate. Comic consequence of a port agreement expiring, no readable labels.",
+      "sha256": "17adcacebbf0a02d6afcf5b12785148db691d77a2063ac6f7ab614bc9f431e78",
+      "bytes": 3499309
+    },
+    {
+      "id": "consequence_insurance_report",
+      "file": "./consequence_insurance_report.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A stubborn insurance adjuster and a relieved city emergency accountant inspect a real damaged factory wall together. The adjuster crosses out a tiny bamboo-scratch doodle on a blank claim sheet and finally offers a payment envelope, while workers begin repairs behind them. Satire about honest city damage compensation, no visible writing.",
+      "sha256": "d8e8778eac54c494657aad6f0d47c5c16851cc9a669329fd92f9126fc9e12f3d",
+      "bytes": 3371678
+    },
+    {
+      "id": "consequence_lab_renewal",
+      "file": "./consequence_lab_renewal.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Civilian astronomers finish packing up a joint public observatory. One fondly clutches a small makeshift lunch-box telescope while another offers a blank renewal agreement to an island science coordinator. A clock without numbers and boxes of public star charts indicate a completed research term. No secret weapons or text.",
+      "sha256": "34227a0ee46034a2ac69e8dc819632b1a264c5e43f5a1b3e3e34dadf9ad713cd",
+      "bytes": 3586841
+    },
+    {
+      "id": "consequence_medical_report",
+      "file": "./consequence_medical_report.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A weary but capable international civilian medical relief team presents a field report to an island city coordinator after two emergencies. Empty noodle boxes are being replaced with proper bandages and medicine crates; repaired shelter windows, relieved civilians and a waiting medical boat behind them. No injuries shown, no legible forms.",
+      "sha256": "91062b40e77a51cfe6a010d50bceb5d99755c0dc1ccdadb0d5659aa2dd7e017f",
+      "bytes": 3446167
+    },
+    {
+      "id": "prep_defense_delivery",
+      "file": "./prep_defense_delivery.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A civil-defence exercise concludes in an island city. A proud repair crew carries tools, volunteers guide residents past lit shelter signs with no lettering, and radar operators calmly check a distant operational defensive antenna. Show people protected by preparation and infrastructure, not invulnerability or a battle victory.",
+      "sha256": "45ec2913328c2330c508c9aa1b3cae21725694040a6244d615b1a5888cafeb22",
+      "bytes": 3635634
+    },
+    {
+      "id": "prep_defense_offer",
+      "file": "./prep_defense_offer.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: At an island civil-defence planning desk an engineer, a medical volunteer and a radar operator consider three tangible plans: a simple radar dial, a toolbox and evacuation shelter lanterns. Open notebooks have no readable content; city buildings and a distant defensive radar silhouette behind them. No weapon design details.",
+      "sha256": "4a636e2a70a390587b51505bd22612d218ea42ced4a5cbc302ac38ba416d56f4",
+      "bytes": 3529394
+    },
+    {
+      "id": "prep_diplomacy_delivery",
+      "file": "./prep_diplomacy_delivery.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A civilian mediation desk at an international harbor concludes a practical agreement. A diplomat stamps a blank warranty folder, a fictional walking robot is guided toward repair, and medical volunteers load a relief boat while a delayed foreign cargo vessel waits beyond the quay. Sober but humorous diplomatic consequences.",
+      "sha256": "7cd99006f02b287b0e7aaae3d93cc63c9364d3cb9252a7d0c970c5a03bb6c71a",
+      "bytes": 3602969
+    },
+    {
+      "id": "prep_diplomacy_offer",
+      "file": "./prep_diplomacy_offer.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A civilian island diplomat weighs three comic proposals at an international desk: a delayed shipping calendar with no numbers, a faulty giant robot warranty card, and a small medical relief boat model. A waiting fictional walking machine and volunteer medics can be seen behind the table. Clear diplomacy choices, no text.",
+      "sha256": "a7e39aa1666484c3a1cb6842ac59696183407f2a4f454f050e1a93d5b1a3b722",
+      "bytes": 3641423
+    },
+    {
+      "id": "prep_industry_delivery",
+      "file": "./prep_industry_delivery.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Workers unveil a newly completed island factory line beside a port. Foreground a civilian inspector compares a signed blank contract with three distinct physical achievements: packed export crates, reinforced factory beams and a transport vessel at the quay. Tangible completed industrial work, hopeful and resolute.",
+      "sha256": "37ada48d5dc57a26c453de381cdf58bb44c5ab1277c84e97742442ea7613bfab",
+      "bytes": 3621753
+    },
+    {
+      "id": "prep_industry_offer",
+      "file": "./prep_industry_offer.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Three clear alternatives for an island industrial budget presented at a civilian factory planning table: an export cargo crate, a reinforced factory wall model and a small transport ship model. A practical factory worker and a thoughtful civilian planner weigh the choices, cranes and workshops behind them. No lettering, diagrams remain symbolic.",
+      "sha256": "a26f0d37e17adf5a568e0e1c36b6791007e09767a9383870291d70fb926b5af6",
+      "bytes": 3604497
+    },
+    {
+      "id": "story_aurora_finish",
+      "file": "./story_aurora_finish.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Relieved international civilian scientists wrap up a solar-storm conference beside a small telescope. One researcher finally holds up an ordinary dinner plate matching the supposed satellite anomaly while others laugh and pack their data folders. Dawn light, settled scientific cooperation, no legible documents.",
+      "sha256": "4f8555549716099fbcabd05b40ab04039567c643d1579e7d60aa067c0c1bdc5c",
+      "bytes": 3426173
+    },
+    {
+      "id": "story_aurora_ground",
+      "file": "./story_aurora_ground.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: At an island civilian communications office engineers restore a ground telephone line while an exhausted operator stops a colleague from feeding an actual lunch box into an old fax machine. Reassuring ground radio equipment and paper records, dark red sunset outside. No secret facility or weapon blueprint.",
+      "sha256": "d02a72d235baff59bfcd5e1ff969748b964eeeef718928f023a859924f3e456d",
+      "bytes": 3598467
+    },
+    {
+      "id": "story_aurora_orbit",
+      "file": "./story_aurora_orbit.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Civilian astronomers in an international observation room carefully compare a circular dinner plate with a blurry orbital photograph, while one solemn scientist measures the plate using a harmless ruler. A small telescope, star chart without writing and crimson solar glow through the window. Wry scientific editorial image.",
+      "sha256": "e0e96a3df0f829f16820d2bd51328400f3759c4fe33bad431fae6911a6f3f90d",
+      "bytes": 3292931
+    },
+    {
+      "id": "story_aurora_start",
+      "file": "./story_aurora_start.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A Pacific civilian observation station under red and green aurora-like solar storm skies. Alarmed scientists and a sleepy military-looking liaison stare at a grainy satellite print that is clearly a round dinner plate. A red telephone and abandoned lunch box complete the absurd surveillance misunderstanding. No screens with text.",
+      "sha256": "fa389500a5db8d96bce122126c551ed033494ccd3d03aae462b0d30478e5737f",
+      "bytes": 3647754
+    },
+    {
+      "id": "story_budget_audit",
+      "file": "./story_budget_audit.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Two amused civilian auditors in a mid-century office discover a mountain of bubble-tea cups hidden behind public procurement ledgers. An embarrassed island delegation offers a tiny receipt while a stern auditor lifts a single drink for examination. Humorous large faces and hands, papers have no readable text.",
+      "sha256": "4e95b803cde1ad1d68b5140a689ed54481f092a8d69618df6a7bc7d73aaa7d52",
+      "bytes": 3470033
+    },
+    {
+      "id": "story_budget_finish",
+      "file": "./story_budget_finish.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: An exhausted budget committee closes its hearing. A clerk ceremonially places a small pillow beneath a resting office printer while a civilian procurement officer and a foreign representative exchange a sealed approval folder. Outside the window are crates and cranes for a future air-defence delivery; no missiles firing, no legible paperwork.",
+      "sha256": "26f47febd24c2f5eeed550366c1f15b809931a203f3f58ad0e9f61f57760a2e8",
+      "bytes": 3401010
+    },
+    {
+      "id": "story_budget_pressure",
+      "file": "./story_budget_pressure.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: American and Taiwanese civilian negotiators exchange a short three-page proposal across a conference table; behind them a hand cart collapses beneath a comically enormous mountain of annexes. One incredulous diplomat measures the pile with a ruler. No legible documents or symbols.",
+      "sha256": "4666ad9774756700c6cc39b3028b7bd4f482f3810bc6f9331352031897ca1583",
+      "bytes": 3361298
+    },
+    {
+      "id": "story_budget_start",
+      "file": "./story_budget_start.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A weary American congressional hearing in a mid-century committee room. Serious legislators in suits stare at a gigantic pile of budget folders while a broken office printer ejects blank paper and a clerk holds an empty paper tray. Folders tower over the witnesses. Satire about the seventh budget attachment, no readable writing.",
+      "sha256": "4f97633b1093e6ead1b711fc4f8739ff2cdec3ada02c10a88d93ad369c75dd08",
+      "bytes": 3332797
+    },
+    {
+      "id": "story_cable_finish",
+      "file": "./story_cable_finish.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A Filipino civilian relief team and an island medical coordinator exchange an exceptionally long folded thank-you letter beside repaired communications equipment. Behind them a modest hospital reopens, medical volunteers and supply crates prepare for a reciprocal relief mission. Blank letter, hopeful hand-painted atmosphere.",
+      "sha256": "c19cc9f8eab949074d1e4f27405dbca1b6e5c4c5b41767a7020ed75239fe88eb",
+      "bytes": 3382387
+    },
+    {
+      "id": "story_cable_repair",
+      "file": "./story_cable_repair.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Civilian marine engineers on a repair ship recover a severed undersea communication cable together with three soggy crates of instant noodles. One engineer inspects the cable, another lifts a dripping noodle bowl in disbelief; a storm-damaged coast and small hospital are visible far behind. No military action.",
+      "sha256": "3e927f020ec1c9577628d021d422683727756a2ded6d55a4fa402ee02b69f61b",
+      "bytes": 3747482
+    },
+    {
+      "id": "story_cable_route",
+      "file": "./story_cable_route.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Filipino radio volunteers restore an improvised emergency communication station using a tangled patch panel. A relieved announcer holds a microphone while assistants excitedly count bowls of instant noodles. Families gather outside under repaired storm shelter roofing, hopeful and slightly absurd.",
+      "sha256": "6942d7a1845ffc687938f1984a6ae980172e71428c1f88b1e956bf79aeb48e3b",
+      "bytes": 3713112
+    },
+    {
+      "id": "story_cable_start",
+      "file": "./story_cable_start.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: After a tropical storm at a Philippine coastal radio shack, worried residents and a civilian engineer hold a broken undersea communication cable and an empty instant-noodle bowl. A rescue coordinator answers a red telephone, fishing boats and damaged communication poles behind them. Humanitarian concern with gentle absurd humor.",
+      "sha256": "4930e090ed0a4ee6e2b65c0a6892a689d752b31eaf307cfaf4212dec5beedc92",
+      "bytes": 3657845
+    },
+    {
+      "id": "story_insurance_audit",
+      "file": "./story_insurance_audit.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A skeptical insurance auditor in a civilian warehouse inspects a public cargo list while a massive harmless walking mechanical tank bends down to peek through the doorway. Shipping crates and ordinary life rings fill the background. The auditor points at a blank line in the contract; no letters or real emblems.",
+      "sha256": "c55d955cc2bab8dde2911bb15e46dbc9cfc5fb9f8cf8cbae7c50f0afaa89e304",
+      "bytes": 3459129
+    },
+    {
+      "id": "story_insurance_finish",
+      "file": "./story_insurance_finish.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Two civilian shipping representatives sign a carefully separated insurance agreement. One page has a simple duck silhouette and another a simple carrier silhouette, with no lettering. Nearby a relief accountant prepares emergency city-repair cash envelopes while a large rubber duck waits outside the office window. Restrained satirical diplomacy.",
+      "sha256": "16ef97aebb7c227508ab05b1acd3be40939f08a8bcaf3cb26a32deedabae95f1",
+      "bytes": 3377218
+    },
+    {
+      "id": "story_insurance_own",
+      "file": "./story_insurance_own.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Tense civilian trade negotiators face each other across a desk piled with life rings and shipping policies. An angry delegate raises a tiny life ring as though it were a strategic export; a weary mediator tries to calm both sides. Port cranes under red storm clouds in the window, no legible text.",
+      "sha256": "b8217ceafcd6075d8333ebc1220d5833638c3385b279c9903dc8195b67d61d21",
+      "bytes": 3241529
+    },
+    {
+      "id": "story_insurance_start",
+      "file": "./story_insurance_start.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: International shipping-insurance representatives at an absurd risk meeting compare a toy walking tank, an oversized rubber duck and a life ring on their table. A frazzled underwriter studies a blank policy sheet through a magnifier while port workers wait impatiently. Editorial caricature, no readable words.",
+      "sha256": "bfd4b0aa91841a565e917154c833b5248988fb63177d7bec2aae776ee363c7ed",
+      "bytes": 3432306
+    },
+    {
+      "id": "story_karaoke_concert",
+      "file": "./story_karaoke_concert.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: North and South Korean civilian musicians rehearse a joint concert. A very serious drummer refuses to strike the drum until two worried diplomats sign a blank tiny truce sheet on a music stand. Other musicians awkwardly hold their instruments mid-pose. Warm absurd diplomacy, no emblems or written music.",
+      "sha256": "6b59905b94a7f622191cb5754a39341ab5b9fc20b6b655d57ffe8b6547eb8757",
+      "bytes": 3416643
+    },
+    {
+      "id": "story_karaoke_finish",
+      "file": "./story_karaoke_finish.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A relieved Korean civilian audience applauds together while two rival delegations ceremonially carry an old karaoke scoring machine into retirement on a small trolley. A conductor invites applause instead of scores, and a red hotline rests quietly on a table. No text or numbers, hopeful but satirical.",
+      "sha256": "5733840d7457c4792441d1471d80255ab29bc0ab21c3395b11551bce27c0212c",
+      "bytes": 3502426
+    },
+    {
+      "id": "story_karaoke_judge",
+      "file": "./story_karaoke_judge.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Neutral civilian music judges demonstrate that a karaoke scoring device completed its score before the singer began. A confused formally dressed Korean leader watches a conductor holding a silent baton over an untouched microphone; rival delegation members lean forward in disbelief. No numbers or writing.",
+      "sha256": "d5c25c06d2a4fa2948382aa82ad147c2d2e3b5ad8e7fd0047fdd84966ea72417",
+      "bytes": 3250548
+    },
+    {
+      "id": "story_karaoke_start",
+      "file": "./story_karaoke_start.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A fictional satirical Kim Jong Un figure in a formal dark suit glares at a karaoke scoring machine after a performance, gripping a microphone while anxious aides study the machine. An embarrassed South Korean civilian host raises an appeasing hand across the stage. No displayed number, readable text or threats, large expressive faces.",
+      "sha256": "fc173f891d4e40a182de9893ea572b9c6c4cc1f6062c9457a7d35e408e0a7795",
+      "bytes": 3405053
+    },
+    {
+      "id": "story_panda_customs",
+      "file": "./story_panda_customs.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A civilian customs examiner and a bamboo merchant compare blank shipping receipts against neatly bundled bamboo crates. The merchant offers a real purchase contract while a cargo vessel waits at the quay behind them. Faces show relief mixed with practical concern about the coming shipment. No instant cash or celebratory victory.",
+      "sha256": "491651b9a1e7fe0a511658c0cecac3863f793f2c3db94eade07fb1edacbaf5ed",
+      "bytes": 3600215
+    },
+    {
+      "id": "story_panda_finish",
+      "file": "./story_panda_finish.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: At a civilian port, exhausted customs clerks finally close a bamboo manifest while a warehouse behind them is comically overflowing with unclaimed bamboo bundles. One clerk offers a donation crate to a community volunteer, another checks a cargo ship still awaiting actual delivery. Satire about completed paperwork, not free money.",
+      "sha256": "57599fb33f7fe93cc58709e6f448709189e0c1932349d2df9990730512e969b0",
+      "bytes": 3537191
+    },
+    {
+      "id": "story_panda_press",
+      "file": "./story_panda_press.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A satirical split stage shows two rival civilian spokespersons at separate press lecterns each holding exactly one bamboo stalk at the same moment, mirrored gestures and equally baffled reporters. Curtains and photographers create a theatrical press conference; no text, flags, logos or legible signs.",
+      "sha256": "9d9f47f37eb1f75c19e09b40475b39837532ef5cf62ab078bb5110367c35ca2e",
+      "bytes": 3281015
+    },
+    {
+      "id": "story_panda_start",
+      "file": "./story_panda_start.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Civilian customs workers on opposite sides of a shipping desk open a crate expected to hold a panda and discover bundles of bamboo instead. A cargo merchant shrugs with a manifest, a puzzled spokesperson holds a single bamboo stalk and a red hotline telephone rings. No animals trapped, no readable text.",
+      "sha256": "34d0757e83e5da847c067d3ecc1dcb81ea29ee73d62a40005bbe3b415fb3e817",
+      "bytes": 3566876
+    },
+    {
+      "id": "story_port_detour",
+      "file": "./story_port_detour.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A surprised civilian freight inspector opens a supposedly empty alternate warehouse and discovers floor-to-ceiling mountains of miniature yellow duck souvenirs. A warehouse worker holds a small packing box while a delivery cart waits outside. Dramatic doorway light, wry embarrassed expressions.",
+      "sha256": "00b889e64b7e4c55a004eccaf4ad8b20b12a265c41c3f9b7c5229b4e918ecd84",
+      "bytes": 3288654
+    },
+    {
+      "id": "story_port_finish",
+      "file": "./story_port_finish.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Dockworkers finally open an alternate quay at dawn. A cheerful official presents a tiny blank employee badge to a giant rubber duck while a cargo vessel moves through a clearly separate, open shipping lane in the background. A completed port scheduling agreement and practical new route, no readable lettering.",
+      "sha256": "eed60d7f5284afcaea37fa86390e079984c14f0644a4488eb67ded1aecc15f2e",
+      "bytes": 3439974
+    },
+    {
+      "id": "story_port_mediate",
+      "file": "./story_port_mediate.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: Dockworkers, a Japanese port manager and a civilian mediator sit around a union negotiation table on a quay. They all point solemnly at a tiny blank time card beside a towering yellow rubber duck that peers through the warehouse doorway, as if the duck must also clock in. No legible writing.",
+      "sha256": "baef4e4abf4ce23a3b8b9863e87d4755b50b1a361ac88ed192c2a98885ab18ee",
+      "bytes": 3324623
+    },
+    {
+      "id": "story_port_start",
+      "file": "./story_port_start.png",
+      "prompt": "Create ONE original landscape 3:2 editorial illustration, 1536x1024 if available, for a fictional satirical strategy game event. Scene: An indignant port official and weary dockworkers in Japan register ONE enormous yellow rubber duck as a single cargo item. A dockworker triumphantly holds a comically long blank punch-card time sheet beside the giant duck on a busy 1950s-style freight quay, cranes and parked cargo ship behind them. This is a unique scene about a port labor dispute, a humorous historical newspaper image. STYLE: mid-20th-century hand-painted wartime poster / coarse lithographic editorial illustration; strongly sculptural expressive faces and hands; bold irregular dark navy-black contours; dry-brush hatching, visibly aged ivory paper, rough offset ink registration and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; dominant diagonal crimson cloth or sky shapes. Painterly gritty hand-made print, NOT clean vector, NOT anime, NOT photoreal or 3D. Readable narrative faces and oversized duck at small event-card size. Full bleed, no borders, NO text, words, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. This is original fictional game art, not a historical claim.",
+      "sha256": "fb635a70dc670d3993098b17d797fc8f9909c3c2741cdd8b5b0314fd5516f150",
+      "bytes": 3394377
+    },
+    {
+      "id": "story_recall_contact",
+      "file": "./story_recall_contact.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A tired human after-sales telephone operator holds a red receiver and points at an enormous unplugged electrical connector, while a baffled Russian fictional walking tank looks through the office door. A civilian mechanic attempts to explain the plug orientation. Comic troubleshooting without technical weapon detail.",
+      "sha256": "dfff9cb83b354bd00f0c379e915781f9de6c72c7ed6c971d587b1e58012e31a8",
+      "bytes": 3540092
+    },
+    {
+      "id": "story_recall_finish",
+      "file": "./story_recall_finish.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: At a solemn civilian warranty settlement desk a fictional walking mechanical tank carefully accepts a small paper warranty card held by a human mediator. Behind it mechanics guide another machine into a maintenance hangar rather than the battlefield. Mixed relief and bureaucratic absurdity, blank documents only.",
+      "sha256": "8e74010cee6a8a335aae349ee00e4698965e79f5dc5744e88555155cb029e812",
+      "bytes": 3242021
+    },
+    {
+      "id": "story_recall_hearing",
+      "file": "./story_recall_hearing.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A huge fictional walking mechanical tank politely sits through a public safety hearing. Human committee members struggle to fit its travel expenses and a tiny blank ticket onto a conference table while a mechanic displays an upside-down wiring diagram. Robot body language is officious and indignant, no weapons firing.",
+      "sha256": "2edaba0c901d6d3ea44c05b882974a80b8148b6643e1081ae13e6f72d5b719ac",
+      "bytes": 3716116
+    },
+    {
+      "id": "story_recall_start",
+      "file": "./story_recall_start.png",
+      "prompt": "Create ONE original landscape 3:2 illustration, preferably 1536x1024, for a fictional satirical strategy game event. Full-bleed scene with large expressive faces and readable hands at a small card size. STYLE: mid-20th-century hand-painted wartime poster and coarse lithographic editorial illustration, sculptural faces and hands, bold irregular dark navy-black outlines, dry-brush hatching, rough offset ink registration, visibly aged parchment ivory paper and coarse pigment grain. Limited vermilion red, ink black, parchment cream, muted olive and dusty gold; strong diagonal composition and large crimson cloth or sky shapes. Painterly gritty printmaking, NOT clean vector, NOT anime, NOT photoreal or 3D. No border, readable text, letters, numbers, captions, logos, watermarks, swastikas or real political slogans. Original fictional game art, not a historical claim. SCENE: A giant fictional Russian walking mechanical tank stands confused at a port warranty counter. A manufacturer representative sheepishly presents a tiny rice cooker as the supposed product model while the robot points at itself. Dockworkers hold a misplaced instruction booklet with only diagrams. Humorous machinery, not combat.",
+      "sha256": "1084512fcfd8e9e4f90369e42cb9b666a95313f290ac885bc1e61568fad4d672",
+      "bytes": 3378374
     }
   ]
 }

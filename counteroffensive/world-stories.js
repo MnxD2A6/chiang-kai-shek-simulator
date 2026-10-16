@@ -2,7 +2,7 @@
  'use strict';
  const c=(id,label,cost,summary,effects={},follow,delay=28)=>({id,label,cost,summary,effects,next:follow?[{id:follow,delay}]:[]});
  const e=(chapter,country,tag,title,body,illustration,choices,extra={})=>({chapter,country,tag,title,body,illustration,choices,...extra});
- return {
+ const events={
   story_budget_start:e('第七份预算附件','美国 / 国会听证','合作条件','美国听证会开到一半，打印机宣布预算不足','议员把防空采购、产业补助和咖啡预算装进了同一个文件夹。美方要求解释合作经费的用途。支持者愿意争取军售，但要求你回应公开监督；拒绝会先损伤关系，甚至暂停采购。','press_debate',[
    c('audit','提交公开合作账目',45,'美国态度 +8、国际观感 +6；已启动科研风险 +4。',{relations:{usa:8},opinion:6,risk:4},'story_budget_audit',24),
    c('lobby','派代表解释军售用途',65,'美国态度 +12、日本态度 +4，进入附加条件谈判。',{relations:{usa:12,japan:4}},'story_budget_pressure',28),
@@ -149,4 +149,6 @@
    c('close','结束特别联络',0,'保留预算、国际紧张 −4，不获得科技工程加速。',{tension:-4})
   ])
  };
+ for(const [id,event] of Object.entries(events))event.illustration=id;
+ return events;
 });

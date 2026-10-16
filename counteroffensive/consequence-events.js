@@ -2,7 +2,7 @@
  'use strict';
  const c=(id,label,cost,summary,consequence)=>({id,label,cost,summary,effects:consequence?{consequence}:{},next:[]});
  const e=(chapter,title,body,illustration,choices)=>({chapter,country:'国际民用协调 / 架空后续',tag:'兑现与后果',title,body,illustration,choices});
- return {
+ const events={
   consequence_cargo_departure:e('竹子订单 / 真正发运','竹子备好了，货主问：谁来负责把它送到？','35资金只是备货投入，尚未获得回款。亲自护航会开启一场地图上的护送行动，补给船必须实际抵港；也可以支付70资金委托承运，等待交付。提前开战会取消未交付订单，备货投入不返还。','duck_convoy',[
    c('escort','派舰队亲自护航',0,'立即开启真实护送行动。成功后领取订单180资金，另有行动本身的奖励。','cargoEscort'),
    c('charter','委托民用承运',70,'约0.53周后交货，再领取180资金；省去手动护航。','cargoCharter'),
@@ -33,4 +33,6 @@
    c('close','结束保单，自留后续风险',0,'保留预算；后续城市应急支出恢复全额。')
   ])
  };
+ for(const [id,event] of Object.entries(events))event.illustration=id;
+ return events;
 });

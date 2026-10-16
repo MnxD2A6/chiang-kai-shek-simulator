@@ -2,7 +2,7 @@
  'use strict';
  const action=(project,stage,route)=>({project,stage,route});
  const choice=(id,label,cost,summary,project,stage,route,extra={})=>({id,label,cost,summary,effects:{...extra,preparation:action(project,stage,route)},next:[]});
- return {...Base,...Stories,...Consequences,
+ const events={...Base,...Stories,...Consequences,
   prep_industry_offer:{preparation:true,illustration:'trade_review',chapter:'产线订单 / 签约',country:'日本 / 产业协调组',tag:'战前发展',title:'产业预算到位：出口、加固，还是运输后勤？',body:'承包商把“战略储备”误写成了“巨型饭团”，但产线用途由你决定。一次投入100资金，达标并筹备约0.8周后验收。开战会中止未兑现项目，投入不返还。',choices:[
    choice('exports','签出口长单',100,'完成经济2级和日本合作后，出口税收 +3/模拟秒；日本贸易受阻时暂停。','industry','enroll','exports'),
    choice('resilience','建设本地韧性产线',100,'完成经济2级后，城市建筑与工厂的导弹物理损伤 −20%。','industry','enroll','resilience'),
@@ -40,4 +40,6 @@
    choice('cancel','撤回协调，回收部分资源',0,'返还40资金，不再改变俄方增援。','diplomacy','cancel',null,{money:40})
   ]}
  };
+ for(const [id,event] of Object.entries(events))event.illustration=id;
+ return events;
 });
