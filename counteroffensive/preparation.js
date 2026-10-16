@@ -16,7 +16,7 @@
  function requirement(s,key,route){
   const level=s.strategy.levels,partners=s.strategy.partners;
   if(!catalog[key]?.routes.includes(route))return '请选择本项议程中的有效路线';
-  if(key==='industry')return level.economy<2?'经济建设还需达到2级':route==='exports'&&!partners.japan?'还需完成日本合作':route==='exports'&&!tradeOpen(s)?'日本贸易受阻，先处理封锁或修复关系':route==='logistics'&&s.naval.ships.filter(a=>a.faction===1&&a.kind==='transport').length<3?'还需保有3艘运输舰，在舰队列表再建造1艘':'';
+  if(key==='industry')return level.economy<2?'经济建设还需达到2级':route==='exports'&&!partners.japan?'还需完成日本合作':route==='exports'&&!tradeOpen(s)?'日本贸易受阻，先处理封锁或修复关系':route==='logistics'&&s.naval.ships.filter(a=>a.faction===1&&a.kind==='transport'&&a.id!==s.operations?.active?.convoyId).length<3?'还需保有3艘正式运输舰；行动中的临时补给船不计入':'';
   if(key==='defense')return level.technology<2?'科技研发还需达到2级':route==='joint'&&!partners.usa?'还需完成美国合作':route==='joint'&&!jointOpen(s)?'美国军售条件暂不满足，先修复关系或航路':route==='civil'&&s.homefront.support<65?'民防演练需民心至少65':'';
   return route==='delay'&&s.world.relations.russia<0?'俄罗斯态度还需达到0':route==='expose'&&s.world.opinion<65?'国际观感还需达到65':route==='regional'&&level.diplomacy<2?'外交支援还需达到2级':route==='regional'&&!['korea','philippines'].some(k=>partners[k]&&s.world.relations[k]>=0&&!(k==='korea'&&s.world.flags.koreaWar)&&s.world.sanctions<2)?'还需完成韩国或菲律宾合作，且态度至少0、合作有效':'';
  }

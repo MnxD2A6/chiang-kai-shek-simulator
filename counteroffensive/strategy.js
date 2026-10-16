@@ -55,7 +55,7 @@
    else{p.levels[key]++;if(key==='diplomacy')s.factions[1].troops=Math.max(0,Math.min(api.capacity(s,1)-api.deployed(s,1),s.factions[1].troops+700));api.event(s,`${projects[key].name}达到 ${p.levels[key]} 级：${s.homefront?(key==='technology'?'设施加固 +6%，进攻损耗 −18%':key==='diplomacy'?'援军 +700，空袭间隔 +18秒，设施加固 +2%':projects[key].effect):projects[key].effect}。`,'success');}
   }
   if(p.phase!=='war')return;
-  if(!p.warning&&s.time>=p.nextStrike){const seconds=(partners(s).philippines?16:12)+P.bonuses(s).warningBonus;p.warning={startedAt:s.time,impactAt:s.time+seconds,sheltered:false};if(s.homefront)H.warn(s);api.event(s,`空袭预警：${seconds} 秒后抵达！可花 60 资金紧急疏散。`,'danger');}
+  if(!p.warning&&s.time>=p.nextStrike){const seconds=(partners(s).philippines?16:12)+P.bonuses(s).warningBonus;p.warning={startedAt:s.time,impactAt:s.time+seconds,sheltered:false};if(s.homefront)H.warn(s);api.event(s,`空袭预警：${seconds} 秒后抵达！可花 ${P.bonuses(s).shelterCost} 资金紧急疏散。`,'danger');}
   if(p.warning&&s.time>=p.warning.impactAt){
    if(s.homefront)H.strike(s,api);else{
    const factor=(1-protection(s))*(p.warning.sheltered?.35:1),damage=36*factor;

@@ -20,8 +20,8 @@
   if(action==='insuranceRenew'&&(!c.insuranceRenewed&&c.insurance>0||c.insuranceRenewed))reason='现有保险尚未用完，或已完成本轮续约';
   if(action==='procurement'&&c.procurement>=2)reason='已有两次快速交付资格，无需重复申请';
   if(action==='procurement'&&c.invested.budget+cost<80)reason='本轮公开采购累计投入需至少80；可免费结束差旅';
-  if(action==='procurement'&&s.homefront?.airDefense.batteries>=2)reason='防空系统已经部署满额，无需再购买快速交付资格';
-  if(['lab','labRenew'].includes(action)&&s.strategy.levels.technology>=3)reason='科技已满级，无需再为新科技工程购买加速';
+  if(action==='procurement'&&(s.homefront?.airDefense.batteries||0)+(s.homefront?.airDefense.order?1:0)>=2)reason='防空已部署或订购满额，无需再购买快速交付资格';
+  if(['lab','labRenew'].includes(action)&&(s.strategy.levels.technology>=3||s.strategy.levels.technology===2&&s.strategy.project?.key==='technology'))reason='科技已满级或最后一级已开工，无需再购买新科技工程加速';
   return {ok:!reason,reason};
  }
  function enqueue(c,id){if(!c.pending.includes(id))c.pending.push(id);}
@@ -37,7 +37,7 @@
   if(action==='labRenew'){c.lab.until=s.time+90;c.lab.renewed=true;}
   if(action==='medical'||action==='medicalRenew'){c.medical=2;if(action==='medicalRenew')c.medicalRenewed=true;}
   if(action==='insurance'||action==='insuranceRenew'){c.insurance=2;if(action==='insuranceRenew')c.insuranceRenewed=true;}
-  if(action==='procurement')c.procurement=2;
+  if(action==='procurement')c.procurement=2-(s.homefront?.airDefense.batteries||0)-(s.homefront?.airDefense.order?1:0);
  }
  function consumeStrike(s){const c=get(s);if(!c)return;if(c.medical>0&&--c.medical===0&&!c.medicalRenewed)enqueue(c,'consequence_medical_report');if(c.insurance>0&&--c.insurance===0&&!c.insuranceRenewed)enqueue(c,'consequence_insurance_report');}
  function onWar(s){const c=get(s);if(!c)return;if(['signed','escort','shipping'].includes(c.cargo.phase)){c.cargo.phase='cancelled';c.pending=c.pending.filter(id=>!id.startsWith('consequence_cargo_'));s.world.queue=s.world.queue.filter(q=>!q.id.startsWith('consequence_cargo_'));s.world.news.unshift({text:'开战后未交付的民用订单中止，35资金备货投入不返还；已获得的医疗与保险保障保留。',kind:'diplomacy',at:s.time});s.world.news.length=Math.min(50,s.world.news.length);}}

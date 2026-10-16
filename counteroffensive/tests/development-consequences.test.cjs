@@ -87,3 +87,16 @@ test('cargo escort delivery and logistics rewards follow actual naval victory, t
  const a=s.operations.active,guard=s.naval.ships.find(v=>v.faction===1&&v.kind==='destroyer');F.followShip(s,guard.id,a.convoyId);for(const id of a.enemyIds)assert.ok(F.missile(s,{shipId:id}).ok);s.world.queue=[];run(s,40);
  assert.equal(s.operations.lastResult.outcome,'success');assert.match(s.operations.lastResult.reward,/后勤额外 \+80/);assert.equal(s.world.active?.id,'consequence_cargo_success');choose(s,'claim');const restored=F.decode(F.encode(s));assert.equal(restored.world.consequences.cargo.phase,'settled');assert.equal(restored.operations.wins,1);
 });
+test('a temporary contract convoy cannot satisfy the permanent transport fleet requirement',()=>{
+ const s=fresh();s.strategy.levels.economy=2;assert.ok(F.reopenPreparation(s,'industry').ok);choose(s,'logistics');run(s,22);assert.ok(F.startOperation(s,'escort').ok);run(s,2.2);
+ assert.equal(s.world.active,null);assert.equal(s.world.preparation.projects.industry.phase,'active');assert.equal(F.preparationBonuses(s).transportCost,100);
+});
+test('a final battery already on order cannot leave paid procurement credits with no usable purchase',()=>{
+ const s=fresh();s.homefront.airDefense.batteries=1;s.homefront.airDefense.ammo=8;assert.ok(F.buyAirDefense(s).ok);event(s,'story_budget_start');choose(s,'audit');event(s,'story_budget_audit');choose(s,'publish');event(s,'story_budget_finish');assert.equal(F.worldChoice(s,s.world.active.token,'thanks').ok,false);choose(s,'close');
+});
+test('a final technology project already in progress prevents selling later acceleration',()=>{
+ const s=fresh();s.strategy.levels.technology=2;assert.ok(F.upgrade(s,'technology').ok);event(s,'story_aurora_finish');assert.equal(F.worldChoice(s,s.world.active.token,'research').ok,false);choose(s,'close');
+});
+test('civil defence warning quotes the actual discounted evacuation price',()=>{
+ const s=fresh();s.strategy.levels.technology=2;complete(s,'defense','civil');assert.ok(F.startWar(s).ok);run(s,18.2);assert.ok(s.strategy.warning);assert.ok(s.events.some(e=>e.text.includes('空袭预警')&&e.text.includes('30 资金')));
+});
