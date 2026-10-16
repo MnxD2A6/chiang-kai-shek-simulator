@@ -61,7 +61,7 @@ test('a cancelled sortie does not count as a repelled landing',()=>{
  tick(s,.1);assert.equal(s.homefront.invasion.repelled,0);assert.equal(s.result,null);
 });
 test('new saves preserve defensive victories and reject impossible counters',()=>{
- const s=ready();assert.equal(JSON.parse(F.encode(s)).version,11);
+ const s=ready();assert.equal(JSON.parse(F.encode(s)).version,12);
  assert.equal(F.decode(F.encode(s)).homefront.invasion.repelled,2);
  for(const n of [-1,1.5,10001]){const raw=JSON.parse(F.encode(s));raw.homefront.invasion.repelled=n;assert.throws(()=>F.decode(JSON.stringify(raw)));}
 });

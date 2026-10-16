@@ -1,4 +1,4 @@
-(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./naval-core.js'));else root.FrontCore=factory(root.FrontCore);})(typeof globalThis!=='undefined'?globalThis:this,function(Base){
+(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./naval-core.js'),require('./preparation.js'));else root.FrontCore=factory(root.FrontCore,root.FrontPreparation);})(typeof globalThis!=='undefined'?globalThis:this,function(Base,P){
  'use strict';
  const F={...Base},empty=()=>({wins:0,attempts:0,active:null,lastResult:null});
  F.operationTypes={escort:{name:'护送补给',description:'补给船自动驶向台北。点海岚号，再点补给船持续护航；点敌舰可追击，也能发射导弹。',reward:'第一军 +600 人 · 160 资金 · 岸防导弹 +1'},intercept:{name:'拦截袭击舰队',description:'60 秒内击沉两艘敌舰。点驱逐舰，再点敌舰靠近开火；导弹可以迅速削减耐久。',reward:'第一军 +600 人 · 160 资金 · 岸防导弹 +1'}};
@@ -8,12 +8,12 @@
  F.createStrategic=seed=>init(Base.createStrategic(seed));
  function clean(s,a){const ids=[a.convoyId,...a.enemyIds];for(const v of s.naval.ships)if(ids.includes(v.follow)){v.follow=null;v.path=[];v.progress=0;v.goal=v.tile;}s.naval.ships=s.naval.ships.filter(v=>!ids.includes(v.id));s.naval.missiles=s.naval.missiles.filter(m=>!ids.includes(m.targetId)&&m.faction===1);}
  function finish(s,outcome,reason){const o=s.operations,a=o.active;if(!a)return;let reward='未获得补给；可重新行动，或调整舰队后再试。';if(outcome==='success'){
-   o.wins++;s.strategy.funds=Math.min(99999,s.strategy.funds+160);s.naval.stock=Math.min(5,s.naval.stock+1);
+   o.wins++;const extra=a.kind==='escort'?P.bonuses(s).escortBonus:0;s.strategy.funds=Math.min(99999,s.strategy.funds+160+extra);s.naval.stock=Math.min(5,s.naval.stock+1);
    // First three victories strengthen a field army directly; repeat missions cannot farm unlimited troops.
    const home=s.units.find(u=>u.name==='第一军'&&s.owners[u.tile]===1)||s.units.find(u=>s.owners[u.tile]===1);
    if(home&&o.wins<=3){home.force+=600;reward=home.name+' +600 人 · 160 资金 · 岸防导弹 +1';}else reward='160 资金 · 岸防导弹 +1（兵员支援限前 3 次）';
   }
-  clean(s,a);o.lastResult={kind:a.kind,outcome,at:s.time,reason,reward};o.active=null;log(s,reason+' '+reward,outcome==='success'?'success':'danger');
+  if(outcome==='success'&&a.kind==='escort'&&P.bonuses(s).escortBonus)reward+=' · 后勤额外 +80资金';clean(s,a);o.lastResult={kind:a.kind,outcome,at:s.time,reason,reward};o.active=null;log(s,reason+' '+reward,outcome==='success'?'success':'danger');
  }
  F.startOperation=function(s,kind){const o=s.operations;if(!Object.hasOwn(F.operationTypes,kind)||!o||o.active||s.result||s.strategy.phase!=='preparation')return {ok:false,message:'筹备期可开始一项海峡行动；先完成当前行动。'};
   if(!s.naval.ships.some(v=>v.faction===1&&v.kind==='destroyer'))return {ok:false,message:'需要一艘驱逐舰。可在舰队列表建造。'};

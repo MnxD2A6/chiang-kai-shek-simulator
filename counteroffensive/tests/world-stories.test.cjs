@@ -49,9 +49,9 @@ test('a mech destroyed before recall settlement cannot charge the player for an 
 test('solar monitoring choices affect an already running abstract research project',()=>{
  const s=fresh();assert.ok(F.startResearch(s).ok);s.world.nuclear.risk=40;event(s,'story_aurora_ground');const before=s.world.nuclear.risk;choose(s,'quiet');assert.ok(s.world.nuclear.risk<before-9);assert.equal(s.world.nuclear.mode,'paused');assert.doesNotThrow(()=>F.decode(F.encode(s)));
 });
-test('all new event decisions and queued branches survive real v11 save roundtrips',()=>{
+test('all new event decisions and queued branches survive current save roundtrips with real prerequisites',()=>{
  assert.ok(newEvents().length>0);
- for(const [id,e] of newEvents())for(const c of e.choices){const s=fresh();if(c.requires==='mech'){const t=s.towns.find(t=>t.id==='shanghai');s.naval.ground.push({id:s.serial++,key:'russia',name:'俄方机甲纵队',tile:t.tile,goal:t.tile,force:1600,path:[],progress:0,nextOrder:s.time});}event(s,id);const pending=F.decode(F.encode(s));assert.equal(pending.world.active.id,id);choose(s,c.id);const restored=F.decode(F.encode(s));assert.deepEqual(restored.world,s.world);assert.equal(restored.strategy.funds,s.strategy.funds);assert.equal(F.worldChoice(s,s.serial,c.id).ok,false);}
+ for(const [id,e] of newEvents())for(const c of e.choices){const s=fresh();if(c.requires==='mech'){const t=s.towns.find(t=>t.id==='shanghai');s.naval.ground.push({id:s.serial++,key:'russia',name:'俄方机甲纵队',tile:t.tile,goal:t.tile,force:1600,path:[],progress:0,nextOrder:s.time});}const setup={procurement:[['story_budget_start','audit'],['story_budget_audit','publish']],harbor:[['story_port_start','mediate']],medical:[['story_cable_start','repair']]};for(const [prior,answer] of setup[c.effects.consequence]||[]){event(s,prior);choose(s,answer);}event(s,id);const pending=F.decode(F.encode(s));assert.equal(pending.world.active.id,id);choose(s,c.id);const restored=F.decode(F.encode(s));assert.deepEqual(restored.world,s.world);assert.equal(restored.strategy.funds,s.strategy.funds);assert.equal(F.worldChoice(s,s.serial,c.id).ok,false);}
 });
 test('zero-budget players can respond to every new event and continue time',()=>{
  assert.ok(newEvents().length>0);

@@ -1,8 +1,16 @@
-# 渡海 · 国际故事 2.5
+# 渡海 · 发展与事件后续 2.6
 
-**[直接玩，无需登录](https://mnxd2a6.github.io/chiang-kai-shek-simulator/counteroffensive/?v=2.5.0)**
+**[直接玩，无需登录](https://mnxd2a6.github.io/chiang-kai-shek-simulator/counteroffensive/?v=2.6.0)**
 
 恢复真实地图上的实时指挥：点军队，再点城市，自动移动、进攻或驻守。右侧保留各国状态，显示关系、合作是否生效、援军进度和大陆动态。
+
+## 2.6的变化
+
+- 三组发展议程各增一条分支，共九条可混搭路线；达到1级即可主动洽谈。
+- 货单需要实际交付，医疗与保险影响后续袭击，港务和科研合同有期限与续签。
+- 发展和国际面板显示持续影响、剩余保障与下一步；免费收尾不再产生虚构退款。
+- [全部路线与后续规则](counteroffensive/docs/development-2.6.md)。旧实时进度可继续，比较新路线建议新开一局。
+
 
 ![城市损伤与大陆登陆警戒](counteroffensive/docs/homefront-2.2-damage.png)
 
@@ -74,6 +82,6 @@ npm run build
 
 ## 旧版与存档
 
-实时版新存档键为`strait-front-v11`，会读取旧实时进度并保留原键；旧设施损伤继续生效，筹备期旧档会获得尚未开展的战前议程。[六角格2.0存档入口](counteroffensive/hex.html)、[六角格旧说明](counteroffensive/docs/README-hex-2.0.md)与[原像素模拟器归档](legacy-simulator.html)均保留。默认游戏源码位于[counteroffensive/](counteroffensive/)。
+实时版新存档键为`strait-front-v12`，会读取旧实时进度并保留原键；旧设施损伤继续生效，筹备期旧档会获得尚未开展的战前议程。[六角格2.0存档入口](counteroffensive/hex.html)、[六角格旧说明](counteroffensive/docs/README-hex-2.0.md)与[原像素模拟器归档](legacy-simulator.html)均保留。默认游戏源码位于[counteroffensive/](counteroffensive/)。
 
 本作是原创单人架空策略游戏，事件对话、数值和结局不代表现实历史。源代码采用MIT许可；历史照片、地图、手绘素材的来源与许可见游戏说明。

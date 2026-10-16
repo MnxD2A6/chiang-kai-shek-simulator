@@ -1,4 +1,4 @@
-(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./homefront.js'),require('./preparation.js'));else root.FrontStrategy=factory(root.FrontHomefront,root.FrontPreparation);})(typeof globalThis!=='undefined'?globalThis:this,function(H,P){
+(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./homefront.js'),require('./preparation.js'),require('./story-consequences.js'));else root.FrontStrategy=factory(root.FrontHomefront,root.FrontPreparation,root.FrontConsequences);})(typeof globalThis!=='undefined'?globalThis:this,function(H,P,C){
  'use strict';
  const projects={economy:{name:'经济建设',effect:'收入 +3/秒，兵力上限 +1,800'},technology:{name:'科技研发',effect:'空袭减伤 +22%，进攻损耗 −18%'},diplomacy:{name:'外交支援',effect:'援军 +700，空袭间隔 +18秒，减伤 +4%'}};
  const no=message=>({ok:false,message}),ok=message=>({ok:true,message});
@@ -9,10 +9,10 @@
   s.events=[];s.flashes=[];api.event(s,'先投资发展，再决定开战。推荐从经济建设开始。');return s;
  }
  const levels=s=>s.strategy?.levels||{economy:0,technology:0,diplomacy:0};
- const support=(s,key)=>!s.world||(s.world.sanctions<2&&s.world.relations[key]>-30&&!(s.world.flags.koreaWar&&['usa','korea'].includes(key))&&!(s.world.flags.duckBlockade&&key==='japan'));
+ const support=(s,key)=>!s.world||(s.world.sanctions<2&&s.world.relations[key]>-30&&!(s.world.flags.koreaWar&&['usa','korea'].includes(key))&&!(s.world.flags.duckBlockade&&key==='japan'&&!C.active(s,'harbor')));
  const partners=s=>Object.fromEntries(Object.entries(s.strategy?.partners||{}).map(([key,value])=>[key,value&&support(s,key)]));
  const deterrence=s=>!!s.world?.nuclear?.disclosed&&s.world.nuclear.stock>0&&!s.world.nuclear.used;
- const income=s=>(4+levels(s).economy*3+(partners(s).japan?2:0)+P.bonuses(s).income)*(s.homefront?H.economy(s):(.4+.6*(s.strategy?.integrity??100)/100))*(s.world?(s.world.sanctions===2?.4:s.world.sanctions===1?.72:1)*(s.world.flags.europeCrisis?.9:1)*(s.world.opinion<25?.85:s.world.opinion>75?1.1:1):1);
+ const income=s=>(4+levels(s).economy*3+(partners(s).japan?2:0)+P.bonuses(s).income+C.bonuses(s).income)*(s.homefront?H.economy(s):(.4+.6*(s.strategy?.integrity??100)/100))*(s.world?(s.world.sanctions===2?.4:s.world.sanctions===1?.72:1)*(s.world.flags.europeCrisis?.9:1)*(s.world.opinion<25?.85:s.world.opinion>75?1.1:1):1);
  const bonusCap=s=>levels(s).economy*1800+levels(s).technology*700+levels(s).diplomacy*1200+(partners(s).usa?2000:0)+(partners(s).japan?1000:0)+Math.min(3,s.operations?.wins||0)*600;
  const bonusGrowth=s=>levels(s).economy*12+levels(s).diplomacy*10+(partners(s).japan?8:0);
  const protection=s=>s.homefront?H.protection(s):levels(s).technology*.22+levels(s).diplomacy*.04+(partners(s).korea?.08:0);
@@ -28,7 +28,7 @@
   if(p.project)return no('当前工程正在进行，完成后再选择下一项。');
   const level=p.levels[key],cost=80+level*60;if(level>=3)return no('这条路线已满级。');
   if(p.funds<cost)return no(`还需 ${Math.ceil(cost-p.funds)} 资金，收入会自动积累。`);
-  p.funds-=cost;p.project={key,endsAt:s.time+12};api.event(s,`${projects[key].name}已投入 ${cost} 资金，12 秒后完成。`);return ok('工程已开始，地图上的时间会继续流动。');
+  const duration=key==='technology'?C.bonuses(s).technologyTime:12;p.funds-=cost;p.project={key,endsAt:s.time+duration};api.event(s,`${projects[key].name}已投入 ${cost} 资金，${duration} 秒后完成。`);return ok('工程已开始'+(duration===8?'，公开科研交流已缩短工期。':'，地图上的时间会继续流动。'));
  }
  function startWar(s,api){
   const p=s.strategy;if(s.result||!p||p.phase!=='preparation')return no('当前无法开战。');
@@ -37,8 +37,8 @@
  }
  function shelter(s,api){
   const p=s.strategy;if(s.result||!p?.warning||p.warning.sheltered)return no('当前没有需要响应的新预警。');
-  if(p.funds<60)return no('紧急疏散需要 60 资金。');
-  p.funds-=60;p.warning.sheltered=true;api.event(s,s.homefront?'疏散已安排：人员损失降低 65%，建筑和工厂仍会受损。':'紧急疏散已安排，本轮空袭损失额外降低 65%。','success');return ok(s.homefront?'疏散保人员；防空拦导弹，维修恢复生产。':'本轮空袭防护已生效。');
+  const cost=P.bonuses(s).shelterCost;if(p.funds<cost)return no('紧急疏散需要 '+cost+' 资金。');
+  p.funds-=cost;p.warning.sheltered=true;api.event(s,s.homefront?'疏散已安排：人员损失降低 '+Math.round((1-P.bonuses(s).shelterFactor)*100)+'%，建筑和工厂仍会受损。':'紧急疏散已安排，本轮空袭损失额外降低 65%。','success');return ok(s.homefront?'疏散保人员；防空拦导弹，维修恢复生产。':'本轮空袭防护已生效。');
  }
  function repair(s,api){
   const p=s.strategy;if(s.result||!p||p.integrity>=100)return no('基础设施目前完好。');
