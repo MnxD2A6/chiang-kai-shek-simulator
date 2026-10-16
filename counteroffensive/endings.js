@@ -1,7 +1,11 @@
-(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./preparation.js'));else root.FrontEndings=factory(root.FrontPreparation);})(typeof globalThis!=='undefined'?globalThis:this,function(P){
+(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./preparation.js'),require('./government.js'));else root.FrontEndings=factory(root.FrontPreparation,root.FrontGovernment);})(typeof globalThis!=='undefined'?globalThis:this,function(P,G){
  'use strict';
  const entry=(title,text,illustration,result='victory',kind='发展收官')=>({title,text,illustration,result,kind});
  const catalog={
+  kmt_compact:entry('蓝色内阁：海峡保全协定','选票让国民党内阁取得任期，军备政策也经过了实际验收。你把准备好的防卫能力用于有监督的海峡安排，承担协调预算后结束这场架空危机。整军花的钱、未扩大的战线和兑现的民生账目一起留在记录中。','civic_budget','victory','国民党执政结局'),
+  dpp_compact:entry('绿色内阁：民生新约','民进党赢得本局选举，商贸或重建政策通过了实际验收。恢复的设施、保住的民心与合作预算成为这份新约的基础。你选择在登陆命令之前收官，让内阁为这届任期兑现的生活安排负责。','civic_recovery_check','victory','民进党执政结局'),
+  kmt_military:entry('蓝色内阁：整军凯旋','国民党在选举中取得执政权，重点政策真正兑现，前线守住三城，后方也扛过两轮空袭与两次登陆。整军的代价没有消失，战后的恢复预算仍需交给下一班人。','prep_industry_delivery','victory','国民党军事结局'),
+  dpp_military:entry('绿色内阁：韧性守成','民进党在选举中执政，政策经实际验收后，联合指挥部仍完成了三城军事目标并保住本岛。贸易或民生路线没有替代防卫，持续修复和守军投入共同支撑了这场代价真实的胜利。','consequence_medical_report','victory','民进党军事结局'),
   military:entry('三城守住，远征落定','福州、南京、广州的驻军熬过了后续反击，台湾后方仍在运转。军事目标已经完成，留下的伤亡、账单与外交裂痕也需要面对。你可以选择已完成路线对应的战后方向。','prep_industry_delivery','victory','军事结局'),
   deterrence:entry('威慑下的停火','你完成曙光计划，通过克制与谈判达成地区停火。战略储备没有被实际使用，远征在外交桌上结束。','dawn_treaty','victory','威慑结局'),
   trade:entry('海峡商路，重新开张','长期出口、稳定生产与国际口碑换来一份民用合作框架。六周的筹备没有走向登陆命令，第一批新货船在监督下离港。你用贸易安排结束了这场架空危机。','story_port_finish'),
@@ -35,10 +39,12 @@
  const safe=s=>ownedHome(s)&&!s.strategy.warning&&!landing(s);
  const retaliationResolved=s=>s.world.interventionCount>=1&&!!s.world.intervention?.arrived&&!s.naval.ships.some(a=>a.faction!==1&&a.name.startsWith('国际干预'));
  const defensive=s=>completed(s,'industry','resilience')||['domestic','civil'].some(r=>completed(s,'defense',r))||completed(s,'diplomacy','regional');
- const costs={trade:600,naval:300,regional:500,reconstruction:400,nuclear_ceasefire:1000};
+ const costs={trade:600,naval:300,regional:500,reconstruction:400,nuclear_ceasefire:1000,kmt_compact:400,dpp_compact:400};
  function evaluate(s,id,extraFunds=0){const w=s.world,h=s.homefront,p=s.strategy,levels=p.levels,funds=p.funds+extraFunds,check=(label,ok)=>({label,ok:!!ok}),conditions=[];
   const add=(label,ok)=>conditions.push(check(label,ok));
-  if(id==='trade'){
+  if(id==='kmt_compact'||id==='dpp_compact'){
+   conditions.push(...G.conditions(s,id));add('资金至少1200；确认支出400',funds>=1200);
+  }else if(id==='trade'){
    add('筹备期，出口长单已兑现',p.phase==='preparation'&&completed(s,'industry','exports'));add('经济3级、外交2级',levels.economy>=3&&levels.diplomacy>=2);add('日本贸易有效',P.tradeOpen(s));add('国际观感至少75',w.opinion>=75);add('两城建筑、工厂平均至少85',ownedHome(s)&&average(s,'buildings')>=85&&average(s,'industry')>=85);add('资金至少1800；确认支出600',funds>=1800);add('筹备至少6周',s.time>=180);
   }else if(id==='naval'){
    const fleet=s.naval.ships.filter(a=>a.faction===1&&a.id!==s.operations.active?.convoyId);add('筹备期，运输后勤已兑现',p.phase==='preparation'&&completed(s,'industry','logistics'));add('经济与科技达到2级',levels.economy>=2&&levels.technology>=2);add('至少2次真实海峡行动胜利',s.operations.wins>=2);add('保有3艘正式运输舰、2艘驱逐舰',fleet.filter(a=>a.kind==='transport').length>=3&&fleet.filter(a=>a.kind==='destroyer').length>=2);add('民心至少70，两城仍在',h.support>=70&&ownedHome(s));add('资金至少800；确认支出300',funds>=800);add('筹备至少5周',s.time>=150);
@@ -52,7 +58,7 @@
   if(id!=='nuclear_ceasefire')add('从未实际使用战略储备',w.nuclear.used===0);
   return {id,...catalog[id],cost:costs[id],conditions,ready:conditions.every(c=>c.ok)};
  }
- function options(s){const ids=s.world.nuclear.used?['nuclear_ceasefire']:[];if(!s.world.nuclear.used){if(completed(s,'industry','exports'))ids.push('trade');if(completed(s,'industry','logistics'))ids.push('naval');if(completed(s,'diplomacy'))ids.push('regional');if(defensive(s))ids.push('reconstruction');}return ids.map(id=>evaluate(s,id));}
+ function options(s){const ids=s.world.nuclear.used?['nuclear_ceasefire']:[];if(!s.world.nuclear.used){if(s.government)ids.push(s.government.party+'_compact');if(completed(s,'industry','exports'))ids.push('trade');if(completed(s,'industry','logistics'))ids.push('naval');if(completed(s,'diplomacy'))ids.push('regional');if(defensive(s))ids.push('reconstruction');}return ids.map(id=>evaluate(s,id));}
  function failure(s){if(s.world.nuclear.used)return 'nuclear_collapse';return {support:'support_collapse',infrastructure:'infrastructure_collapse',cities:'home_lost'}[s.homefront.defeatReason]||'defeat';}
  return {catalog,epilogues,costs,evaluate,options,completed,safe,retaliationResolved,failure};
 });

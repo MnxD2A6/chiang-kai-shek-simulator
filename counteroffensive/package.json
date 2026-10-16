@@ -1,6 +1,6 @@
 {
   "name": "counteroffensive-front",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "private": true,
   "license": "MIT",
   "description": "Realtime geographic strategy with persistent city damage, air defence, mainland landings and illustrated world events.",

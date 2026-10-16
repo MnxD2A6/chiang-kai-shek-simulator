@@ -1,12 +1,12 @@
-(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./civic-events.js'));else root.FrontCivics=factory(root.FrontCivicEvents);})(typeof globalThis!=='undefined'?globalThis:this,function(Events){
+(function(root,factory){if(typeof module==='object'&&module.exports)module.exports=factory(require('./civic-events.js'),require('./government.js'));else root.FrontCivics=factory(root.FrontCivicEvents,root.FrontGovernment);})(typeof globalThis!=='undefined'?globalThis:this,function(Events,G){
  'use strict';
  const clamp=(n,a=0,b=100)=>Math.max(a,Math.min(b,n)),active=(s,key)=>!!s.civic&&s.civic[key]>s.time;
  const extras=()=>({promise:null,speeches:0,review:null,serviceUntil:0,austerityUntil:0,deadlockDue:null,nextDeadlock:0});
  function init(s){s.civic={version:2,kmt:60,dpp:45,rng:(s.seed^0x28c1a43)>>>0,nextDebate:s.time+45,nextForeign:s.time+45,foreignAt:0,cooldowns:{relief:0,consult:0},warning:null,disruption:null,collapseAt:s.result==='defeat'&&s.homefront.support<=0?s.time:null,accordUntil:0,burdenUntil:0,lastSalvos:s.homefront.salvos,lastNuclear:s.world.nuclear.used,warSeen:s.strategy.phase==='war',outflows:0,history:[],...extras()};return s;}
  const deadlocked=s=>!!s.civic&&Math.min(s.civic.kmt,s.civic.dpp)<35;
- function income(s){const p=s.civic;if(!p)return 1;const labour=p.disruption&&p.disruption.until>s.time?{strike:.75,protest:.7,outflow:.8}[p.disruption.kind]:1;return (active(s,'accordUntil')?1.05:1)*(active(s,'burdenUntil')?.85:1)*(active(s,'austerityUntil')?.8:1)*(deadlocked(s)?.85:1)*(p.promise?.phase==='overdue'?.85:1)*labour;}
- function mobilization(s){if(!s.civic)return 1;return (deadlocked(s)?.75:1)*(active(s,'serviceUntil')?.75:1)*(active(s,'austerityUntil')?.75:1)*(s.civic.promise?.phase==='overdue'?.7:1)*(s.civic.disruption&&s.civic.disruption.until>s.time?.8:1);}
- const repairTime=(s,base)=>Math.max(6,base-(active(s,'accordUntil')?2:0));
+ function income(s){const p=s.civic;if(!p)return 1;const labour=p.disruption&&p.disruption.until>s.time?{strike:.75,protest:.7,outflow:.8}[p.disruption.kind]:1;return (active(s,'accordUntil')?1.05:1)*(active(s,'burdenUntil')?.85:1)*(active(s,'austerityUntil')?.8:1)*(deadlocked(s)?.85:1)*(p.promise?.phase==='overdue'?.85:1)*labour*G.bonuses(s).income;}
+ function mobilization(s){if(!s.civic)return 1;return (deadlocked(s)?.75:1)*(active(s,'serviceUntil')?.75:1)*(active(s,'austerityUntil')?.75:1)*(s.civic.promise?.phase==='overdue'?.7:1)*(s.civic.disruption&&s.civic.disruption.until>s.time?.8:1)*G.bonuses(s).mobilization;}
+ const repairTime=(s,base)=>Math.max(6,(base-(active(s,'accordUntil')?2:0))*G.bonuses(s).repair);
  const terminal=s=>!s.civic||(s.civic.collapseAt!==null&&s.time+1e-8>=s.civic.collapseAt);
  const risk=s=>s.homefront.support<=0?'collapse':s.homefront.support<=15?'flight':s.homefront.support<=30?'protest':s.homefront.support<50?'strike':null;
  const removeQueued=(s,...ids)=>{s.world.queue=s.world.queue.filter(q=>!ids.includes(q.id));};
